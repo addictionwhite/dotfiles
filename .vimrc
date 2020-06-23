@@ -22,50 +22,65 @@ Plug 'sainnhe/vim-color-forest-night'
 Plug 'Rigellute/rigel'
 Plug 'hauleth/blame.vim'
 Plug 'crusoexia/vim-monokai'
-Plug 'sainnhe/vim-color-ice-age'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'w0ng/vim-hybrid'
+Plug 'sainnhe/sonokai'
+"Plug 'sickill/vim-monokai', {'as' :'test_monokai'}
 
 
 " 編集
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'glidenote/memolist.vim'
-Plug 'tpope/vim-repeat'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-repeat' "vim-macro-repeatと同等
+Plug 'jacobchrismarsh/vim-macro-repeat'
+"Plug 'terryma/vim-multiple-cursors' "TODO: 不要そうなら消す
 Plug 'Townk/vim-autoclose'
 Plug 'w0rp/ale'
-Plug 'tpope/vim-eunuch'
+"Plug 'tpope/vim-eunuch'
 " 改行は挿入できない
 "Plug 'hlissner/vim-multiedit' 
 "Plug 'mg979/vim-visual-multi'
 " 他のプラグインとのかねあいがノイズがはいる
 "Plug 'vim-scripts/vim-auto-save' 
+Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+Plug 'pbrisbin/vim-mkdir'
+" 判定がシビアに感じる
+"Plug 'pirey/underscored.vim'
+"Plug 'mattn/vim-sonictemplate'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+" マークダウンのプレビューに必要
+Plug 'tpope/vim-markdown'
+Plug 'kannokanno/previm'
+"Plug 'tyru/open-browser.vim' " 既に定義されているため
+Plug 'AndrewRadev/switch.vim'
 
 "VCS 
 Plug 'tpope/vim-fugitive'
-Plug 'tommcdo/vim-fugitive-blame-ext'
-
-Plug 'vim-scripts/vcscommand.vim'
+"Plug 'tommcdo/vim-fugitive-blame-ext'
+Plug 'vim-scripts/vcscommand.vim' " TODO:不要そうなら消す
 Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'
-Plug 'rhysd/committia.vim' " vital.vimに依存
+"Plug 'cohama/agit.vim'
+"Plug 'rhysd/committia.vim' " vital.vimに依存
 Plug 'vim-jp/vital.vim'  " plugin作成用の関数群
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 "Plug 'jreybert/vimagit'
-Plug 'rhysd/git-messenger.vim'
+"Plug 'rhysd/git-messenger.vim'
 Plug 'iberianpig/tig-explorer.vim'
 " Plug 'vim-scripts/vim-svngutter'
 " Plug 'idanarye/vim-merginal'
 " 画面がちらつく
 "Plug 'tveskag/nvim-blame-line'
+Plug 'lambdalisue/gina.vim'
 
 " 表示
 Plug 'simeji/winresizer' "ウィンドウサイズ変更
 Plug 'Yggdroot/indentLine'
-" Plug 'tyru/current-func-info.vim' " 表示している関数名表示 重いのではないかといったん削除(未検証
+"Plug 'tyru/current-func-info.vim' " 表示している関数名表示 (カーソル移動が遅くなる
 Plug 'haya14busa/incsearch.vim' " 検索中の文字列をハイライト
-Plug 'vim-scripts/vim-signature' " マーク位置の表示
+"Plug 'vim-scripts/vim-signature' " マーク位置の表示
 Plug 'elzr/vim-json' 
 Plug 't9md/vim-quickhl' " 指定の単語をハイライト
 Plug 'myrobo/smart_tabline.vim'
@@ -78,10 +93,17 @@ Plug 'ryanoasis/vim-devicons'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 "Plug 'thiagoalessio/rainbow_levels.vim'
-Plug 'vimplugin/project.vim'
+Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'scrooloose/nerdtree'
+
+"Plug 'lambdalisue/fern.vim'
+Plug 'vifm/vifm.vim'
+
+
 "Plug 'weirongxu/coc-explorer'
-"Plug 'ryanoasis/nerd-fonts'
+Plug 'ryanoasis/nerd-fonts'
+
+"Plug 'camspiers/lens.vim'
 
 " Plug 'IMOKURI/line-number-interval.nvim' " 重い?
 "Plug 'mkitt/tabline.vim'
@@ -89,6 +111,7 @@ Plug 'scrooloose/nerdtree'
 
 "Plug 'zefei/vim-wintabs'
 "Plug 'bagrat/vim-buffet'
+Plug 'skywind3000/vim-quickui'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -96,34 +119,40 @@ Plug 'thinca/vim-qfreplace' " grep 結果を置換
 "Plug 'mileszs/ack.vim'
 Plug 'fuenor/qfixgrep'
 Plug 'osyo-manga/vim-over'
-Plug 'wsdjeg/FlyGrep.vim'
+"Plug 'wsdjeg/FlyGrep.vim'
 " Plug 'kana/vim-operator-replace'
 Plug 'kana/vim-operator-user'
 Plug 'othree/eregex.vim'
+Plug 'itchyny/vim-cursorword'
 
 " バッファ操作
 Plug 'vim-scripts/copypath.vim'
 Plug 'airblade/vim-rooter' " ディレクトリルートへ遷移
 Plug 'qpkorr/vim-bufkill'
+Plug 'markonm/traces.vim'
 "Plug 'troydm/easybuffer.vim'
-Plug 'jlanzarotta/bufexplorer'
+"Plug 'jlanzarotta/bufexplorer'
 " Plug 'vim-scripts/BufOnly.vim'
 " Plug 'rbgrouleff/bclose.vim'
 " 重い？カーソル移動が鈍る
 "Plug 'mg979/vim-xtabline'
 " Plug 'vim-scripts/Changed'
+Plug 'tpope/vim-abolish'
 
 " 移動
 Plug 'haya14busa/vim-asterisk'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'haya14busa/vim-edgemotion'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'szw/vim-tags'
+"Plug 'szw/vim-tags'
 Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
+"Plug 'pechorin/any-jump.vim' " 精度がLSPより荒い
 
 " 興味深いけどエラーがでる
 " Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -137,53 +166,63 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tyru/open-browser-github.vim'
 Plug 'tyru/open-browser.vim'
 
-Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/vim-preview'
-Plug 'mattn/benchvimrc-vim'
+Plug 'skywind3000/asyncrun.vim' "TODO: なにかに依存して使われていなければ不要そう
+Plug 'skywind3000/vim-preview' "TODO: 不要そうなら消す
+
+"Plug 'mattn/benchvimrc-vim'
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'mattn/vim-lsp-settings'
-"Plug 'iberianpig/ranger-explorer.vim'
+Plug 'iberianpig/ranger-explorer.vim'
 Plug 'mattn/webapi-vim'
 "Plug 'tpope/vim-unimpaired'
 Plug 'embear/vim-localvimrc'
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
-"
+
+
+" Debug
+Plug 'sebdah/vim-delve'
+Plug 'vim-vdebug/vdebug'
+
+" ブレイクポイントで止まらなくなったので一旦vdebugを使用するようにする
+  " ブレイクポイントに一発で止まらない
+  " phpunitでの挙動がおかしい
+"./install_gadget.py --force-enable-php でエラーが起きる RuntimeError: Failed to install gadgets: vscode-php-debug  20200217
+"Plug 'puremourning/vimspector' 
 "PHP
 " language
-Plug 'sebdah/vim-delve'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'nono/jquery.vim'
 Plug 'Rican7/php-doc-modded'
+"Plug 'shawncplus/phpcomplete.vim' " cocnvimとぶつかりそうなので一旦外す
+"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' } 重い？
 
-Plug 'vim-vdebug/vdebug'
-"Plug 't9md/vim-chef'
 
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-
-Plug 'docunext/closetag.vim'
-Plug 'ap/vim-css-color'
+Plug 'docunext/closetag.vim' " 基本はEmmet。補助的に使用したい
+Plug 'ap/vim-css-color' " TODO:不要そうなら消す
 " https://qiita.com/cyrt/items/ff5edd392b3f41dd6e10
 " 遅い？
 " Plug 'phpactor/phpactor' 
 
 " js "
+Plug 'jelera/vim-javascript-syntax'
+Plug 'nono/jquery.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'mxw/vim-jsx'
+
 " ts "
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
-
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
-Plug 'mxw/vim-jsx'
-
+" ohter
 Plug 'chr4/nginx.vim'
-" Plug 'shawncplus/phpcomplete.vim' " cocnvimとぶつかりそうなので一旦外す
 Plug 'hashivim/vim-terraform'
+"Plug 't9md/vim-chef'
+"Plug 'itkq/fluentd-vim' " 効かない?
+
 
 " Plug 'vexxor/phpdoc.vim'
 " Plug 'vim-scripts/php_localvarcheck.vim' 特定の関数でエラーを吐く
@@ -194,8 +233,7 @@ Plug 'hashivim/vim-terraform'
 " TODO  有用だけどビューの保存時遅くなる
 " Plug 'bpearson/vim-phpcs'
 Plug 'beanworks/vim-phpfmt'
-Plug 'vim-jp/vimdoc-ja'
-Plug 'kevinhui/vim-docker-tools'
+"Plug 'kevinhui/vim-docker-tools'
 
 " #LSP
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -213,7 +251,7 @@ Plug 'mattn/vim-lsp-settings'
 " Plug 'liuchengxu/vista.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
-
+Plug 'vim-jp/vimdoc-ja'
 "Plug 'skanehira/docker.vim'
 
 call plug#end()
@@ -224,10 +262,6 @@ call plug#end()
 " 外部ファイル読み込み
 "---------------------------------------------------------------------------
 
-" プロジェクト固有の設定はembear/vim-localvimrcで対応する
-if filereadable(expand($HOME.'/.vimrc_local'))
-  source $HOME/.vimrc_local
-endif
 
 " 検証用スクリプト
 if filereadable(expand($HOME.'/myVimscript.vim'))
@@ -240,6 +274,25 @@ if !has('gui_macvim')
 endif
 
 
+if has('gui_macvim')
+    set guioptions+=M
+
+    "" macVimのterminalでcommand+vでpaste(fzfで用いる）
+    "" https://github.com/macvim-dev/macvim/issues/676
+    macm Edit.Paste key=<nop>
+    tmap <D-v> <C-w>"+
+    nnoremap <D-v> "+p
+    vnoremap <D-v> "+p
+    inoremap <D-v> <C-R><C-O>+
+    cnoremap <D-v> <C-R><C-O>+
+
+    set pythonthreedll=/Library/Frameworks/Python.framework/Versions/3.6/Python
+    set pythonthreehome=/Library/Frameworks/Python.framework/Versions/3.6
+endif
+
+"let g:lsp_signature_help_enabled = 0
+
+
 "let mapleader = "\<Space>"
 "let mapleader = ","
 
@@ -249,6 +302,9 @@ endif
 
 "terminalモード中ESCでnormal mode
 tnoremap <silent> <ESC> <C-\><C-n>
+" https://techracho.bpsinc.jp/tsunekawa/2018_09_11/61576
+" ターミナルモードでCtrl-t で無名レジスタをペースト
+tnoremap <C-T> <C-W>""
 
 " easyMotion
 " https://github.com/easymotion/vim-easymotion
@@ -259,6 +315,9 @@ nmap <silent> <Space>k <Plug>(easymotion-k)
 "nmap <silent>f <Plug>(easymotion-overwin-f)
 " 画面全体  s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
+
+map <C-j> <Plug>(edgemotion-j)
+map <C-k> <Plug>(edgemotion-k)
 
 " sublime like grep
 "nnoremap <Space>sf :CtrlSF 
@@ -283,9 +342,8 @@ nnoremap <Space>ml :MemoList<CR>
 nnoremap <Space>mg :MemoGrep<CR>
 
 " json整形
-nnoremap <silent> <Space>jq  ::%!jq '.'<CR>
+"nnoremap <silent> <Space>jq  ::%!jq '.'<CR>
 
-nnoremap <silent> <Space>hr  :GitGutterUndoHunk<CR>
 
 " プラグイン更新
 nnoremap <silent> <Space>pi  :PlugInstall<CR>
@@ -297,19 +355,17 @@ nnoremap <silent> <Space>eg  :<C-u>edit $HOME/.gvimrc<CR>
 nnoremap <silent> <Space>et  :<C-u>edit $HOME/.tigrc<CR>
 
 
-nnoremap <silent> <Space>em  :<C-u>edit ~/myVimscript.vim<CR>
-
-nmap ;s :source ~/myVimscript.vim<CR>
-
-
 " 設定再読み込み
 nnoremap <silent> <Space>vi  :source ~/.config/nvim/init.vim<CR>
 nmap ;s :source ~/myVimscript.vim<CR>
 
 " Rican7/php-doc-modded
-inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
-nnoremap <C-P> :call PhpDocSingle()<CR> 
-vnoremap <C-P> :call PhpDocRange()<CR> 
+"inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
+"nnoremap <C-P> :call PhpDocSingle()<CR> 
+"vnoremap <C-P> :call PhpDocRange()<CR> 
+
+":command! Phodoc :call PhpDocSingle()<CR>
+
 
 "単語を色マーク
 nmap <Space>h <Plug>(quickhl-manual-this)
@@ -326,9 +382,22 @@ nnoremap wk <C-w>k
 nnoremap wl <C-w>l
 nnoremap wh <C-w>h
 
-nnoremap <silent> ,f  :Files<CR>
+" 新規ファイル
+nnoremap <silent> ,f  :Files<CR> 
+"nnoremap <silent> ,f  :GFiles<CR>
+nnoremap <silent> ,F  :GFiles?<CR>
 nnoremap <silent> ,b  :BuffersPreview<CR>
-nnoremap <silent> ,h  :LspHover<CR>
+nnoremap <silent> ,s  :Snippets<CR>
+"nnoremap <silent> ,h  :LspHover<CR>
+
+
+" --git--
+nnoremap <silent> ,gd  :Gina diff<CR>
+nnoremap <silent> ,gap  :Gina!! add -p<CR>
+
+nnoremap <silent> <Space>hr  :GitGutterUndoHunk<CR>
+
+
 " ,fに移行したい
 "nnoremap <silent> <Space>f  :Files<CR>
 
@@ -338,6 +407,8 @@ nnoremap <silent> <Space>nc :NERDTreeClose<CR>
 
 nmap <silent> gr :LspReferences<CR>
 nmap <silent> gd :LspDefinition<CR>
+nmap <silent> gh  :LspHover<CR>
+
 "LspReferencesでQuickfixが表示されるため操作を合わせたい
 nnoremap gp :cprevious<CR>
 nnoremap gn :cnext<CR>
@@ -357,14 +428,6 @@ nmap N Nzz
 nmap * *zz
 nmap # #zz
 
-
-"---------------------------------------------------------------------------
-" 簡易スニペット(1行のみ）*キー+Tabでシンプルに出力させるため
-"---------------------------------------------------------------------------
-"nnoremap ld<TAB>  :<C-u>g/TODO_0958509280948320948023/d <CR>
-inoremap l<TAB> \Log::debug((print_r($aaa,true))); //TODO_0958509280948320948023<C-c>
-"inoremap ll<TAB> Log::write('Debug', print_r($aaa,true));// TODO<C-c>
-inoremap lq<TAB> \Log::debug((print_r(\DB::last_query(),true))); //TODO<C-c>
 
 
 "---------------------------------------------------------------------------
@@ -462,7 +525,14 @@ endif
 
 
 " ---bookmark---
-"let g:bookmark_sign = '♥'
+"    龎
+" https://www.nerdfonts.com/cheat-sheet
+"let g:bookmark_sign = ''
+let g:bookmark_sign = ''
+
+let NERDTreeShowHidden = 1
+
+"
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 let g:bookmark_show_warning = 1
@@ -497,13 +567,25 @@ let g:terraform_fmt_on_save = 1
 let g:winresizer_gui_enable=1
 
 
-" ---vdebug---
-:map <F1> :BreakpointRemove * <CR>
-let g:vdebug_options["break_on_open"] = 0
-
 
 " ---lsp---
 let g:lsp_diagnostics_enabled = 0
+
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
+
+" --ultisnips--
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" --settings--
+"map *   <Plug>(asterisk-*)
+map *  <Plug>(asterisk-z*)
+
 
 "---------------------------------------------------------------------------
 " その他設定
@@ -577,9 +659,86 @@ command! -nargs=0 ClipDir  call s:Clip(expand('%:p:h'))
 "---------------------------------------------------------------------------
 " note
 "---------------------------------------------------------------------------
-" :windo diffthis   開かれている無名バッファのdiffをとる https://thinca.hatenablog.com/entry/20130426/1366910837
 
 " https://github.com/othree/eregex.vim
 " For replacement, use :%S// (uppercase S) to trigger perl style regexp.
 
 " :s/, /\r,/g   行をカンマ区切りで改行する
+
+" :%s/^\%([^,]\+,\)\{2}\zs/挿入したい文字列！！！,/ 
+
+vnoremap z/ <ESC>/\%V
+vnoremap z? <ESC>?\%V
+
+filetype plugin on
+
+
+" プロジェクト固有の設定はembear/vim-localvimrcで対応する
+if filereadable(expand($HOME.'/.vimrc_local'))
+  source $HOME/.vimrc_local
+endif
+
+
+" start ブレイクポイントに止まらなかったので一旦ここに移動（動いた
+" ---vdebug---
+:map <F1> :BreakpointRemove * <CR>
+let g:vdebug_options["break_on_open"] = 0
+
+" end
+
+
+
+" たまに遅くなっている原因？検証
+let g:phpfmt_autosave = 0
+
+" 実験
+" 遅い端末を使っている場合は、ステータスメッセージをオフにすることで編集のスピー ドを上げることができます:
+" https://vim-jp.org/vimdoc-ja/intro.html
+set nosc noru nosm
+
+
+" マクロを定義して範囲を選択して@{key}でマクロを実行できる
+" https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+" https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+
+" たまに遅くなっている原因？検証
+let g:phpfmt_autosave = 0
+
+" 実験
+" 遅い端末を使っている場合は、ステータスメッセージをオフにすることで編集のスピー ドを上げることができます:
+" https://vim-jp.org/vimdoc-ja/intro.html
+set nosc noru nosm
+
+"let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+
+autocmd BufNewFile,BufRead *.gs  set filetype=javascript
+
+" vimのselectより視点の移動が少ないのが利点に思う
+" 他にも機能がある
+"https://github.com/skywind3000/vim-quickui/blob/master/MANUAL.md
+
+" バッファの差分 https://thinca.hatenablog.com/entry/20130426/1366910837
+" ビジュアル選択してポップアップを起動してもリストを選択できない
+let content = [
+            \ [ 'PHPDoc生成', ':call PhpDocSingle()' ],
+            \ [ 'バッファの差分', ':windo diffthis' ], 
+            \ [ 'json整形', ':%!jq '.'' ],
+            \ [ 'カンマ区切りを改行(カーソルライン対象)', ':s/,/\r,/g' ],
+            \ [ 'markdown preview', ':PrevimOpen' ],
+            \]
+let opts = {'title': 'select one'}
+
+nnoremap <silent>,my :call quickui#listbox#open(content, opts)<CR>
+"map <silent>,my :call quickui#listbox#open(content, opts)<CR>
+
+" バッファ切り替え
+" call quickui#tools#list_buffer('tabedit')
+nnoremap <silent>,b :call quickui#tools#list_buffer('e')<CR>
