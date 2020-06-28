@@ -3,10 +3,12 @@
 " general
 """""""""""""
 "set mapleader = "\<Space>"
-colorscheme monokai_pro 
+"colorscheme monokai_pro 
+"colorscheme monokai
+colorscheme sonokai 
 
 " term.appだとvimの色が壊れる
-set termguicolors
+"set termguicolors
 
 " macvimで日本語入力の不備対応 https://loumo.jp/wp/archive/20160914120009/
 set imdisable
@@ -52,7 +54,8 @@ set incsearch
 set hlsearch
 
 "検索時に最後まで行ったら最初に戻らない ctrlsfの際にループしたくないため
-set nowrapscan 
+" -> 困るケースのほうが多いのでいったんコメントアウト
+"set nowrapscan 
 
 syntax on
 "---------------------------------------------------------------------------
@@ -62,6 +65,8 @@ syntax on
 set laststatus=2
 " ファイル名表示
 set statusline=%F
+" https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
+set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
 
 "-------------------------------------------------------------------------------
 " エンコーディング設定
@@ -76,6 +81,9 @@ set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先�
 " itermの設定が優先される
 " set guifont=Ricty_Diminished:h14 " フォント
 "set guifont=Hack_Nerd_Font:h14 " フォント
+"set guifont=Hack_Nerd_Font:h2 " フォント
+set guifont=Hack_Nerd_Font:h14 " フォント
+
 
 set list  " 不可視文字を表示する
 " set listchars=tab:≫-,trail:-,extends:≫,precedes:≪,nbsp:%,eol:?
