@@ -74,6 +74,7 @@ Plug 'iberianpig/tig-explorer.vim'
 " 画面がちらつく
 "Plug 'tveskag/nvim-blame-line'
 Plug 'lambdalisue/gina.vim'
+Plug 'cohama/lexima.vim'
 
 " 表示
 Plug 'simeji/winresizer' "ウィンドウサイズ変更
@@ -111,7 +112,8 @@ Plug 'ryanoasis/nerd-fonts'
 
 "Plug 'zefei/vim-wintabs'
 "Plug 'bagrat/vim-buffet'
-Plug 'skywind3000/vim-quickui'
+"Plug 'skywind3000/vim-quickui' " 有用だがaws ssm環境で動かないため...
+"Plug 'itchyny/thumbnail.vim'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -176,7 +178,10 @@ Plug 'skywind3000/vim-preview' "TODO: 不要そうなら消す
 Plug 'iberianpig/ranger-explorer.vim'
 Plug 'mattn/webapi-vim'
 "Plug 'tpope/vim-unimpaired'
-Plug 'embear/vim-localvimrc'
+
+" エラーでるようになった？
+"Plug 'embear/vim-localvimrc'
+
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 
@@ -277,8 +282,8 @@ endif
 if has('gui_macvim')
     set guioptions+=M
 
-    "" macVimのterminalでcommand+vでpaste(fzfで用いる）
-    "" https://github.com/macvim-dev/macvim/issues/676
+    " macVimのterminalでcommand+vでpaste(fzfで用いる）
+    " https://github.com/macvim-dev/macvim/issues/676
     macm Edit.Paste key=<nop>
     tmap <D-v> <C-w>"+
     nnoremap <D-v> "+p
@@ -341,9 +346,6 @@ nnoremap <Space>mn :MemoNew<CR>
 nnoremap <Space>ml :MemoList<CR>
 nnoremap <Space>mg :MemoGrep<CR>
 
-" json整形
-"nnoremap <silent> <Space>jq  ::%!jq '.'<CR>
-
 
 " プラグイン更新
 nnoremap <silent> <Space>pi  :PlugInstall<CR>
@@ -358,13 +360,6 @@ nnoremap <silent> <Space>et  :<C-u>edit $HOME/.tigrc<CR>
 " 設定再読み込み
 nnoremap <silent> <Space>vi  :source ~/.config/nvim/init.vim<CR>
 nmap ;s :source ~/myVimscript.vim<CR>
-
-" Rican7/php-doc-modded
-"inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
-"nnoremap <C-P> :call PhpDocSingle()<CR> 
-"vnoremap <C-P> :call PhpDocRange()<CR> 
-
-":command! Phodoc :call PhpDocSingle()<CR>
 
 
 "単語を色マーク
@@ -390,16 +385,6 @@ nnoremap <silent> ,b  :BuffersPreview<CR>
 nnoremap <silent> ,s  :Snippets<CR>
 "nnoremap <silent> ,h  :LspHover<CR>
 
-
-" --git--
-nnoremap <silent> ,gd  :Gina diff<CR>
-nnoremap <silent> ,gap  :Gina!! add -p<CR>
-
-nnoremap <silent> <Space>hr  :GitGutterUndoHunk<CR>
-
-
-" ,fに移行したい
-"nnoremap <silent> <Space>f  :Files<CR>
 
 nnoremap <silent> <Space>nf :NERDTreeFind<CR>
 nnoremap <silent> <Space>nc :NERDTreeClose<CR>
@@ -478,6 +463,19 @@ let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
 
 
+
+" Rican7/php-doc-modded
+" https://github.com/Rican7/php-doc-modded/blob/master/plugin/php-doc.vim
+let g:pdv_cfg_autoEndFunction = 0
+
+let g:pdv_cfg_annotation_Package = 0
+let g:pdv_cfg_annotation_Version = 0
+let g:pdv_cfg_annotation_Author = 0
+let g:pdv_cfg_annotation_Copyright = 0
+let g:pdv_cfg_annotation_License = 0
+
+
+" TODO
 " ---fzf---
 "let g:fzf_layout = { 'up': '~40%' }
 let g:fzf_layout = { 'down': '~90%' }
@@ -486,7 +484,8 @@ let g:fzf_buffers_jump = 1
 
 let g:fzf_preview_rate = 0.9
 
-"let g:fzf_command_prefix = 'Fzf'
+let g:fzf_command_prefix = 'Fzf'
+
 
 
 " ファイル一覧を出すときにプレビュー表示
@@ -596,6 +595,12 @@ autocmd FileType * setlocal formatoptions-=r
 autocmd FileType * setlocal formatoptions-=o
 
 
+" https://note.com/yasukotelin/n/na87dc604e042
+" 補完表示時のEnterで改行をしない
+set completeopt=menuone,noinsert
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+
+
 " vimで長い行を持つファイルを開いた時に重くならないようにする
 augroup vimrc-highlight
   au!
@@ -675,7 +680,7 @@ filetype plugin on
 
 " プロジェクト固有の設定はembear/vim-localvimrcで対応する
 if filereadable(expand($HOME.'/.vimrc_local'))
-  source $HOME/.vimrc_local
+    source $HOME/.vimrc_local
 endif
 
 
@@ -716,29 +721,66 @@ let g:phpfmt_autosave = 0
 " https://vim-jp.org/vimdoc-ja/intro.html
 set nosc noru nosm
 
-"let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
-
 
 autocmd BufNewFile,BufRead *.gs  set filetype=javascript
 
-" vimのselectより視点の移動が少ないのが利点に思う
-" 他にも機能がある
-"https://github.com/skywind3000/vim-quickui/blob/master/MANUAL.md
 
-" バッファの差分 https://thinca.hatenablog.com/entry/20130426/1366910837
-" ビジュアル選択してポップアップを起動してもリストを選択できない
-let content = [
-            \ [ 'PHPDoc生成', ':call PhpDocSingle()' ],
-            \ [ 'バッファの差分', ':windo diffthis' ], 
-            \ [ 'json整形', ':%!jq '.'' ],
-            \ [ 'カンマ区切りを改行(カーソルライン対象)', ':s/,/\r,/g' ],
-            \ [ 'markdown preview', ':PrevimOpen' ],
-            \]
-let opts = {'title': 'select one'}
 
-nnoremap <silent>,my :call quickui#listbox#open(content, opts)<CR>
-"map <silent>,my :call quickui#listbox#open(content, opts)<CR>
+nnoremap <silent>,vf :Vifm<CR>
+nnoremap <silent>,my  :call MyFunc()<CR>
+nnoremap <silent>,g  :call GitFunc()<CR>
 
-" バッファ切り替え
-" call quickui#tools#list_buffer('tabedit')
-nnoremap <silent>,b :call quickui#tools#list_buffer('e')<CR>
+
+"------------
+"比較的使うけどキー覚えてないもの
+"------------
+:function! MyFunc()
+    :let lines = [
+        \ "Please select a Function",
+        \ "1 : PHPDoc生成",
+        \ "2 : バッファの差分",
+        \ "3 : json整形",
+        \ "4 : カンマ区切りを改行(カーソルライン対象)",
+        \ "5 : markdown preview",
+        \ ]
+    :let choice = inputlist(lines)
+    :if choice == 1
+        :call PhpDocSingle()
+    :elseif choice == 2
+        " バッファの差分 https://thinca.hatenablog.com/entry/20130426/1366910837
+        :windo diffthis
+    :elseif choice == 3
+        :%!jq '.'
+    :elseif choice == 4
+        :s/,/\r,/g
+    :elseif choice == 5
+        :PrevimOpen
+    :else
+        :echo "exit"
+    :endif
+:endfunction
+
+
+
+"------------
+"自分が使用するgit処理のラッパー
+"------------
+:function! GitFunc()
+    :let lines = [
+        \ "Please select a Function",
+        \ "1 : Gina Diff",
+        \ "2 : Gina!! add -p",
+        \ "3 : GitGutterUndoHunk",
+        \ ]
+    :let choice = inputlist(lines)
+    :if choice == 1
+        :Gina diff
+    :elseif choice == 2
+        :Gina!! add -p
+    :elseif choice == 3
+        :GitGutterUndoHunk
+    :else
+        :echo "exit"
+    :endif
+:endfunction
+
