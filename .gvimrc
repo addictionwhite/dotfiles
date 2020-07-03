@@ -5,7 +5,8 @@
 "set mapleader = "\<Space>"
 "colorscheme monokai_pro 
 "colorscheme monokai
-colorscheme sonokai 
+"colorscheme sonokai  " コメントのビジュアル選択が見づらい
+colorscheme vim-monokai-tasty
 
 " term.appだとvimの色が壊れる
 "set termguicolors
