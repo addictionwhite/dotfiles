@@ -49,7 +49,7 @@ Plug 'pbrisbin/vim-mkdir'
 " 判定がシビアに感じる
 "Plug 'pirey/underscored.vim'
 "Plug 'mattn/vim-sonictemplate'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } "ssm環境で動かないので
 
 " マークダウンのプレビューに必要
 Plug 'tpope/vim-markdown'
