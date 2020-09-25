@@ -116,3 +116,6 @@ hi Comment ctermfg=102
 hi Visual  ctermbg=236
 
 
+"https://qiita.com/akira-hamada/items/eb46ef02fabfdd418449
+" Vimでキーワードにマッチした数を表示(vim 8.1以降
+set shortmess-=S

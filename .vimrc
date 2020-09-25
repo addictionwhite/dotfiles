@@ -3,6 +3,8 @@ autocmd QuickFixCmdPost *ag* cwindow
 
 
 "-------- vim-plug START --------
+" TODO コメントアウトしているもの消す(過去のものはgit logでsearchできるようにする）
+
 call plug#begin('~/.vim/plugged')
 
 " color
@@ -26,7 +28,6 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'w0ng/vim-hybrid'
 Plug 'sainnhe/sonokai'
 "Plug 'sickill/vim-monokai', {'as' :'test_monokai'}
-
 
 " 編集
 Plug 'mattn/emmet-vim'
@@ -60,7 +61,7 @@ Plug 'AndrewRadev/switch.vim'
 "VCS 
 Plug 'tpope/vim-fugitive'
 "Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'vim-scripts/vcscommand.vim' " TODO:不要そうなら消す
+"Plug 'vim-scripts/vcscommand.vim' " SVN使うときには必要(今使用してないので外す）
 Plug 'airblade/vim-gitgutter'
 "Plug 'cohama/agit.vim'
 "Plug 'rhysd/committia.vim' " vital.vimに依存
@@ -74,7 +75,10 @@ Plug 'iberianpig/tig-explorer.vim'
 " 画面がちらつく
 "Plug 'tveskag/nvim-blame-line'
 Plug 'lambdalisue/gina.vim'
-Plug 'cohama/lexima.vim'
+" https://teratail.com/questions/116046 
+" 補完の際の改行に干渉しているもよう
+" verbose inoremap <CR> 
+"Plug 'cohama/lexima.vim'
 
 " 表示
 Plug 'simeji/winresizer' "ウィンドウサイズ変更
@@ -100,7 +104,6 @@ Plug 'scrooloose/nerdtree'
 "Plug 'lambdalisue/fern.vim'
 Plug 'vifm/vifm.vim'
 
-
 "Plug 'weirongxu/coc-explorer'
 Plug 'ryanoasis/nerd-fonts'
 
@@ -124,7 +127,7 @@ Plug 'osyo-manga/vim-over'
 "Plug 'wsdjeg/FlyGrep.vim'
 " Plug 'kana/vim-operator-replace'
 Plug 'kana/vim-operator-user'
-Plug 'othree/eregex.vim'
+"Plug 'othree/eregex.vim' " インクリメンタルサーチができなくなる http://deris.hatenablog.jp/entry/2013/05/15/024932
 Plug 'itchyny/vim-cursorword'
 
 " バッファ操作
@@ -144,11 +147,14 @@ Plug 'tpope/vim-abolish'
 " 移動
 Plug 'haya14busa/vim-asterisk'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'haya14busa/vim-edgemotion'
+" Plug 'haya14busa/vim-edgemotion'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+"Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 "Plug 'szw/vim-tags'
 Plug 't9md/vim-choosewin'
@@ -179,8 +185,10 @@ Plug 'iberianpig/ranger-explorer.vim'
 Plug 'mattn/webapi-vim'
 "Plug 'tpope/vim-unimpaired'
 
-" エラーでるようになった？
-"Plug 'embear/vim-localvimrc'
+" エラーでるようになった？(他のプラグインとぶつかっているようなエラーが出る
+" Plug 'embear/vim-localvimrc'
+" https://thinca.hatenablog.com/entry/20110108/1294427418
+"Plug 'thinca/vim-localrc'
 
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
@@ -207,7 +215,9 @@ Plug 'docunext/closetag.vim' " 基本はEmmet。補助的に使用したい
 Plug 'ap/vim-css-color' " TODO:不要そうなら消す
 " https://qiita.com/cyrt/items/ff5edd392b3f41dd6e10
 " 遅い？
-" Plug 'phpactor/phpactor' 
+"Plug 'phpactor/phpactor' 
+" https://phpactor.readthedocs.io/en/master/usage/vim-plugin.html
+"Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 
 " js "
 Plug 'jelera/vim-javascript-syntax'
@@ -228,7 +238,6 @@ Plug 'hashivim/vim-terraform'
 "Plug 't9md/vim-chef'
 "Plug 'itkq/fluentd-vim' " 効かない?
 
-
 " Plug 'vexxor/phpdoc.vim'
 " Plug 'vim-scripts/php_localvarcheck.vim' 特定の関数でエラーを吐く
 " 有用だけどカーソルの移動が遅くなる
@@ -242,14 +251,23 @@ Plug 'beanworks/vim-phpfmt'
 
 " #LSP
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+"Plug 'prabirshrestha/async.vim' "vim-lspの何かに統合されたという記事を見た気がする
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'mattn/vim-lsp-settings'
+
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
+Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+Plug 'mattn/vim-lsp-icons'
+
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 " 上のlspとバッティングする？(同じ定義元が複数表示される
-" Plug 'felixfbecker/php-language-server', {'do': 'composer install && composer run-script parse-stubs'}
+"Plug 'felixfbecker/php-language-server', {'do': 'composer install && composer run-script parse-stubs'}
 
 
 "Plug 'voldikss/coc-bookmark'
@@ -368,7 +386,7 @@ xmap <Space>h <Plug>(quickhl-manual-this)
 nmap <Space>H <Plug>(quickhl-manual-reset)
 xmap <Space>H <Plug>(quickhl-manual-reset)
 
-" nnoremap / /\v
+nnoremap / /\v
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
 nnoremap ww <C-w>w
@@ -488,6 +506,12 @@ let g:fzf_command_prefix = 'Fzf'
 
 
 
+"command! -bang -nargs=* Ggrep
+"  \ call fzf#vim#grep(
+"  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+"  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+
 " ファイル一覧を出すときにプレビュー表示
 " reference https://kashewnuts.github.io/2018/12/02/bp_advent_calender.html
 command! -bang -nargs=? -complete=dir Files
@@ -498,6 +522,7 @@ command! -bang -nargs=? -complete=dir Files
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
+
 " 外部コマンドptを使用してプレビューしながらgrep検索する
 command! -bang -nargs=* Grep
 \ call fzf#vim#grep(
@@ -547,9 +572,9 @@ nnoremap <silent> <Space>p <plug>(quickr_preview)
 
 
 "--ale--
-let g:ale_linters = {
-      \ 'javascript': ['eslint']
-      \ }
+"let g:ale_linters = {
+"      \ 'javascript': ['eslint']
+"      \ }
 
 
 " --phpmd--
@@ -566,14 +591,8 @@ let g:terraform_fmt_on_save = 1
 let g:winresizer_gui_enable=1
 
 
-
 " ---lsp---
 let g:lsp_diagnostics_enabled = 0
-
-
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 
 
 " --ultisnips--
@@ -660,7 +679,6 @@ command! -nargs=0 ClipFile call s:Clip(expand('%:t'))
 command! -nargs=0 ClipDir  call s:Clip(expand('%:p:h'))
 
 
-
 "---------------------------------------------------------------------------
 " note
 "---------------------------------------------------------------------------
@@ -678,19 +696,10 @@ vnoremap z? <ESC>?\%V
 filetype plugin on
 
 
-" プロジェクト固有の設定はembear/vim-localvimrcで対応する
+" 注意: vdebugの設定は読み込みのタイミングの問題か、.vimrcか$HOME.'/.vimrc_local'に定義しないとうまく動かない
 if filereadable(expand($HOME.'/.vimrc_local'))
     source $HOME/.vimrc_local
 endif
-
-
-" start ブレイクポイントに止まらなかったので一旦ここに移動（動いた
-" ---vdebug---
-:map <F1> :BreakpointRemove * <CR>
-let g:vdebug_options["break_on_open"] = 0
-
-" end
-
 
 
 " たまに遅くなっている原因？検証
@@ -722,13 +731,13 @@ let g:phpfmt_autosave = 0
 set nosc noru nosm
 
 
-autocmd BufNewFile,BufRead *.gs  set filetype=javascript
-
+"autocmd BufNewFile,BufRead *.gs  set filetype=javascript
 
 
 nnoremap <silent>,vf :Vifm<CR>
 nnoremap <silent>,my  :call MyFunc()<CR>
 nnoremap <silent>,g  :call GitFunc()<CR>
+nnoremap <silent>,pa  :call PhactorFunc()<CR>
 
 
 "------------
@@ -783,4 +792,33 @@ nnoremap <silent>,g  :call GitFunc()<CR>
         :echo "exit"
     :endif
 :endfunction
+
+
+:function! PhactorFunc()
+    " memo 文字列に.があるとエラーになる？
+    :let lines = [
+        \ "Please select a Function",
+        \ "1 : PhpactorTransform",
+        \ "2 : Import all missing classes in the current file",
+        \ "3 : Generate a new class",
+        \ "4 : Move a class",
+        \ ]
+    :let choice = inputlist(lines)
+    :if choice == 1
+        :PhpactorTransform
+    :elseif choice == 2
+        :PhpactorImportMissingClasses
+    :elseif choice == 3
+        :PhpactorClassNew
+    :elseif choice == 4
+        :PhpactorMoveFile
+    :else
+        :echo "exit"
+    :endif
+:endfunction
+
+
+
+" memo
+" https://github.com/dyng/ctrlsf.vimつかえばgrepとreplaceできる
 
