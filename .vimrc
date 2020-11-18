@@ -58,6 +58,9 @@ Plug 'kannokanno/previm'
 "Plug 'tyru/open-browser.vim' " 既に定義されているため
 Plug 'AndrewRadev/switch.vim'
 
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 "VCS 
 Plug 'tpope/vim-fugitive'
 "Plug 'tommcdo/vim-fugitive-blame-ext'
@@ -822,3 +825,40 @@ nnoremap <silent>,pa  :call PhactorFunc()<CR>
 " memo
 " https://github.com/dyng/ctrlsf.vimつかえばgrepとreplaceできる
 
+
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+"nmap        s   <Plug>(vsnip-select-text)
+"xmap        s   <Plug>(vsnip-select-text)
+"nmap        S   <Plug>(vsnip-cut-text)
+"xmap        S   <Plug>(vsnip-cut-text)
+"
+" If you want to use snippet for multiple filetypes, you can `g:vsip_filetypes` for it.
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
+
+
+" https://qiita.com/horiem/items/5f503af679d8aed24dd5
+" vim の :! コマンドでも .bashrc のエイリアス設定を有効にする
+let $BASH_ENV = "~/.bash_aliases"
+
+
+let g:VM_mouse_mappings = 1
+"nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
+"nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
+nmap   <C-RightMouse>        <Plug>(VM-Mouse-Cursor)
+nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
