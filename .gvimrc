@@ -1,12 +1,31 @@
 
+
+
 """""""""""""
 " general
 """""""""""""
 "set mapleader = "\<Space>"
 "colorscheme monokai_pro 
 "colorscheme monokai
+"colorscheme  typewriter-night
+"colorscheme plain
+
+"colorscheme typewriter
+
 "colorscheme sonokai  " コメントのビジュアル選択が見づらい
-colorscheme vim-monokai-tasty
+"colorscheme vim-monokai-tasty
+"colorscheme wellsokai
+"colorscheme xcodewwdc
+colorscheme molokai
+
+
+"colorscheme spaceduck
+"コメントの色を変更 https://www.366service.com/jp/qa/62a28ff7365e609d7518149a1df4a0e7
+"hi Comment guifg=#ABCDEF
+"hi Comment guifg=#ABCDEF
+
+"set background=light
+"colorscheme toast
 
 " term.appだとvimの色が壊れる
 "set termguicolors
@@ -17,7 +36,10 @@ set imdisable
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set number " コーディングの際には不要だがペアプロやエラーの箇所に飛ぶ際にあったほうがよい "
+" コーディングの際には不要だがペアプロやエラーの箇所に飛ぶ際にあったほうがよい "
+"set number
+" 最近特に行数で指摘受けてないので
+set nonumber 
 " set relativenumber
 set nowrap " 折返し無効
 set showmatch
@@ -27,7 +49,7 @@ set matchtime=1
 set nowrap
 " TODO
 " mouseで有効にしているモードだとクリップボードがうまく共有されない
-" ただしmousewおセットしているモードだとマウスからスクロールができる
+" ただしmouseをセットしているモードだとマウスからスクロールができる
 " set mouse=v
 "set mouse=nv
 set mouse=a
@@ -68,6 +90,13 @@ set laststatus=2
 set statusline=%F
 " https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
 set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
+" https://qiita.com/tashua314/items/101f1bec368c75a90251
+" 現在行数/全行数
+set statusline+=[LOW=%l/%L]
+
+" 作業時間
+" gtm https://github.com/git-time-metric/gtm/blob/master/README.md
+set statusline+=%{exists('*GTMStatusline')?'['.GTMStatusline().']':''}
 
 "-------------------------------------------------------------------------------
 " エンコーディング設定
@@ -112,10 +141,28 @@ set backspace=indent,eol,start
 
 " コメントとvisualモードが見づらいので
 " http://shocrunch.hatenablog.com/entry/2015/01/15/234555
-hi Comment ctermfg=102
+"hi Comment ctermfg=102
+"hi Comment ctermfg=202
 hi Visual  ctermbg=236
+
+"hi Comment ctermfg=white
 
 
 "https://qiita.com/akira-hamada/items/eb46ef02fabfdd418449
 " Vimでキーワードにマッチした数を表示(vim 8.1以降
 set shortmess-=S
+" 補完候補がステータスメニュー上に一覧表示 https://qiita.com/lighttiger2505/items/2f6e4686b8db051378c0
+set wildmenu
+
+
+
+" 検索をファイルの先頭へループしない
+set nowrapscan
+
+
+
+"https://github.com/74th/vscode-monokaicharcoal/blob/master/themes/Monokai-Charcoal.vim
+
+
+let g:molokai_original = 1
+let g:rehash256 = 1
