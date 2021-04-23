@@ -1,3 +1,4 @@
+
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd QuickFixCmdPost *ag* cwindow
 
@@ -20,6 +21,7 @@ Plug 'jdkanani/vim-material-theme'
 Plug 'reedes/vim-colors-pencil'
 Plug 'cocopon/iceberg.vim'
 " Plug 'sickill/vim-monokai' vim-monokaiぶつかる asつけたら対応できそう
+Plug 'sickill/vim-monokai', { 'as': 'vim-monokai_sickill' }
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'Rigellute/rigel'
 Plug 'hauleth/blame.vim'
@@ -28,6 +30,18 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'w0ng/vim-hybrid'
 Plug 'sainnhe/sonokai'
 "Plug 'sickill/vim-monokai', {'as' :'test_monokai'}
+Plug 'jsit/toast.vim'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'pineapplegiant/spaceduck'
+Plug 'andreypopp/vim-colors-plain'
+Plug 'plan9-for-vimspace/acme-colors'
+Plug 'axvr/photon.vim'
+Plug 'A/vim-trash-polka'
+Plug 'logico/typewriter'
+Plug 'rakr/vim-two-firewatch'
+Plug 'wellsjo/wellsokai.vim'
+Plug 'arzg/vim-colors-xcode'
+Plug 'tomasr/molokai'
 
 " 編集
 Plug 'mattn/emmet-vim'
@@ -44,31 +58,36 @@ Plug 'w0rp/ale'
 "Plug 'mg979/vim-visual-multi'
 " 他のプラグインとのかねあいがノイズがはいる
 "Plug 'vim-scripts/vim-auto-save' 
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 Plug 'pbrisbin/vim-mkdir'
 " 判定がシビアに感じる
 "Plug 'pirey/underscored.vim'
 "Plug 'mattn/vim-sonictemplate'
-"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } "ssm環境で動かないので
+Plug 'mg979/vim-visual-multi'
 
+"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+" TODO マークダウン編集不要そうなら消す
 " マークダウンのプレビューに必要
 Plug 'tpope/vim-markdown'
 Plug 'kannokanno/previm'
 "Plug 'tyru/open-browser.vim' " 既に定義されているため
 Plug 'AndrewRadev/switch.vim'
 
+
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
 "VCS 
 Plug 'tpope/vim-fugitive'
+Plug 'aacunningham/vim-fuzzy-stash'
 "Plug 'tommcdo/vim-fugitive-blame-ext'
 "Plug 'vim-scripts/vcscommand.vim' " SVN使うときには必要(今使用してないので外す）
 Plug 'airblade/vim-gitgutter'
 "Plug 'cohama/agit.vim'
 "Plug 'rhysd/committia.vim' " vital.vimに依存
-Plug 'vim-jp/vital.vim'  " plugin作成用の関数群
+"Plug 'vim-jp/vital.vim'  " plugin作成用の関数群
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 "Plug 'jreybert/vimagit'
 "Plug 'rhysd/git-messenger.vim'
@@ -82,6 +101,8 @@ Plug 'lambdalisue/gina.vim'
 " 補完の際の改行に干渉しているもよう
 " verbose inoremap <CR> 
 "Plug 'cohama/lexima.vim'
+"Plug 'skanehira/gh.vim' 
+"Plug 'git-time-metric/gtm-vim-plugin'
 
 " 表示
 Plug 'simeji/winresizer' "ウィンドウサイズ変更
@@ -104,8 +125,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'scrooloose/nerdtree'
 
-"Plug 'lambdalisue/fern.vim'
-Plug 'vifm/vifm.vim'
+"Plug 'lambdalisue/fern.vim' ツリー上での操作がNerdTreeの方が合っているため
+"Plug 'vifm/vifm.vim'
 
 "Plug 'weirongxu/coc-explorer'
 Plug 'ryanoasis/nerd-fonts'
@@ -120,6 +141,9 @@ Plug 'ryanoasis/nerd-fonts'
 "Plug 'bagrat/vim-buffet'
 "Plug 'skywind3000/vim-quickui' " 有用だがaws ssm環境で動かないため...
 "Plug 'itchyny/thumbnail.vim'
+"Plug 'obcat/vim-sclow'
+
+Plug 'jeetsukumaran/vim-buffergator'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -132,6 +156,7 @@ Plug 'osyo-manga/vim-over'
 Plug 'kana/vim-operator-user'
 "Plug 'othree/eregex.vim' " インクリメンタルサーチができなくなる http://deris.hatenablog.jp/entry/2013/05/15/024932
 Plug 'itchyny/vim-cursorword'
+" Plug 'rstacruz/vim-gitgrep' " 使いやすそうだがgrepの結果をreplaceできないので一旦ctrlsfの方を採用
 
 " バッファ操作
 Plug 'vim-scripts/copypath.vim'
@@ -156,14 +181,22 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Plug 'ctrlpvim/ctrlp.vim' " エラーが出る'maxmempattern' 以上のメモリを使用します
+
+"Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 "Plug 'yuki-ycino/fzf-preview.vim'
-Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'chengzeyi/fzf-preview.vim', { 'as': 'fzf-preview_c' }
+
+"Plug 'MattesGroeger/vim-bookmarks'
+"Plug 'Yilin-Yang/vim-markbar'
+Plug 'kshenoy/vim-signature'
+
 "Plug 'szw/vim-tags'
 Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
 "Plug 'pechorin/any-jump.vim' " 精度がLSPより荒い
+Plug 'unblevable/quick-scope'
 
 " 興味深いけどエラーがでる
 " Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -184,7 +217,7 @@ Plug 'skywind3000/vim-preview' "TODO: 不要そうなら消す
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'mattn/vim-lsp-settings'
-Plug 'iberianpig/ranger-explorer.vim'
+"Plug 'iberianpig/ranger-explorer.vim'
 Plug 'mattn/webapi-vim'
 "Plug 'tpope/vim-unimpaired'
 
@@ -206,8 +239,16 @@ Plug 'vim-vdebug/vdebug'
   " phpunitでの挙動がおかしい
 "./install_gadget.py --force-enable-php でエラーが起きる RuntimeError: Failed to install gadgets: vscode-php-debug  20200217
 "Plug 'puremourning/vimspector' 
+
+
+Plug 'pixelneo/vim-python-docstring'
+" よさそうだがdoqが必要なので一旦見送り(install時エラーになったので）
+" Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+
+
 "PHP
 " language
+Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'hail2u/vim-css3-syntax'
 Plug 'Rican7/php-doc-modded'
 "Plug 'shawncplus/phpcomplete.vim' " cocnvimとぶつかりそうなので一旦外す
@@ -228,6 +269,10 @@ Plug 'nono/jquery.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'mxw/vim-jsx'
+Plug 'heavenshell/vim-jsdoc', { 
+  \ 'for': ['javascript', 'javascript.jsx','typescript'], 
+  \ 'do': 'make install'
+\}
 
 " ts "
 Plug 'leafgarland/typescript-vim'
@@ -236,8 +281,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
 " ohter
-Plug 'chr4/nginx.vim'
-Plug 'hashivim/vim-terraform'
+"Plug 'chr4/nginx.vim'
+"Plug 'hashivim/vim-terraform'
 "Plug 't9md/vim-chef'
 "Plug 'itkq/fluentd-vim' " 効かない?
 
@@ -252,9 +297,11 @@ Plug 'hashivim/vim-terraform'
 Plug 'beanworks/vim-phpfmt'
 "Plug 'kevinhui/vim-docker-tools'
 
+Plug 'tell-k/vim-autopep8'
+
 " #LSP
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-"Plug 'prabirshrestha/async.vim' "vim-lspの何かに統合されたという記事を見た気がする
+"Plug 'prabirshrestha/async.vim'
 "Plug 'prabirshrestha/vim-lsp'
 "Plug 'prabirshrestha/asyncomplete.vim'
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -380,7 +427,8 @@ nnoremap <silent> <Space>et  :<C-u>edit $HOME/.tigrc<CR>
 
 " 設定再読み込み
 nnoremap <silent> <Space>vi  :source ~/.config/nvim/init.vim<CR>
-nmap ;s :source ~/myVimscript.vim<CR>
+" ;をあてるとfが使いづらくなるので必要なら別を割り当てる
+"nmap ;s :source ~/myVimscript.vim<CR>
 
 
 "単語を色マーク
@@ -402,13 +450,17 @@ nnoremap wh <C-w>h
 nnoremap <silent> ,f  :Files<CR> 
 "nnoremap <silent> ,f  :GFiles<CR>
 nnoremap <silent> ,F  :GFiles?<CR>
-nnoremap <silent> ,b  :BuffersPreview<CR>
+"nnoremap <silent> ,b  :BuffersPreview<CR>
+nnoremap <silent> ,b  :FzfBuffers<CR>
 nnoremap <silent> ,s  :Snippets<CR>
 "nnoremap <silent> ,h  :LspHover<CR>
 
 
 nnoremap <silent> <Space>nf :NERDTreeFind<CR>
 nnoremap <silent> <Space>nc :NERDTreeClose<CR>
+
+"nnoremap <silent> <Space>bt :BuffergatorToggle<CR>
+nnoremap <silent> <Space>b :BuffergatorToggle<CR>
 
 
 nmap <silent> gr :LspReferences<CR>
@@ -440,7 +492,8 @@ nmap # #zz
 " 各種プラグインの設定
 "---------------------------------------------------------------------------
 
-" ---ctrlSF---
+" ---ctrlSF--- 
+" pはpreviewと重複する
 let g:ctrlsf_mapping = {
     \ "next": "n",
     \ "prev": "N",
@@ -453,6 +506,8 @@ let g:ctrlsf_auto_close = {
 let g:ctrlsf_auto_focus = {
     \ "at": "start"
     \ }
+
+let g:ctrlsf_position = 'right'
 
 
 " --easyMotion--
@@ -499,7 +554,8 @@ let g:pdv_cfg_annotation_License = 0
 " TODO
 " ---fzf---
 "let g:fzf_layout = { 'up': '~40%' }
-let g:fzf_layout = { 'down': '~90%' }
+"let g:fzf_layout = { 'down': '~90%' }
+let g:fzf_layout = { 'down': '~70%' }
 " fzfからファイルにジャンプできるようにする
 let g:fzf_buffers_jump = 1
 
@@ -526,21 +582,21 @@ function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-" 外部コマンドptを使用してプレビューしながらgrep検索する
-command! -bang -nargs=* Grep
-\ call fzf#vim#grep(
-\   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
-\   <bang>0 ? fzf#vim#with_preview('up:60%')
-\           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
-\   <bang>0)
-
-
-if executable('rg')
-    command! -bang -nargs=* Rg
-        \ call fzf#vim#grep(
-        \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
-        \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'up:50%:wrap'))
-endif
+"" 外部コマンドptを使用してプレビューしながらgrep検索する
+"command! -bang -nargs=* Grep
+"\ call fzf#vim#grep(
+"\   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
+"\   <bang>0 ? fzf#vim#with_preview('up:60%')
+"\           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
+"\   <bang>0)
+"
+"
+"if executable('rg')
+"    command! -bang -nargs=* Rg
+"        \ call fzf#vim#grep(
+"        \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+"        \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'up:50%:wrap'))
+"endif
 
 if executable('buffers')
     command! -bang -nargs=* Buffers
@@ -551,21 +607,21 @@ endif
 
 
 
-" ---bookmark---
-"    龎
-" https://www.nerdfonts.com/cheat-sheet
-"let g:bookmark_sign = ''
-let g:bookmark_sign = ''
-
-let NERDTreeShowHidden = 1
-
-"
-let g:bookmark_save_per_working_dir = 1
-let g:bookmark_auto_save = 1
-let g:bookmark_show_warning = 1
-" https://github.com/MattesGroeger/vim-bookmarks
-
-let g:bookmark_auto_close = 1
+"" ---bookmark---
+""    龎
+"" https://www.nerdfonts.com/cheat-sheet
+""let g:bookmark_sign = ''
+"let g:bookmark_sign = ''
+"
+"let NERDTreeShowHidden = 1
+"
+""
+"let g:bookmark_save_per_working_dir = 1
+"let g:bookmark_auto_save = 1
+"let g:bookmark_show_warning = 1
+"" https://github.com/MattesGroeger/vim-bookmarks
+"
+"let g:bookmark_auto_close = 1
 
 
 " --quickr-preview.vim--
@@ -576,7 +632,7 @@ nnoremap <silent> <Space>p <plug>(quickr_preview)
 
 "--ale--
 "let g:ale_linters = {
-"      \ 'javascript': ['eslint']
+"      \ 'tsx': ['eslint']
 "      \ }
 
 
@@ -599,9 +655,9 @@ let g:lsp_diagnostics_enabled = 0
 
 
 " --ultisnips--
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " --settings--
 "map *   <Plug>(asterisk-*)
@@ -737,10 +793,15 @@ set nosc noru nosm
 "autocmd BufNewFile,BufRead *.gs  set filetype=javascript
 
 
-nnoremap <silent>,vf :Vifm<CR>
-nnoremap <silent>,my  :call MyFunc()<CR>
-nnoremap <silent>,g  :call GitFunc()<CR>
-nnoremap <silent>,pa  :call PhactorFunc()<CR>
+" ,を使うとfが使いづらくなるので別を割り当てる
+"nnoremap <silent>,vf :Vifm<CR>
+"nnoremap <silent>,my  :call MyFunc()<CR>
+"nnoremap <silent>,g  :call GitFunc()<CR>
+"nnoremap <silent>,pa  :call PhactorFunc()<CR>
+"nnoremap <silent>,py  :call MyPython()<CR>
+nnoremap <Space>my :call MyFunc()<CR>
+nnoremap <Space>g :call GitFunc()<CR>
+nnoremap <Space>pa :call PhactorFunc()<CR>
 
 
 "------------
@@ -821,10 +882,22 @@ nnoremap <silent>,pa  :call PhactorFunc()<CR>
 :endfunction
 
 
+:function! MyPython()
+    :let lines = [
+        \ "Please select a Function",
+        \ "1 : Docstring生成",
+        \ ]
+    :let choice = inputlist(lines)
+    :if choice == 1
+        :Docstring
+    :else
+        :echo "exit"
+    :endif
+:endfunction
+
 
 " memo
 " https://github.com/dyng/ctrlsf.vimつかえばgrepとreplaceできる
-
 
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -862,3 +935,111 @@ let g:VM_mouse_mappings = 1
 "nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
 nmap   <C-RightMouse>        <Plug>(VM-Mouse-Cursor)
 nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
+
+
+"command Tr NERDTree
+"COMMAND oPG oPENgITHUBfILE
+
+
+
+
+
+
+" https://getpocket.com/read/3241960719
+" https://gist.github.com/AndrewRadev/1371174
+" bookmark start
+nnoremap ma :Bookmark 
+nnoremap mc :CopenBookmarks<CR>
+nnoremap md :DelBookmark<CR>
+
+
+set viminfo+=!
+
+if !exists('g:BOOKMARKS')
+  let g:BOOKMARKS = {}
+endif
+
+" Add the current [filename, cursor position] in g:BOOKMARKS under the given
+" name
+command! -nargs=1 Bookmark call s:Bookmark(<f-args>)
+function! s:Bookmark(name)
+  let file   = expand('%:p')
+  let cursor = getpos('.')
+
+  if file != ''
+    let g:BOOKMARKS[a:name] = [file, cursor]
+  else
+    echom "No file"
+  endif
+
+  wviminfo
+endfunction
+
+" Delete the user-chosen bookmark
+command! -nargs=1 -complete=custom,s:BookmarkNames DelBookmark call s:DelBookmark(<f-args>)
+function! s:DelBookmark(name)
+  if !has_key(g:BOOKMARKS, a:name)
+    return
+  endif
+
+  call remove(g:BOOKMARKS, a:name)
+  wviminfo
+endfunction
+
+" Go to the user-chosen bookmark
+command! -nargs=1 -complete=custom,s:BookmarkNames GotoBookmark call s:GotoBookmark(<f-args>)
+function! s:GotoBookmark(name)
+  if !has_key(g:BOOKMARKS, a:name)
+    return
+  endif
+
+  let [filename, cursor] = g:BOOKMARKS[a:name]
+
+  exe 'edit '.filename
+  call setpos('.', cursor)
+endfunction
+
+" Open all bookmarks in the quickfix window
+command! CopenBookmarks call s:CopenBookmarks()
+function! s:CopenBookmarks()
+  let choices = []
+
+  for [name, place] in items(g:BOOKMARKS)
+    let [filename, cursor] = place
+
+    call add(choices, {
+          \ 'text':     name,
+          \ 'filename': filename,
+          \ 'lnum':     cursor[1],
+          \ 'col':      cursor[2]
+          \ })
+  endfor
+
+  call setqflist(choices)
+  copen
+endfunction
+
+" Completion function for choosing bookmarks
+function! s:BookmarkNames(A, L, P)
+  return join(sort(keys(g:BOOKMARKS)), "\n")
+endfunction
+
+
+" bookmark end
+
+
+" https://vim-jp.org/vim-users-jp/2009/08/31/Hack-65.html
+" : 選択範囲を検索する
+vnoremap z/ <ESC>/\%V
+vnoremap z? <ESC>?\%V
+
+
+
+let g:gtm_plugin_status_enabled = 1
+
+" bが遅くなる
+" http://ivxi.hatenablog.com/entry/2013/05/23/163825
+"nnoremap <silent>bp :bprevious<CR>
+"nnoremap <silent>bn :bnext<CR>
+"nnoremap <silent>bb :b#<CR>
+
