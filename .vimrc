@@ -112,7 +112,8 @@ Plug 'haya14busa/incsearch.vim' " 検索中の文字列をハイライト
 "Plug 'vim-scripts/vim-signature' " マーク位置の表示
 Plug 'elzr/vim-json' 
 Plug 't9md/vim-quickhl' " 指定の単語をハイライト
-Plug 'myrobo/smart_tabline.vim'
+"Plug 'myrobo/smart_tabline.vim'
+Plug 'pacha/vem-tabline'
 Plug 'mechatroner/rainbow_csv'
 Plug 'AndrewRadev/linediff.vim'
 "Plug 'kamykn/spelunker.vim' " 重い
@@ -1043,3 +1044,6 @@ let g:gtm_plugin_status_enabled = 1
 "nnoremap <silent>bn :bnext<CR>
 "nnoremap <silent>bb :b#<CR>
 
+
+
+let g:vem_tabline_show_number='index'
