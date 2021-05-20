@@ -570,9 +570,6 @@ if filereadable(expand($HOME.'/.vimrc_local'))
 endif
 
 
-" たまに遅くなっている原因？検証
-let g:phpfmt_autosave = 0
-
 " 実験
 " 遅い端末を使っている場合は、ステータスメッセージをオフにすることで編集のスピー ドを上げることができます:
 " https://vim-jp.org/vimdoc-ja/intro.html
