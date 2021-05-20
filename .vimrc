@@ -20,7 +20,6 @@ Plug 'cormacrelf/vim-colors-github'
 Plug 'jdkanani/vim-material-theme'
 Plug 'reedes/vim-colors-pencil'
 Plug 'cocopon/iceberg.vim'
-" Plug 'sickill/vim-monokai' vim-monokaiぶつかる asつけたら対応できそう
 Plug 'sickill/vim-monokai', { 'as': 'vim-monokai_sickill' }
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'Rigellute/rigel'
@@ -29,7 +28,6 @@ Plug 'crusoexia/vim-monokai'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'w0ng/vim-hybrid'
 Plug 'sainnhe/sonokai'
-"Plug 'sickill/vim-monokai', {'as' :'test_monokai'}
 Plug 'jsit/toast.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'pineapplegiant/spaceduck'
@@ -49,24 +47,10 @@ Plug 'tpope/vim-surround'
 Plug 'glidenote/memolist.vim'
 Plug 'tpope/vim-repeat' "vim-macro-repeatと同等
 Plug 'jacobchrismarsh/vim-macro-repeat'
-"Plug 'terryma/vim-multiple-cursors' "TODO: 不要そうなら消す
 Plug 'Townk/vim-autoclose'
 Plug 'w0rp/ale'
-"Plug 'tpope/vim-eunuch'
-" 改行は挿入できない
-"Plug 'hlissner/vim-multiedit' 
-"Plug 'mg979/vim-visual-multi'
-" 他のプラグインとのかねあいがノイズがはいる
-"Plug 'vim-scripts/vim-auto-save' 
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
 Plug 'pbrisbin/vim-mkdir'
-" 判定がシビアに感じる
-"Plug 'pirey/underscored.vim'
-"Plug 'mattn/vim-sonictemplate'
 Plug 'mg979/vim-visual-multi'
-
-"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " TODO マークダウン編集不要そうなら消す
 " マークダウンのプレビューに必要
@@ -85,167 +69,74 @@ Plug 'aacunningham/vim-fuzzy-stash'
 "Plug 'tommcdo/vim-fugitive-blame-ext'
 "Plug 'vim-scripts/vcscommand.vim' " SVN使うときには必要(今使用してないので外す）
 Plug 'airblade/vim-gitgutter'
-"Plug 'cohama/agit.vim'
-"Plug 'rhysd/committia.vim' " vital.vimに依存
-"Plug 'vim-jp/vital.vim'  " plugin作成用の関数群
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
-"Plug 'jreybert/vimagit'
-"Plug 'rhysd/git-messenger.vim'
 Plug 'iberianpig/tig-explorer.vim'
-" Plug 'vim-scripts/vim-svngutter'
-" Plug 'idanarye/vim-merginal'
-" 画面がちらつく
-"Plug 'tveskag/nvim-blame-line'
 Plug 'lambdalisue/gina.vim'
-" https://teratail.com/questions/116046 
-" 補完の際の改行に干渉しているもよう
-" verbose inoremap <CR> 
-"Plug 'cohama/lexima.vim'
-"Plug 'skanehira/gh.vim' 
-"Plug 'git-time-metric/gtm-vim-plugin'
 
 " 表示
 Plug 'simeji/winresizer' "ウィンドウサイズ変更
 Plug 'Yggdroot/indentLine'
-"Plug 'tyru/current-func-info.vim' " 表示している関数名表示 (カーソル移動が遅くなる
 Plug 'haya14busa/incsearch.vim' " 検索中の文字列をハイライト
-"Plug 'vim-scripts/vim-signature' " マーク位置の表示
 Plug 'elzr/vim-json' 
 Plug 't9md/vim-quickhl' " 指定の単語をハイライト
-"Plug 'myrobo/smart_tabline.vim'
 Plug 'pacha/vem-tabline'
 Plug 'mechatroner/rainbow_csv'
 Plug 'AndrewRadev/linediff.vim'
-"Plug 'kamykn/spelunker.vim' " 重い
-" Plug 'jeetsukumaran/vim-buffergator'
 Plug 'ryanoasis/vim-devicons'
-" ツリー描写遅くなる
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-"Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'scrooloose/nerdtree'
-
-"Plug 'lambdalisue/fern.vim' ツリー上での操作がNerdTreeの方が合っているため
-"Plug 'vifm/vifm.vim'
-
-"Plug 'weirongxu/coc-explorer'
 Plug 'ryanoasis/nerd-fonts'
-
-"Plug 'camspiers/lens.vim'
-
-" Plug 'IMOKURI/line-number-interval.nvim' " 重い?
-"Plug 'mkitt/tabline.vim'
-"Plug 'itchyny/lightline.vim'
-
-"Plug 'zefei/vim-wintabs'
-"Plug 'bagrat/vim-buffet'
-"Plug 'skywind3000/vim-quickui' " 有用だがaws ssm環境で動かないため...
-"Plug 'itchyny/thumbnail.vim'
-"Plug 'obcat/vim-sclow'
 
 Plug 'jeetsukumaran/vim-buffergator'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
 Plug 'thinca/vim-qfreplace' " grep 結果を置換
-"Plug 'mileszs/ack.vim'
 Plug 'fuenor/qfixgrep'
 Plug 'osyo-manga/vim-over'
-"Plug 'wsdjeg/FlyGrep.vim'
-" Plug 'kana/vim-operator-replace'
 Plug 'kana/vim-operator-user'
-"Plug 'othree/eregex.vim' " インクリメンタルサーチができなくなる http://deris.hatenablog.jp/entry/2013/05/15/024932
 Plug 'itchyny/vim-cursorword'
-" Plug 'rstacruz/vim-gitgrep' " 使いやすそうだがgrepの結果をreplaceできないので一旦ctrlsfの方を採用
 
 " バッファ操作
 Plug 'vim-scripts/copypath.vim'
 Plug 'airblade/vim-rooter' " ディレクトリルートへ遷移
 Plug 'qpkorr/vim-bufkill'
 Plug 'markonm/traces.vim'
-"Plug 'troydm/easybuffer.vim'
-"Plug 'jlanzarotta/bufexplorer'
-" Plug 'vim-scripts/BufOnly.vim'
-" Plug 'rbgrouleff/bclose.vim'
-" 重い？カーソル移動が鈍る
-"Plug 'mg979/vim-xtabline'
-" Plug 'vim-scripts/Changed'
 Plug 'tpope/vim-abolish'
 
 " 移動
 Plug 'haya14busa/vim-asterisk'
 Plug 'Lokaltog/vim-easymotion'
-" Plug 'haya14busa/vim-edgemotion'
-
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-" Plug 'ctrlpvim/ctrlp.vim' " エラーが出る'maxmempattern' 以上のメモリを使用します
-
-"Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-"Plug 'yuki-ycino/fzf-preview.vim'
-"Plug 'chengzeyi/fzf-preview.vim', { 'as': 'fzf-preview_c' }
-
-"Plug 'MattesGroeger/vim-bookmarks'
-"Plug 'Yilin-Yang/vim-markbar'
 Plug 'kshenoy/vim-signature'
 
-"Plug 'szw/vim-tags'
 Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
-"Plug 'pechorin/any-jump.vim' " 精度がLSPより荒い
 Plug 'unblevable/quick-scope'
 
-" 興味深いけどエラーがでる
-" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " その他
 Plug 'thinca/vim-quickrun'
 Plug 'editorconfig/editorconfig-vim'
-"Plug 'zivyangll/git-blame.vim'
-"Plug 'tyru/restart.vim'
-"Plug 'Shougo/denite.nvim'
 Plug 'tyru/open-browser-github.vim'
 Plug 'tyru/open-browser.vim'
 
 Plug 'skywind3000/asyncrun.vim' "TODO: なにかに依存して使われていなければ不要そう
 Plug 'skywind3000/vim-preview' "TODO: 不要そうなら消す
 
-"Plug 'mattn/benchvimrc-vim'
-"Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'mattn/vim-lsp-settings'
-"Plug 'iberianpig/ranger-explorer.vim'
 Plug 'mattn/webapi-vim'
-"Plug 'tpope/vim-unimpaired'
 
-" エラーでるようになった？(他のプラグインとぶつかっているようなエラーが出る
-" Plug 'embear/vim-localvimrc'
-" https://thinca.hatenablog.com/entry/20110108/1294427418
-"Plug 'thinca/vim-localrc'
-
-"Plug 'voldikss/vim-floaterm'
-"Plug 'liuchengxu/vim-clap'
 Plug 'reireias/vim-cheatsheet'
-
 
 " Debug
 Plug 'sebdah/vim-delve'
 Plug 'vim-vdebug/vdebug'
 
-" ブレイクポイントで止まらなくなったので一旦vdebugを使用するようにする
-  " ブレイクポイントに一発で止まらない
-  " phpunitでの挙動がおかしい
-"./install_gadget.py --force-enable-php でエラーが起きる RuntimeError: Failed to install gadgets: vscode-php-debug  20200217
-"Plug 'puremourning/vimspector' 
-
-
 Plug 'pixelneo/vim-python-docstring'
-" よさそうだがdoqが必要なので一旦見送り(install時エラーになったので）
-" Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 
 
 "PHP
@@ -253,17 +144,9 @@ Plug 'pixelneo/vim-python-docstring'
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'hail2u/vim-css3-syntax'
 Plug 'Rican7/php-doc-modded'
-"Plug 'shawncplus/phpcomplete.vim' " cocnvimとぶつかりそうなので一旦外す
-"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' } 重い？
-
 
 Plug 'docunext/closetag.vim' " 基本はEmmet。補助的に使用したい
 Plug 'ap/vim-css-color' " TODO:不要そうなら消す
-" https://qiita.com/cyrt/items/ff5edd392b3f41dd6e10
-" 遅い？
-"Plug 'phpactor/phpactor' 
-" https://phpactor.readthedocs.io/en/master/usage/vim-plugin.html
-"Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 
 " js "
 Plug 'jelera/vim-javascript-syntax'
@@ -282,33 +165,11 @@ Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
-" ohter
-"Plug 'chr4/nginx.vim'
-"Plug 'hashivim/vim-terraform'
-"Plug 't9md/vim-chef'
-"Plug 'itkq/fluentd-vim' " 効かない?
 
-" Plug 'vexxor/phpdoc.vim'
-" Plug 'vim-scripts/php_localvarcheck.vim' 特定の関数でエラーを吐く
-" 有用だけどカーソルの移動が遅くなる
-"Plug 'flyinshadow/php_localvarcheck.vim'
-"Plug 'beanworks/vim-phpfmt'
-
-" TODO  有用だけどビューの保存時遅くなる
-" Plug 'bpearson/vim-phpcs'
 Plug 'beanworks/vim-phpfmt'
-"Plug 'kevinhui/vim-docker-tools'
-
 Plug 'tell-k/vim-autopep8'
 
 " #LSP
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-"Plug 'prabirshrestha/async.vim'
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'prabirshrestha/asyncomplete.vim'
-"Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"Plug 'mattn/vim-lsp-settings'
-
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -318,16 +179,9 @@ Plug 'mattn/vim-lsp-icons'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-" 上のlspとバッティングする？(同じ定義元が複数表示される
-"Plug 'felixfbecker/php-language-server', {'do': 'composer install && composer run-script parse-stubs'}
-
-
-"Plug 'voldikss/coc-bookmark'
-" Plug 'liuchengxu/vista.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 Plug 'vim-jp/vimdoc-ja'
-"Plug 'skanehira/docker.vim'
 
 call plug#end()
 "-------- vim-plug END --------
