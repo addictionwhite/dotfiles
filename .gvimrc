@@ -86,8 +86,11 @@ syntax on
 "---------------------------------------------------------------------------
 " ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
 set laststatus=2
-" ファイル名表示
+" パス/ファイル名
 "set statusline=%F
+" ファイル名
+"https://stackoverflow.com/questions/13783839/vim-way-to-only-show-the-current-files-name-in-the-statusline
+set statusline=%t
 
 
 " https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
