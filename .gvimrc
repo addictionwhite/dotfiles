@@ -170,3 +170,7 @@ set nowrapscan
 
 let g:molokai_original = 1
 let g:rehash256 = 1
+
+
+"タブバー非表示
+set showtabline=0

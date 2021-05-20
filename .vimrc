@@ -88,7 +88,7 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/nerd-fonts'
 
-Plug 'jeetsukumaran/vim-buffergator'
+"Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bling/vim-bufferline'
 
 "検索置換
@@ -739,10 +739,6 @@ nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
 " : 選択範囲を検索する
 vnoremap z/ <ESC>/\%V
 vnoremap z? <ESC>?\%V
-
-
-
-let g:gtm_plugin_status_enabled = 1
 
 
 let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
