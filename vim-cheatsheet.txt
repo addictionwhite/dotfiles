@@ -1,0 +1,6 @@
+#Git
+## http://grainrigi.hatenablog.com/entry/2017/10/08/224246
+git add -p [file]
+git reset -p [file]
+# Hunkの破棄
+git checkout -p [file]

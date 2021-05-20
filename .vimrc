@@ -228,6 +228,7 @@ Plug 'mattn/webapi-vim'
 
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
+Plug 'reireias/vim-cheatsheet'
 
 
 " Debug
@@ -1043,3 +1044,4 @@ let g:gtm_plugin_status_enabled = 1
 "nnoremap <silent>bn :bnext<CR>
 "nnoremap <silent>bb :b#<CR>
 
+let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'

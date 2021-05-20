@@ -15,8 +15,8 @@
 "colorscheme sonokai  " コメントのビジュアル選択が見づらい
 "colorscheme vim-monokai-tasty
 "colorscheme wellsokai
-"colorscheme xcodewwdc
-colorscheme molokai
+colorscheme xcodewwdc
+"colorscheme molokai
 
 
 "colorscheme spaceduck
