@@ -79,7 +79,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'haya14busa/incsearch.vim' " 検索中の文字列をハイライト
 Plug 'elzr/vim-json' 
 Plug 't9md/vim-quickhl' " 指定の単語をハイライト
-Plug 'pacha/vem-tabline'
+"Plug 'pacha/vem-tabline'
 Plug 'mechatroner/rainbow_csv'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -89,6 +89,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/nerd-fonts'
 
 Plug 'jeetsukumaran/vim-buffergator'
+Plug 'bling/vim-bufferline'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -747,4 +748,6 @@ let g:gtm_plugin_status_enabled = 1
 let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
 
 
-let g:vem_tabline_show_number='index'
+"https://vim-jp.org/vimdoc-ja/cmdline.html#filename-modifiers
+let g:bufferline_fname_mod = ':.'
+

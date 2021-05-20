@@ -87,16 +87,20 @@ syntax on
 " ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
 set laststatus=2
 " ファイル名表示
-set statusline=%F
+"set statusline=%F
+
+
 " https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
 set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
 " https://qiita.com/tashua314/items/101f1bec368c75a90251
 " 現在行数/全行数
 set statusline+=[LOW=%l/%L]
 
+
+
 " 作業時間
 " gtm https://github.com/git-time-metric/gtm/blob/master/README.md
-set statusline+=%{exists('*GTMStatusline')?'['.GTMStatusline().']':''}
+"set statusline+=%{exists('*GTMStatusline')?'['.GTMStatusline().']':''}
 
 "-------------------------------------------------------------------------------
 " エンコーディング設定
