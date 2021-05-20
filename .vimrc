@@ -555,8 +555,6 @@ let g:pdv_cfg_annotation_License = 0
 
 " TODO
 " ---fzf---
-"let g:fzf_layout = { 'up': '~40%' }
-"let g:fzf_layout = { 'down': '~90%' }
 let g:fzf_layout = { 'down': '~70%' }
 " fzfからファイルにジャンプできるようにする
 let g:fzf_buffers_jump = 1
@@ -564,13 +562,6 @@ let g:fzf_buffers_jump = 1
 let g:fzf_preview_rate = 0.9
 
 let g:fzf_command_prefix = 'Fzf'
-
-
-
-"command! -bang -nargs=* Ggrep
-"  \ call fzf#vim#grep(
-"  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
-"  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 
 " ファイル一覧を出すときにプレビュー表示
@@ -584,21 +575,6 @@ function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-"" 外部コマンドptを使用してプレビューしながらgrep検索する
-"command! -bang -nargs=* Grep
-"\ call fzf#vim#grep(
-"\   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
-"\   <bang>0 ? fzf#vim#with_preview('up:60%')
-"\           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
-"\   <bang>0)
-"
-"
-"if executable('rg')
-"    command! -bang -nargs=* Rg
-"        \ call fzf#vim#grep(
-"        \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
-"        \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'up:50%:wrap'))
-"endif
 
 if executable('buffers')
     command! -bang -nargs=* Buffers
@@ -606,24 +582,6 @@ if executable('buffers')
         \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
         \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'up:50%:wrap'))
 endif
-
-
-
-"" ---bookmark---
-""    龎
-"" https://www.nerdfonts.com/cheat-sheet
-""let g:bookmark_sign = ''
-"let g:bookmark_sign = ''
-"
-"let NERDTreeShowHidden = 1
-"
-""
-"let g:bookmark_save_per_working_dir = 1
-"let g:bookmark_auto_save = 1
-"let g:bookmark_show_warning = 1
-"" https://github.com/MattesGroeger/vim-bookmarks
-"
-"let g:bookmark_auto_close = 1
 
 
 " --quickr-preview.vim--
@@ -655,11 +613,6 @@ let g:winresizer_gui_enable=1
 " ---lsp---
 let g:lsp_diagnostics_enabled = 0
 
-
-" --ultisnips--
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " --settings--
 "map *   <Plug>(asterisk-*)
@@ -792,8 +745,6 @@ let g:phpfmt_autosave = 0
 set nosc noru nosm
 
 
-"autocmd BufNewFile,BufRead *.gs  set filetype=javascript
-
 
 " ,を使うとfが使いづらくなるので別を割り当てる
 "nnoremap <silent>,vf :Vifm<CR>
@@ -914,13 +865,6 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
-" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-" See https://github.com/hrsh7th/vim-vsnip/pull/50
-"nmap        s   <Plug>(vsnip-select-text)
-"xmap        s   <Plug>(vsnip-select-text)
-"nmap        S   <Plug>(vsnip-cut-text)
-"xmap        S   <Plug>(vsnip-cut-text)
-"
 " If you want to use snippet for multiple filetypes, you can `g:vsip_filetypes` for it.
 let g:vsnip_filetypes = {}
 let g:vsnip_filetypes.javascriptreact = ['javascript']
@@ -939,97 +883,6 @@ nmap   <C-RightMouse>        <Plug>(VM-Mouse-Cursor)
 nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
 
 
-"command Tr NERDTree
-"COMMAND oPG oPENgITHUBfILE
-
-
-
-
-
-
-" https://getpocket.com/read/3241960719
-" https://gist.github.com/AndrewRadev/1371174
-" bookmark start
-nnoremap ma :Bookmark 
-nnoremap mc :CopenBookmarks<CR>
-nnoremap md :DelBookmark<CR>
-
-
-set viminfo+=!
-
-if !exists('g:BOOKMARKS')
-  let g:BOOKMARKS = {}
-endif
-
-" Add the current [filename, cursor position] in g:BOOKMARKS under the given
-" name
-command! -nargs=1 Bookmark call s:Bookmark(<f-args>)
-function! s:Bookmark(name)
-  let file   = expand('%:p')
-  let cursor = getpos('.')
-
-  if file != ''
-    let g:BOOKMARKS[a:name] = [file, cursor]
-  else
-    echom "No file"
-  endif
-
-  wviminfo
-endfunction
-
-" Delete the user-chosen bookmark
-command! -nargs=1 -complete=custom,s:BookmarkNames DelBookmark call s:DelBookmark(<f-args>)
-function! s:DelBookmark(name)
-  if !has_key(g:BOOKMARKS, a:name)
-    return
-  endif
-
-  call remove(g:BOOKMARKS, a:name)
-  wviminfo
-endfunction
-
-" Go to the user-chosen bookmark
-command! -nargs=1 -complete=custom,s:BookmarkNames GotoBookmark call s:GotoBookmark(<f-args>)
-function! s:GotoBookmark(name)
-  if !has_key(g:BOOKMARKS, a:name)
-    return
-  endif
-
-  let [filename, cursor] = g:BOOKMARKS[a:name]
-
-  exe 'edit '.filename
-  call setpos('.', cursor)
-endfunction
-
-" Open all bookmarks in the quickfix window
-command! CopenBookmarks call s:CopenBookmarks()
-function! s:CopenBookmarks()
-  let choices = []
-
-  for [name, place] in items(g:BOOKMARKS)
-    let [filename, cursor] = place
-
-    call add(choices, {
-          \ 'text':     name,
-          \ 'filename': filename,
-          \ 'lnum':     cursor[1],
-          \ 'col':      cursor[2]
-          \ })
-  endfor
-
-  call setqflist(choices)
-  copen
-endfunction
-
-" Completion function for choosing bookmarks
-function! s:BookmarkNames(A, L, P)
-  return join(sort(keys(g:BOOKMARKS)), "\n")
-endfunction
-
-
-" bookmark end
-
-
 " https://vim-jp.org/vim-users-jp/2009/08/31/Hack-65.html
 " : 選択範囲を検索する
 vnoremap z/ <ESC>/\%V
@@ -1039,11 +892,6 @@ vnoremap z? <ESC>?\%V
 
 let g:gtm_plugin_status_enabled = 1
 
-" bが遅くなる
-" http://ivxi.hatenablog.com/entry/2013/05/23/163825
-"nnoremap <silent>bp :bprevious<CR>
-"nnoremap <silent>bn :bnext<CR>
-"nnoremap <silent>bb :b#<CR>
 
 let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
 
