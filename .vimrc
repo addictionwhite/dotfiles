@@ -619,6 +619,7 @@ nnoremap <Space>pa :call PhactorFunc()<CR>
         \ "3 : json整形",
         \ "4 : カンマ区切りを改行(カーソルライン対象)",
         \ "5 : markdown preview",
+        \ "6 : Cheat",
         \ ]
     :let choice = inputlist(lines)
     :if choice == 1
@@ -632,6 +633,8 @@ nnoremap <Space>pa :call PhactorFunc()<CR>
         :s/,/\r,/g
     :elseif choice == 5
         :PrevimOpen
+    :elseif choice == 6
+        :Cheat
     :else
         :echo "exit"
     :endif
