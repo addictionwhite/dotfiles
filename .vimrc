@@ -105,6 +105,7 @@ Plug 'airblade/vim-rooter' " ディレクトリルートへ遷移
 Plug 'qpkorr/vim-bufkill'
 Plug 'markonm/traces.vim'
 Plug 'tpope/vim-abolish'
+Plug 'itchyny/thumbnail.vim'
 
 " 移動
 Plug 'haya14busa/vim-asterisk'
@@ -261,6 +262,9 @@ nmap <C-w>n :enew<CR>
 "nmap ∑      :BD<CR>
 
 
+nnoremap <silent> <Space>b  :Thumbnail<CR>
+
+
 " finderで開く
 "nnoremap <silent> <Space>op  :! explorer .<CR>
 nnoremap <silent> <Space>op  :! open .<CR>
@@ -312,13 +316,8 @@ nnoremap <silent> ,b  :FzfBuffers<CR>
 nnoremap <silent> ,s  :Snippets<CR>
 "nnoremap <silent> ,h  :LspHover<CR>
 
-
 nnoremap <silent> <Space>nf :NERDTreeFind<CR>
 nnoremap <silent> <Space>nc :NERDTreeClose<CR>
-
-"nnoremap <silent> <Space>bt :BuffergatorToggle<CR>
-nnoremap <silent> <Space>b :BuffergatorToggle<CR>
-
 
 nmap <silent> gr :LspReferences<CR>
 nmap <silent> gd :LspDefinition<CR>
