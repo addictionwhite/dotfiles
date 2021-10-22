@@ -15,7 +15,11 @@
 "colorscheme sonokai  " コメントのビジュアル選択が見づらい
 "colorscheme vim-monokai-tasty
 "colorscheme wellsokai
-colorscheme xcodewwdc
+"colorscheme xcodewwdc
+"colorscheme snow
+
+"colorscheme embark
+colorscheme palenight
 "colorscheme molokai
 
 
@@ -176,4 +180,6 @@ let g:rehash256 = 1
 
 
 "タブバー非表示
-set showtabline=0
+"set showtabline=0
+
+
