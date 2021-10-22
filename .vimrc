@@ -1,4 +1,4 @@
-
+GTy
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd QuickFixCmdPost *ag* cwindow
 
@@ -40,6 +40,12 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'wellsjo/wellsokai.vim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'tomasr/molokai'
+Plug 'sainnhe/edge'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'embark-theme/vim', { 'as': 'embark' }
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'bluz71/vim-moonfly-colors'
+
 
 " 編集
 Plug 'mattn/emmet-vim'
@@ -62,6 +68,8 @@ Plug 'AndrewRadev/switch.vim'
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+
+Plug 'junegunn/vim-easy-align'
 
 "VCS 
 Plug 'tpope/vim-fugitive'
@@ -89,7 +97,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/nerd-fonts'
 
 "Plug 'jeetsukumaran/vim-buffergator'
-Plug 'bling/vim-bufferline'
+"Plug 'bling/vim-bufferline'
+"Plug 'itchyny/lightline.vim'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -106,6 +115,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'markonm/traces.vim'
 Plug 'tpope/vim-abolish'
 Plug 'itchyny/thumbnail.vim'
+Plug 'mihaifm/bufstop'
 
 " 移動
 Plug 'haya14busa/vim-asterisk'
@@ -177,6 +187,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-lsp-icons'
+"Plug 'lighttiger2505/sqls.vim'
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -204,22 +215,6 @@ if !has('gui_macvim')
     source $HOME/.gvimrc
 endif
 
-
-if has('gui_macvim')
-    set guioptions+=M
-
-    " macVimのterminalでcommand+vでpaste(fzfで用いる）
-    " https://github.com/macvim-dev/macvim/issues/676
-    macm Edit.Paste key=<nop>
-    tmap <D-v> <C-w>"+
-    nnoremap <D-v> "+p
-    vnoremap <D-v> "+p
-    inoremap <D-v> <C-R><C-O>+
-    cnoremap <D-v> <C-R><C-O>+
-
-    set pythonthreedll=/Library/Frameworks/Python.framework/Versions/3.6/Python
-    set pythonthreehome=/Library/Frameworks/Python.framework/Versions/3.6
-endif
 
 "let g:lsp_signature_help_enabled = 0
 
@@ -312,7 +307,11 @@ nnoremap <silent> ,f  :Files<CR>
 "nnoremap <silent> ,f  :GFiles<CR>
 nnoremap <silent> ,F  :GFiles?<CR>
 "nnoremap <silent> ,b  :BuffersPreview<CR>
-nnoremap <silent> ,b  :FzfBuffers<CR>
+"nnoremap <silent> ,b  :FzfBuffers<CR>
+" 開いているウィンドウでバッファが開くのが使いやすい
+"nnoremap <silent> ,b  :Bufstop<CR>
+nnoremap <silent> ,b  :BufstopPreview<CR>
+
 nnoremap <silent> ,s  :Snippets<CR>
 "nnoremap <silent> ,h  :LspHover<CR>
 
@@ -598,11 +597,6 @@ set nosc noru nosm
 
 
 " ,を使うとfが使いづらくなるので別を割り当てる
-"nnoremap <silent>,vf :Vifm<CR>
-"nnoremap <silent>,my  :call MyFunc()<CR>
-"nnoremap <silent>,g  :call GitFunc()<CR>
-"nnoremap <silent>,pa  :call PhactorFunc()<CR>
-"nnoremap <silent>,py  :call MyPython()<CR>
 nnoremap <Space>my :call MyFunc()<CR>
 nnoremap <Space>g :call GitFunc()<CR>
 nnoremap <Space>pa :call PhactorFunc()<CR>
@@ -749,3 +743,22 @@ let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
 "https://vim-jp.org/vimdoc-ja/cmdline.html#filename-modifiers
 let g:bufferline_fname_mod = ':.'
 
+augroup EchoFilePath
+  autocmd WinEnter * execute "normal! 1\<C-g>"
+augroup END
+
+
+"https://qiita.com/01en/items/7262593be49de784861d
+" note: 先頭は大文字である必要がある
+:command Bs BufstopPreview
+
+
+" https://codehero.jp/vim/9065941/how-can-i-change-vim-status-line-color
+hi StatusLine ctermbg=white ctermfg=black
+
+
+" https://github.com/junegunn/vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
