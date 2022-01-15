@@ -6,22 +6,34 @@
 """""""""""""
 "set mapleader = "\<Space>"
 "colorscheme monokai_pro 
+"colorscheme blue
+"colorscheme github
 "colorscheme monokai
+"colorscheme shades_of_purple
+"colorscheme aurora
+"colorscheme sonokai
 "colorscheme  typewriter-night
-"colorscheme plain
+" colorscheme plain
 
 "colorscheme typewriter
 
 "colorscheme sonokai  " コメントのビジュアル選択が見づらい
 "colorscheme vim-monokai-tasty
-"colorscheme wellsokai
+" colorscheme wellsokai
 "colorscheme xcodewwdc
 "colorscheme snow
+"colorscheme shirotelin
+colorscheme hotline
 
+" デフォルトのなかではみやすい
+"colorscheme pablo
 "colorscheme embark
-colorscheme palenight
+"colorscheme palenight
+"colorscheme nord
+"colorscheme aquarium
 "colorscheme molokai
-
+"colorscheme darcula
+"colorscheme edge
 
 "colorscheme spaceduck
 "コメントの色を変更 https://www.366service.com/jp/qa/62a28ff7365e609d7518149a1df4a0e7
@@ -154,7 +166,8 @@ set backspace=indent,eol,start
 " http://shocrunch.hatenablog.com/entry/2015/01/15/234555
 "hi Comment ctermfg=102
 "hi Comment ctermfg=202
-hi Visual  ctermbg=236
+
+"hi Visual  ctermbg=236
 
 "hi Comment ctermfg=white
 
@@ -175,11 +188,64 @@ set nowrapscan
 "https://github.com/74th/vscode-monokaicharcoal/blob/master/themes/Monokai-Charcoal.vim
 
 
-let g:molokai_original = 1
-let g:rehash256 = 1
+"let g:molokai_original = 1
+"let g:rehash256 = 1
 
 
 "タブバー非表示
 "set showtabline=0
 
+"termianl.appでうまく動かない
+"別環境でも動かないかもしれないので一旦コメントアウト
+"if (has("termguicolors"))
+" set termguicolors
+"endif
 
+
+"https://qiita.com/Qiita_Sui/items/a9f77a7310d1e53a95b1
+" カレントタブをハイライト
+hi TabLineSel ctermbg=1
+
+" タブにフルパスでなく、ファイル名のみを表示する
+set tabline=%!MyTabLine()
+
+" 常にタブラインを表示
+set showtabline=2
+
+function! MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+        " ラベルは MyTabLabel() で作成する
+        let my_tab_label = '%{MyTabLabel(' . (i + 1) . ')}'
+        " 強調表示グループの選択
+        if i + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+        " タブ番号 : [ファイル名] のフォーマットになるように設定
+        let s .= (i + 1) . ':[' . my_tab_label .'] '
+    endfor
+
+    " 最後のタブページの後は TabLineFill で埋め、タブページ番号をリセットする
+    let s .= '%#TabLineFill#%T'
+
+    return s
+endfunction
+
+function! MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return fnamemodify(bufname(buflist[winnr - 1]), ":t")
+endfunction
+
+
+
+
+" https://inari111.hatenablog.com/entry/2014/10/22/222051
+" カレント行ハイライト
+set cursorline
+" アンダーラインを引く(color terminal)
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" アンダーラインを引く(gui)
+highlight CursorLine gui=underline guifg=NONE guibg=NONE
