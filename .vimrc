@@ -1,4 +1,3 @@
-GTy
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd QuickFixCmdPost *ag* cwindow
 
@@ -9,7 +8,8 @@ autocmd QuickFixCmdPost *ag* cwindow
 call plug#begin('~/.vim/plugged')
 
 " color
-Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'doums/darcula'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'sts10/vim-pink-moon'
@@ -45,6 +45,21 @@ Plug 'bluz71/vim-moonfly-colors'
 Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'bluz71/vim-moonfly-colors'
+Plug 'frenzyexists/aquarium-vim', { 'branch': 'develop' }
+Plug 'arcticicestudio/nord-vim'
+"Plug 'colepeters/spacemacs-theme.vim'
+"Plug 'koron/vim-monochromenote'
+Plug 'crusoexia/vim-dracula'
+Plug 'Rigellute/shades-of-purple.vim'
+Plug 'ray-x/aurora'
+"Plug 'cseelus/vim-colors-lucid'
+Plug 'fenetikm/falcon'
+Plug 'yasukotelin/shirotelin'
+
+Plug 'mnishz/colorscheme-preview.vim'
+
+
+Plug 'ronwoch/hotline-vim'
 
 
 " 編集
@@ -57,6 +72,7 @@ Plug 'Townk/vim-autoclose'
 Plug 'w0rp/ale'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'mg979/vim-visual-multi'
+"Plug 'bun913/min-todo.vim'
 
 " TODO マークダウン編集不要そうなら消す
 " マークダウンのプレビューに必要
@@ -95,6 +111,11 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/nerd-fonts'
+"Plug 'chrisbra/vim-diff-enhanced'
+
+"Plug 'sandeepcr529/Buffet.vim'
+" 少し不安定かも
+"Plug 'osyo-manga/vim-stripe'
 
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'bling/vim-bufferline'
@@ -129,6 +150,7 @@ Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
 Plug 'unblevable/quick-scope'
+Plug 'dstein64/vim-win'
 
 
 " その他
@@ -143,6 +165,7 @@ Plug 'skywind3000/vim-preview' "TODO: 不要そうなら消す
 Plug 'mattn/webapi-vim'
 
 Plug 'reireias/vim-cheatsheet'
+Plug 'itchyny/calendar.vim'
 
 " Debug
 Plug 'sebdah/vim-delve'
@@ -309,8 +332,11 @@ nnoremap <silent> ,F  :GFiles?<CR>
 "nnoremap <silent> ,b  :BuffersPreview<CR>
 "nnoremap <silent> ,b  :FzfBuffers<CR>
 " 開いているウィンドウでバッファが開くのが使いやすい
-"nnoremap <silent> ,b  :Bufstop<CR>
-nnoremap <silent> ,b  :BufstopPreview<CR>
+nnoremap <silent> ,b  :Bufstop<CR>
+
+nnoremap <silent> ,m  :MRU<CR>
+
+"nnoremap <silent> ,b  :BufstopPreview<CR>
 
 nnoremap <silent> ,s  :Snippets<CR>
 "nnoremap <silent> ,h  :LspHover<CR>
@@ -388,10 +414,15 @@ let g:clever_f_use_migemo=1
 
 " ---gitgutter---
 " https://github.com/statico/dotfiles/blob/master/.vim/vimrc
-let g:gitgutter_sign_added = '∙'
-let g:gitgutter_sign_modified = '∙'
-let g:gitgutter_sign_removed = '∙'
-let g:gitgutter_sign_modified_removed = '∙'
+"let g:gitgutter_sign_added = '∙'
+"let g:gitgutter_sign_modified = '∙'
+"let g:gitgutter_sign_removed = '∙'
+"let g:gitgutter_sign_modified_removed = '∙'
+
+let g:gitgutter_sign_added = '.'
+let g:gitgutter_sign_modified = '.'
+let g:gitgutter_sign_removed = '.'
+"let g:gitgutter_sign_modified_removed = '∙'
 
 
 
@@ -614,6 +645,7 @@ nnoremap <Space>pa :call PhactorFunc()<CR>
         \ "4 : カンマ区切りを改行(カーソルライン対象)",
         \ "5 : markdown preview",
         \ "6 : Cheat",
+        \ "7 : バッファ差分解除",
         \ ]
     :let choice = inputlist(lines)
     :if choice == 1
@@ -629,6 +661,8 @@ nnoremap <Space>pa :call PhactorFunc()<CR>
         :PrevimOpen
     :elseif choice == 6
         :Cheat
+    :elseif choice == 7
+        :diffoff
     :else
         :echo "exit"
     :endif
@@ -750,7 +784,7 @@ augroup END
 
 "https://qiita.com/01en/items/7262593be49de784861d
 " note: 先頭は大文字である必要がある
-:command Bs BufstopPreview
+":command Bs BufstopPreview
 
 
 " https://codehero.jp/vim/9065941/how-can-i-change-vim-status-line-color
@@ -762,3 +796,71 @@ hi StatusLine ctermbg=white ctermfg=black
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+
+
+
+
+"https://qiita.com/locona_0810/items/5644af52da2469adce1a
+if has("autocmd")
+  "ファイルタイプの検索を有効にする
+  filetype plugin on
+  "ファイルタイプに合わせたインデントを利用
+  filetype indent on
+  "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtabの略
+  autocmd FileType ts        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
+endif
+
+
+" vモードの置換連続ペースト用
+" https://qiita.com/hikaruna/items/83c1220eede810bee492?utm_source=pocket_mylist
+function! Put_text_without_override_register()
+  let line_len = strlen(getline('.'))
+  execute "normal! `>"
+  let col_loc = col('.')
+  execute 'normal! gv"_x'
+  if line_len == col_loc
+    execute 'normal! p'
+  else 
+    execute 'normal! P'
+  endif
+endfunction
+xnoremap <silent> p :call Put_text_without_override_register()<CR>
+
+set clipboard=unnamed "ヤンクした時に自動でクリップボードにコピー(autoselectを指定するとvモードの置換連続ペーストができない)
+
+
+
+"let g:buffetdisabledefaultmaps = 1
+
+
+" https://github.com/osyo-manga/vim-stripe?utm_source=pocket_mylist
+
+
+"set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+
+
+" 参考　https://naoty.hatenablog.com/entry/2013/04/28/002926
+nnoremap <silent> ,to  :tabe ~/min-todo/todo.md<CR>
+" todoリストのon/offを切り替える
+nnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
+"nnoremap <silent> ,tt :tabe ~/min-todo/todo.md<CR>
+" https://www.softel.co.jp/blogs/tech/archives/4468
+nnoremap <silent> ,ti :r! echo "- [ ]"<CR>
+nnoremap <silent> ,tc :call ToggleCheckbox()<CR>
+
+"nnoremap <silent> ,ts :r! echo strftime("%Y/%m/%d \()%A\")<CR>
+nnoremap <silent> ,ts a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
+
+
+function! ToggleCheckbox()
+  let l:line = getline('.')
+  if l:line =~ '^\-\s\[\s\]'
+    let l:result = substitute(l:line, '^-\s\[\s\]', '- [x]', '')
+    call setline('.', l:result)
+  elseif l:line =~ '^\-\s\[x\]'
+    let l:result = substitute(l:line, '^-\s\[x\]', '- [ ]', '')
+    call setline('.', l:result)
+  end
+endfunction
