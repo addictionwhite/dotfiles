@@ -23,7 +23,11 @@
 "colorscheme xcodewwdc
 "colorscheme snow
 "colorscheme shirotelin
-colorscheme hotline
+"colorscheme hotline
+"colorscheme elflord
+"colorscheme hatsunemiku
+colorscheme noirblaze
+
 
 " デフォルトのなかではみやすい
 "colorscheme pablo
@@ -39,6 +43,7 @@ colorscheme hotline
 "コメントの色を変更 https://www.366service.com/jp/qa/62a28ff7365e609d7518149a1df4a0e7
 "hi Comment guifg=#ABCDEF
 "hi Comment guifg=#ABCDEF
+
 
 "set background=light
 "colorscheme toast
