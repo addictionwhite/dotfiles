@@ -55,11 +55,16 @@ Plug 'ray-x/aurora'
 "Plug 'cseelus/vim-colors-lucid'
 Plug 'fenetikm/falcon'
 Plug 'yasukotelin/shirotelin'
+Plug '4513ECHO/vim-colors-hatsunemiku'
 
 Plug 'mnishz/colorscheme-preview.vim'
 
 
 Plug 'ronwoch/hotline-vim'
+Plug 'blackbirdtheme/vim'
+"エラーになる？
+"Plug 'rayes0/blossom.vim'
+Plug 'n1ghtmare/noirblaze-vim'
 
 
 " 編集
@@ -127,6 +132,7 @@ Plug 'thinca/vim-qfreplace' " grep 結果を置換
 Plug 'fuenor/qfixgrep'
 Plug 'osyo-manga/vim-over'
 Plug 'kana/vim-operator-user'
+" TODO
 Plug 'itchyny/vim-cursorword'
 
 " バッファ操作
@@ -149,6 +155,8 @@ Plug 'kshenoy/vim-signature'
 Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
+
+" An always-on highlight for a unique character in every word on a line to help you use f, F and family.
 Plug 'unblevable/quick-scope'
 Plug 'dstein64/vim-win'
 
@@ -864,3 +872,40 @@ function! ToggleCheckbox()
     call setline('.', l:result)
   end
 endfunction
+
+
+
+
+"https://wisteriasec.wordpress.com/2018/08/20/vim-statusline%E3%81%AE%E6%95%B4%E3%81%88%E6%96%B9/
+function! SetStatusLine()
+  if mode() =~ 'i'
+    let c = 1
+    let mode_name = 'Insert'
+  elseif mode() =~ 'n'
+    let c = 2
+    let mode_name = 'Normal'
+  elseif mode() =~ 'R'
+    let c = 3
+    let mode_name = 'Replace'
+  else
+    let c = 4
+    let mode_name = 'Visual'
+  endif
+  return '%' . c . '*[' . mode_name . ']%* %<%F%=%m%r %18([%{toupper(&ft)}][%l/%L]%)'
+endfunction
+
+hi User1 gui=bold guibg=red guifg=white
+hi User2 gui=bold guibg=blue guifg=white
+hi User3 gui=bold guibg=coral guifg=white
+hi User4 gui=bold guibg=green guifg=black
+
+set statusline=%!SetStatusLine()
+
+
+
+
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=underline
+
+" https://blog.trippyboy.com/2014/centos/vim%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%89%B2%E3%81%8C%E8%A6%8B%E3%81%A5%E3%82%89%E3%81%84%E3%81%AA%E3%82%89%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%97/
+:hi Comment ctermfg=Magenta
