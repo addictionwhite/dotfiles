@@ -254,3 +254,7 @@ set cursorline
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+" 不可視文字の設定　参考:  https://blog.delphinus.dev/2011/08/display-invisible-characters-on-vim.html
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
