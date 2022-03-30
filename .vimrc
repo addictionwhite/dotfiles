@@ -56,8 +56,8 @@ Plug 'ray-x/aurora'
 Plug 'fenetikm/falcon'
 Plug 'yasukotelin/shirotelin'
 Plug '4513ECHO/vim-colors-hatsunemiku'
-
-Plug 'mnishz/colorscheme-preview.vim'
+Plug 'tobi-wan-kenobi/zengarden'
+Plug 'davidbachmann/vim-punk-colorscheme'
 
 
 Plug 'ronwoch/hotline-vim'
@@ -65,7 +65,14 @@ Plug 'blackbirdtheme/vim'
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
 Plug 'n1ghtmare/noirblaze-vim'
+Plug 'ingram1107/moneokai'
+Plug 'dterei/VimCobaltColourScheme'
+Plug 'therubymug/vim-pyte'
+Plug 'thenewvu/vim-colors-blueprint'
+Plug 'cideM/yui'
 
+" preview スクロールしているとたびたびエラーになる?
+Plug 'mnishz/colorscheme-preview.vim'
 
 " 編集
 Plug 'mattn/emmet-vim'
@@ -114,17 +121,14 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/nerd-fonts'
 "Plug 'chrisbra/vim-diff-enhanced'
 
 "Plug 'sandeepcr529/Buffet.vim'
-" 少し不安定かも
-"Plug 'osyo-manga/vim-stripe'
 
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'bling/vim-bufferline'
 "Plug 'itchyny/lightline.vim'
+Plug 'naoty/vim-folcom'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -208,7 +212,6 @@ Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
-
 Plug 'beanworks/vim-phpfmt'
 Plug 'tell-k/vim-autopep8'
 
@@ -234,44 +237,30 @@ call plug#end()
 "---------------------------------------------------------------------------
 " 外部ファイル読み込み
 "---------------------------------------------------------------------------
-
-
 " 検証用スクリプト
 if filereadable(expand($HOME.'/myVimscript.vim'))
   source $HOME/myVimscript.vim
 endif
-
 
 if !has('gui_macvim')
     source $HOME/.gvimrc
 endif
 
 
-"let g:lsp_signature_help_enabled = 0
-
-
-"let mapleader = "\<Space>"
-"let mapleader = ","
-
 "---------------------------------------------------------------------------
 " キー設定
 "---------------------------------------------------------------------------
-
-"terminalモード中ESCでnormal mode
-tnoremap <silent> <ESC> <C-\><C-n>
-" https://techracho.bpsinc.jp/tsunekawa/2018_09_11/61576
-" ターミナルモードでCtrl-t で無名レジスタをペースト
-tnoremap <C-T> <C-W>""
+let mapleader = ","
 
 " easyMotion
 " https://github.com/easymotion/vim-easymotion
-" nmap s <Plug>(easymotion-s2)
 nmap <silent> <Space>j <Plug>(easymotion-j)
 nmap <silent> <Space>k <Plug>(easymotion-k)
 "map  <silent>f <Plug>(easymotion-bd-f)
 "nmap <silent>f <Plug>(easymotion-overwin-f)
 " 画面全体  s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
+" nmap s <Plug>(easymotion-s2)
 
 map <C-j> <Plug>(edgemotion-j)
 map <C-k> <Plug>(edgemotion-k)
@@ -301,6 +290,8 @@ nnoremap <Space>mn :MemoNew<CR>
 nnoremap <Space>ml :MemoList<CR>
 nnoremap <Space>mg :MemoGrep<CR>
 
+" Cheatsheet
+let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
 
 " プラグイン更新
 nnoremap <silent> <Space>pi  :PlugInstall<CR>
@@ -311,9 +302,9 @@ nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
 nnoremap <silent> <Space>eg  :<C-u>edit $HOME/.gvimrc<CR>
 nnoremap <silent> <Space>et  :<C-u>edit $HOME/.tigrc<CR>
 
-
 " 設定再読み込み
 nnoremap <silent> <Space>vi  :source ~/.config/nvim/init.vim<CR>
+
 " ;をあてるとfが使いづらくなるので必要なら別を割り当てる
 "nmap ;s :source ~/myVimscript.vim<CR>
 
@@ -349,8 +340,7 @@ nnoremap <silent> ,m  :MRU<CR>
 nnoremap <silent> ,s  :Snippets<CR>
 "nnoremap <silent> ,h  :LspHover<CR>
 
-nnoremap <silent> <Space>nf :NERDTreeFind<CR>
-nnoremap <silent> <Space>nc :NERDTreeClose<CR>
+nnoremap <silent> <Space>nf :call Nf()<CR>
 
 nmap <silent> gr :LspReferences<CR>
 nmap <silent> gd :LspDefinition<CR>
@@ -376,11 +366,9 @@ nmap * *zz
 nmap # #zz
 
 
-
 "---------------------------------------------------------------------------
 " 各種プラグインの設定
 "---------------------------------------------------------------------------
-
 " ---ctrlSF--- 
 " pはpreviewと重複する
 let g:ctrlsf_mapping = {
@@ -404,13 +392,13 @@ let g:ctrlsf_position = 'right'
 let g:EasyMotion_smartcase = 1
 
 
-" ---ryanoasis/vim-devicons---
-" https://qiita.com/tos-miyake/items/0cb4729c4d6a949bd480
-" フォルダアイコンの表示をON
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
-let g:DevIconsDefaultFolderOpenSymbol = ''
+"" ---ryanoasis/vim-devicons---
+"" https://qiita.com/tos-miyake/items/0cb4729c4d6a949bd480
+"" フォルダアイコンの表示をON
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:DevIconsEnableFoldersOpenClose = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+"let g:DevIconsDefaultFolderOpenSymbol = ''
 
 
 " Jsonのダブルクォーテーション表示 'elzr/vim-json'
@@ -422,16 +410,10 @@ let g:clever_f_use_migemo=1
 
 " ---gitgutter---
 " https://github.com/statico/dotfiles/blob/master/.vim/vimrc
-"let g:gitgutter_sign_added = '∙'
-"let g:gitgutter_sign_modified = '∙'
-"let g:gitgutter_sign_removed = '∙'
-"let g:gitgutter_sign_modified_removed = '∙'
-
 let g:gitgutter_sign_added = '.'
 let g:gitgutter_sign_modified = '.'
 let g:gitgutter_sign_removed = '.'
 "let g:gitgutter_sign_modified_removed = '∙'
-
 
 
 " Rican7/php-doc-modded
@@ -480,12 +462,6 @@ endif
 let g:quickr_preview_keymaps = 0
 " nmap <Space>p <plug>(quickr_preview)
 nnoremap <silent> <Space>p <plug>(quickr_preview)
-
-
-"--ale--
-"let g:ale_linters = {
-"      \ 'tsx': ['eslint']
-"      \ }
 
 
 " --phpmd--
@@ -583,6 +559,14 @@ command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
 command! -nargs=0 ClipFile call s:Clip(expand('%:t'))
 " 現在開いているファイルのディレクトリパスをレジスタへ
 command! -nargs=0 ClipDir  call s:Clip(expand('%:p:h'))
+
+
+function! Nf()
+    "command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
+    let p = expand('%:p:h')
+    execute(':e '. p)
+    "execute(':Vex '. p)
+endfunction
 
 
 "---------------------------------------------------------------------------
@@ -779,9 +763,6 @@ vnoremap z/ <ESC>/\%V
 vnoremap z? <ESC>?\%V
 
 
-let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
-
-
 "https://vim-jp.org/vimdoc-ja/cmdline.html#filename-modifiers
 let g:bufferline_fname_mod = ':.'
 
@@ -804,9 +785,6 @@ hi StatusLine ctermbg=white ctermfg=black
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-
-
 
 
 "https://qiita.com/locona_0810/items/5644af52da2469adce1a
@@ -839,73 +817,26 @@ xnoremap <silent> p :call Put_text_without_override_register()<CR>
 set clipboard=unnamed "ヤンクした時に自動でクリップボードにコピー(autoselectを指定するとvモードの置換連続ペーストができない)
 
 
-
-"let g:buffetdisabledefaultmaps = 1
-
-
-" https://github.com/osyo-manga/vim-stripe?utm_source=pocket_mylist
-
-
-"set diffopt=internal,filler,algorithm:histogram,indent-heuristic
-
-
-" 参考　https://naoty.hatenablog.com/entry/2013/04/28/002926
-nnoremap <silent> ,to  :tabe ~/min-todo/todo.md<CR>
-" todoリストのon/offを切り替える
-nnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
-"nnoremap <silent> ,tt :tabe ~/min-todo/todo.md<CR>
-" https://www.softel.co.jp/blogs/tech/archives/4468
-nnoremap <silent> ,ti :r! echo "- [ ]"<CR>
-nnoremap <silent> ,tc :call ToggleCheckbox()<CR>
-
-"nnoremap <silent> ,ts :r! echo strftime("%Y/%m/%d \()%A\")<CR>
-nnoremap <silent> ,ts a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
-
-
-function! ToggleCheckbox()
-  let l:line = getline('.')
-  if l:line =~ '^\-\s\[\s\]'
-    let l:result = substitute(l:line, '^-\s\[\s\]', '- [x]', '')
-    call setline('.', l:result)
-  elseif l:line =~ '^\-\s\[x\]'
-    let l:result = substitute(l:line, '^-\s\[x\]', '- [ ]', '')
-    call setline('.', l:result)
-  end
-endfunction
-
-
-
-
-"https://wisteriasec.wordpress.com/2018/08/20/vim-statusline%E3%81%AE%E6%95%B4%E3%81%88%E6%96%B9/
-function! SetStatusLine()
-  if mode() =~ 'i'
-    let c = 1
-    let mode_name = 'Insert'
-  elseif mode() =~ 'n'
-    let c = 2
-    let mode_name = 'Normal'
-  elseif mode() =~ 'R'
-    let c = 3
-    let mode_name = 'Replace'
-  else
-    let c = 4
-    let mode_name = 'Visual'
-  endif
-  return '%' . c . '*[' . mode_name . ']%* %<%F%=%m%r %18([%{toupper(&ft)}][%l/%L]%)'
-endfunction
-
-hi User1 gui=bold guibg=red guifg=white
-hi User2 gui=bold guibg=blue guifg=white
-hi User3 gui=bold guibg=coral guifg=white
-hi User4 gui=bold guibg=green guifg=black
-
-set statusline=%!SetStatusLine()
-
-
-
-
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=underline
 
+" コメントアウトの色変更
 " https://blog.trippyboy.com/2014/centos/vim%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%89%B2%E3%81%8C%E8%A6%8B%E3%81%A5%E3%82%89%E3%81%84%E3%81%AA%E3%82%89%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%97/
 :hi Comment ctermfg=Magenta
+
+
+filetype plugin on
+" http://blog.tojiru.net/article/234400966.html
+" netrwは常にtree view
+let g:netrw_liststyle = 3
+" CVSと.で始まるファイルは表示しない
+"let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
+" 'v'でファイルを開くときは右側に開く。(デフォルトが左側なので入れ替え)
+let g:netrw_altv = 1
+" 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
+let g:netrw_alto = 1
+" https://pc.oreda.net/software/filer/netrw#%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E8%A8%AD%E5%AE%9A
+" ヘッダを非表示にする
+let g:netrw_banner=0
+
+"let g:netrw_winsize = 15
