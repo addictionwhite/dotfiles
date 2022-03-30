@@ -1,54 +1,17 @@
-
-
-
 """""""""""""
 " general
 """""""""""""
 "set mapleader = "\<Space>"
-"colorscheme monokai_pro 
-"colorscheme blue
-"colorscheme github
-"colorscheme monokai
-"colorscheme shades_of_purple
-"colorscheme aurora
+"colorscheme noirblaze
 "colorscheme sonokai
-"colorscheme  typewriter-night
-" colorscheme plain
+"colorscheme darkblue
 
-"colorscheme typewriter
-
-"colorscheme sonokai  " コメントのビジュアル選択が見づらい
-"colorscheme vim-monokai-tasty
-" colorscheme wellsokai
-"colorscheme xcodewwdc
-"colorscheme snow
-"colorscheme shirotelin
-"colorscheme hotline
-"colorscheme elflord
-"colorscheme hatsunemiku
-colorscheme noirblaze
-
-
-" デフォルトのなかではみやすい
-"colorscheme pablo
-"colorscheme embark
-"colorscheme palenight
-"colorscheme nord
-"colorscheme aquarium
-"colorscheme molokai
-"colorscheme darcula
-"colorscheme edge
-
-"colorscheme spaceduck
-"コメントの色を変更 https://www.366service.com/jp/qa/62a28ff7365e609d7518149a1df4a0e7
-"hi Comment guifg=#ABCDEF
-"hi Comment guifg=#ABCDEF
-
+colorscheme aurora
+"colorscheme zengarden
 
 "set background=light
-"colorscheme toast
 
-" term.appだとvimの色が壊れる
+"term.appだとvimの色が壊れる
 "set termguicolors
 
 " macvimで日本語入力の不備対応 https://loumo.jp/wp/archive/20160914120009/
@@ -111,16 +74,16 @@ set laststatus=2
 "set statusline=%F
 " ファイル名
 "https://stackoverflow.com/questions/13783839/vim-way-to-only-show-the-current-files-name-in-the-statusline
-set statusline=%t
+"set statusline=%t
+set statusline=%f
 
 
 " https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
 set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
+
 " https://qiita.com/tashua314/items/101f1bec368c75a90251
 " 現在行数/全行数
 set statusline+=[LOW=%l/%L]
-
-
 
 " 作業時間
 " gtm https://github.com/git-time-metric/gtm/blob/master/README.md
@@ -173,7 +136,6 @@ set backspace=indent,eol,start
 "hi Comment ctermfg=202
 
 "hi Visual  ctermbg=236
-
 "hi Comment ctermfg=white
 
 
@@ -183,19 +145,8 @@ set shortmess-=S
 " 補完候補がステータスメニュー上に一覧表示 https://qiita.com/lighttiger2505/items/2f6e4686b8db051378c0
 set wildmenu
 
-
-
 " 検索をファイルの先頭へループしない
 set nowrapscan
-
-
-
-"https://github.com/74th/vscode-monokaicharcoal/blob/master/themes/Monokai-Charcoal.vim
-
-
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-
 
 "タブバー非表示
 "set showtabline=0
@@ -245,8 +196,6 @@ function! MyTabLabel(n)
 endfunction
 
 
-
-
 " https://inari111.hatenablog.com/entry/2014/10/22/222051
 " カレント行ハイライト
 set cursorline
@@ -254,7 +203,3 @@ set cursorline
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
-
-" 不可視文字の設定　参考:  https://blog.delphinus.dev/2011/08/display-invisible-characters-on-vim.html
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-
