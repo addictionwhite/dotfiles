@@ -203,3 +203,10 @@ set cursorline
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+
+" for in container 
+set re=1
+
+set ttyfast
+set lazyredraw
