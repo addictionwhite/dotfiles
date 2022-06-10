@@ -58,10 +58,11 @@ Plug 'yasukotelin/shirotelin'
 Plug '4513ECHO/vim-colors-hatsunemiku'
 Plug 'tobi-wan-kenobi/zengarden'
 Plug 'davidbachmann/vim-punk-colorscheme'
-
+Plug 'reewr/vim-monokai-phoenix'
 
 Plug 'ronwoch/hotline-vim'
 Plug 'blackbirdtheme/vim'
+
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
 Plug 'n1ghtmare/noirblaze-vim'
@@ -130,6 +131,8 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 "Plug 'itchyny/lightline.vim'
 Plug 'naoty/vim-folcom'
 
+Plug 'ronakg/quickr-preview.vim'
+
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
 Plug 'thinca/vim-qfreplace' " grep 結果を置換
@@ -141,11 +144,13 @@ Plug 'itchyny/vim-cursorword'
 
 " バッファ操作
 Plug 'vim-scripts/copypath.vim'
-Plug 'airblade/vim-rooter' " ディレクトリルートへ遷移
+"Plug 'airblade/vim-rooter' " ディレクトリルートへ遷移
+Plug 'mattn/vim-findroot'
+
 Plug 'qpkorr/vim-bufkill'
 Plug 'markonm/traces.vim'
 Plug 'tpope/vim-abolish'
-Plug 'itchyny/thumbnail.vim'
+"Plug 'itchyny/thumbnail.vim'
 Plug 'mihaifm/bufstop'
 
 " 移動
@@ -156,14 +161,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'kshenoy/vim-signature'
 
-Plug 't9md/vim-choosewin'
+"Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
-
 " An always-on highlight for a unique character in every word on a line to help you use f, F and family.
 Plug 'unblevable/quick-scope'
 Plug 'dstein64/vim-win'
-
 
 " その他
 Plug 'thinca/vim-quickrun'
@@ -199,7 +202,7 @@ Plug 'ap/vim-css-color' " TODO:不要そうなら消す
 Plug 'jelera/vim-javascript-syntax'
 Plug 'nono/jquery.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'maksimr/vim-jsbeautify'
+"Plug 'maksimr/vim-jsbeautify'
 Plug 'mxw/vim-jsx'
 Plug 'heavenshell/vim-jsdoc', { 
   \ 'for': ['javascript', 'javascript.jsx','typescript'], 
@@ -250,70 +253,46 @@ endif
 "---------------------------------------------------------------------------
 " キー設定
 "---------------------------------------------------------------------------
-let mapleader = ","
+let mapleader = "\<Space>"
 
 " easyMotion
 " https://github.com/easymotion/vim-easymotion
-nmap <silent> <Space>j <Plug>(easymotion-j)
-nmap <silent> <Space>k <Plug>(easymotion-k)
-"map  <silent>f <Plug>(easymotion-bd-f)
-"nmap <silent>f <Plug>(easymotion-overwin-f)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+
 " 画面全体  s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 " nmap s <Plug>(easymotion-s2)
 
-map <C-j> <Plug>(edgemotion-j)
-map <C-k> <Plug>(edgemotion-k)
-
 " sublime like grep
-"nnoremap <Space>sf :CtrlSF 
-nnoremap <Space>sf :CtrlSF -ignoredir "*/logs/*" 
-
-nmap  -  <Plug>(choosewin)
-
-" バッファ作成
-nmap <C-w>n :enew<CR>
-" バッファ削除
-"nmap ∑      :BD<CR>
-
-
-nnoremap <silent> <Space>b  :Thumbnail<CR>
-
-
-" finderで開く
-"nnoremap <silent> <Space>op  :! explorer .<CR>
-nnoremap <silent> <Space>op  :! open .<CR>
-
+nnoremap <leader>sf :CtrlSF -ignoredir "*/logs/*" 
 
 " メモプラグイン
-nnoremap <Space>mn :MemoNew<CR>
-nnoremap <Space>ml :MemoList<CR>
-nnoremap <Space>mg :MemoGrep<CR>
+nnoremap <leader>mn :MemoNew<CR>
+nnoremap <leader>ml :MemoList<CR>
+nnoremap <leader>mg :MemoGrep<CR>
 
 " Cheatsheet
 let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
 
 " プラグイン更新
-nnoremap <silent> <Space>pi  :PlugInstall<CR>
-nnoremap <silent> <Space>pu  :PlugUpdate<CR>
+nnoremap <silent> <leader>pi  :PlugInstall<CR>
+nnoremap <silent> <leader>pu  :PlugUpdate<CR>
 " .設定ファイルを開く
-nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
-"nnoremap <silent> <Space>eg  :<C-u>edit $MYGVIMRC<CR>
-nnoremap <silent> <Space>eg  :<C-u>edit $HOME/.gvimrc<CR>
-nnoremap <silent> <Space>et  :<C-u>edit $HOME/.tigrc<CR>
+nnoremap <silent> <leader>ev  :<C-u>edit $MYVIMRC<CR>
+"nnoremap <silent> <leader>eg  :<C-u>edit $MYGVIMRC<CR>
+nnoremap <silent> <leader>eg  :<C-u>edit $HOME/.gvimrc<CR>
+nnoremap <silent> <leader>et  :<C-u>edit $HOME/.tigrc<CR>
 
 " 設定再読み込み
-nnoremap <silent> <Space>vi  :source ~/.config/nvim/init.vim<CR>
-
-" ;をあてるとfが使いづらくなるので必要なら別を割り当てる
-"nmap ;s :source ~/myVimscript.vim<CR>
-
+nnoremap <silent> <leader>vi  :source ~/.config/nvim/init.vim<CR>
 
 "単語を色マーク
-nmap <Space>h <Plug>(quickhl-manual-this)
-xmap <Space>h <Plug>(quickhl-manual-this)
-nmap <Space>H <Plug>(quickhl-manual-reset)
-xmap <Space>H <Plug>(quickhl-manual-reset)
+nmap <leader>h <Plug>(quickhl-manual-this)
+xmap <leader>h <Plug>(quickhl-manual-this)
+nmap <leader>H <Plug>(quickhl-manual-reset)
+xmap <leader>H <Plug>(quickhl-manual-reset)
+"QuickhlManualReset
 
 nnoremap / /\v
 nnoremap <ESC><ESC> :nohlsearch<CR>
@@ -324,23 +303,14 @@ nnoremap wk <C-w>k
 nnoremap wl <C-w>l
 nnoremap wh <C-w>h
 
+
 " 新規ファイル
 nnoremap <silent> ,f  :Files<CR> 
-"nnoremap <silent> ,f  :GFiles<CR>
 nnoremap <silent> ,F  :GFiles?<CR>
-"nnoremap <silent> ,b  :BuffersPreview<CR>
-"nnoremap <silent> ,b  :FzfBuffers<CR>
+
 " 開いているウィンドウでバッファが開くのが使いやすい
-nnoremap <silent> ,b  :Bufstop<CR>
-
-nnoremap <silent> ,m  :MRU<CR>
-
-"nnoremap <silent> ,b  :BufstopPreview<CR>
-
-nnoremap <silent> ,s  :Snippets<CR>
-"nnoremap <silent> ,h  :LspHover<CR>
-
-nnoremap <silent> <Space>nf :call Nf()<CR>
+nnoremap <silent> <leader>b  :Bufstop<CR>
+nnoremap <silent> <leader>nf :call Nf()<CR>
 
 nmap <silent> gr :LspReferences<CR>
 nmap <silent> gd :LspDefinition<CR>
@@ -351,7 +321,6 @@ nnoremap gp :cprevious<CR>
 nnoremap gn :cnext<CR>
 "close quickfix
 nnoremap gc :ccl<CR>
-
 
 " vimのvisualモードで連続でペーストして書き換えられるようにする  http://kaminora.hatenablog.com/entry/2018/04/08/193154
 xnoremap p "_dP
@@ -365,10 +334,13 @@ nmap N Nzz
 nmap * *zz
 nmap # #zz
 
-
 "---------------------------------------------------------------------------
 " 各種プラグインの設定
 "---------------------------------------------------------------------------
+" ファイル形式別プラグインのロードを有効化するには
+" https://vim-jp.org/vimdoc-ja/filetype.html
+filetype plugin on
+
 " ---ctrlSF--- 
 " pはpreviewと重複する
 let g:ctrlsf_mapping = {
@@ -391,16 +363,6 @@ let g:ctrlsf_position = 'right'
 " 検索時、大文字小文字を区別しない
 let g:EasyMotion_smartcase = 1
 
-
-"" ---ryanoasis/vim-devicons---
-"" https://qiita.com/tos-miyake/items/0cb4729c4d6a949bd480
-"" フォルダアイコンの表示をON
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:DevIconsEnableFoldersOpenClose = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
-"let g:DevIconsDefaultFolderOpenSymbol = ''
-
-
 " Jsonのダブルクォーテーション表示 'elzr/vim-json'
 " https://qiita.com/karur4n/items/a26007236c59c5fb8735#vim-json-%E5%85%A5%E3%82%8C%E3%82%88%E3%81%86
 let g:vim_json_syntax_conceal = 0
@@ -413,7 +375,15 @@ let g:clever_f_use_migemo=1
 let g:gitgutter_sign_added = '.'
 let g:gitgutter_sign_modified = '.'
 let g:gitgutter_sign_removed = '.'
-"let g:gitgutter_sign_modified_removed = '∙'
+""let g:gitgutter_sign_modified_removed = '∙'
+
+" https://wonderwall.hatenablog.com/entry/2016/03/26/211710
+" https://h2plus.biz/hiromitsu/entry/674
+"highlight clear SignColumn
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=9
+"highlight GitGutterChangeDelete ctermfg=4
 
 
 " Rican7/php-doc-modded
@@ -427,14 +397,11 @@ let g:pdv_cfg_annotation_Copyright = 0
 let g:pdv_cfg_annotation_License = 0
 
 
-" TODO
 " ---fzf---
 let g:fzf_layout = { 'down': '~70%' }
 " fzfからファイルにジャンプできるようにする
 let g:fzf_buffers_jump = 1
-
 let g:fzf_preview_rate = 0.9
-
 let g:fzf_command_prefix = 'Fzf'
 
 
@@ -460,8 +427,8 @@ endif
 
 " --quickr-preview.vim--
 let g:quickr_preview_keymaps = 0
-" nmap <Space>p <plug>(quickr_preview)
-nnoremap <silent> <Space>p <plug>(quickr_preview)
+nnoremap <silent> <leader>p <plug>(quickr_preview)
+let g:quickr_preview_on_cursor = 1
 
 
 " --phpmd--
@@ -469,21 +436,16 @@ nnoremap <silent> <Space>p <plug>(quickr_preview)
 " phpmdの警告一旦消す
 let g:syntastic_php_phpmd_post_args=''
 
-
 " --vim-terraform--
 let g:terraform_fmt_on_save = 1
-
 
 " --winresizer--
 let g:winresizer_gui_enable=1
 
-
 " ---lsp---
 let g:lsp_diagnostics_enabled = 0
 
-
 " --settings--
-"map *   <Plug>(asterisk-*)
 map *  <Plug>(asterisk-z*)
 
 
@@ -513,7 +475,6 @@ set synmaxcol=320
 " 折りたたみ有効 https://qiita.com/jiro4989/items/12a41fb58cc42287092f
 au FileType vim setlocal foldmethod=marker
 
-
 " モードでカーソルの形状を変える https://blog.delphinus.dev/2012/10/spotlight-cursor-line.html
 let &t_SI = "\e]50;CursorShape=1\x7"
 let &t_EI = "\e]50;CursorShape=0\x7"
@@ -526,64 +487,11 @@ au BufRead,BufNewFile *.yaml set ft=cloudformation.yaml
 
 " vimgrepの差分を見やすくする https://qiita.com/takaakikasai/items/3d4f8a4867364a46dfa3
 set diffopt=internal,filler,algorithm:histogram,indent-heuristic
-"---------------------------------------------------------------------------
-" function
-"---------------------------------------------------------------------------
 
-" ウィンドウ一時的に最大化 toggle
-" https://qiita.com/grohiro/items/e3dbcc93510bc8c4c812
-let g:toggle_window_size = 0
-function! ToggleWindowSize()
-  if g:toggle_window_size == 1
-    exec "normal \<C-w>="
-    let g:toggle_window_size = 0
-  else
-    :resize
-    :vertical resize
-    let g:toggle_window_size = 1
-  endif
-endfunction
-nnoremap <silent> <Space>w :call ToggleWindowSize()<CR>
-
-
-" https://gist.github.com/pinzolo/8168337
-" 指定のデータをレジスタに登録する
-function! s:Clip(data)
-  let @*=a:data
-  echo "clipped: " . a:data
-endfunction
-
-" 現在開いているファイルのパスをレジスタへ
-command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
-" 現在開いているファイルのファイル名をレジスタへ
-command! -nargs=0 ClipFile call s:Clip(expand('%:t'))
-" 現在開いているファイルのディレクトリパスをレジスタへ
-command! -nargs=0 ClipDir  call s:Clip(expand('%:p:h'))
-
-
-function! Nf()
-    "command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
-    let p = expand('%:p:h')
-    execute(':e '. p)
-    "execute(':Vex '. p)
-endfunction
-
-
-"---------------------------------------------------------------------------
-" note
-"---------------------------------------------------------------------------
-
-" https://github.com/othree/eregex.vim
-" For replacement, use :%S// (uppercase S) to trigger perl style regexp.
-
-" :s/, /\r,/g   行をカンマ区切りで改行する
-
-" :%s/^\%([^,]\+,\)\{2}\zs/挿入したい文字列！！！,/ 
 
 vnoremap z/ <ESC>/\%V
 vnoremap z? <ESC>?\%V
 
-filetype plugin on
 
 
 " 注意: vdebugの設定は読み込みのタイミングの問題か、.vimrcか$HOME.'/.vimrc_local'に定義しないとうまく動かない
@@ -592,7 +500,6 @@ if filereadable(expand($HOME.'/.vimrc_local'))
 endif
 
 
-" 実験
 " 遅い端末を使っている場合は、ステータスメッセージをオフにすることで編集のスピー ドを上げることができます:
 " https://vim-jp.org/vimdoc-ja/intro.html
 set nosc noru nosm
@@ -616,115 +523,6 @@ let g:phpfmt_autosave = 0
 " 遅い端末を使っている場合は、ステータスメッセージをオフにすることで編集のスピー ドを上げることができます:
 " https://vim-jp.org/vimdoc-ja/intro.html
 set nosc noru nosm
-
-
-
-" ,を使うとfが使いづらくなるので別を割り当てる
-nnoremap <Space>my :call MyFunc()<CR>
-nnoremap <Space>g :call GitFunc()<CR>
-nnoremap <Space>pa :call PhactorFunc()<CR>
-
-
-"------------
-"比較的使うけどキー覚えてないもの
-"------------
-:function! MyFunc()
-    :let lines = [
-        \ "Please select a Function",
-        \ "1 : PHPDoc生成",
-        \ "2 : バッファの差分",
-        \ "3 : json整形",
-        \ "4 : カンマ区切りを改行(カーソルライン対象)",
-        \ "5 : markdown preview",
-        \ "6 : Cheat",
-        \ "7 : バッファ差分解除",
-        \ ]
-    :let choice = inputlist(lines)
-    :if choice == 1
-        :call PhpDocSingle()
-    :elseif choice == 2
-        " バッファの差分 https://thinca.hatenablog.com/entry/20130426/1366910837
-        :windo diffthis
-    :elseif choice == 3
-        :%!jq '.'
-    :elseif choice == 4
-        :s/,/\r,/g
-    :elseif choice == 5
-        :PrevimOpen
-    :elseif choice == 6
-        :Cheat
-    :elseif choice == 7
-        :diffoff
-    :else
-        :echo "exit"
-    :endif
-:endfunction
-
-
-
-"------------
-"自分が使用するgit処理のラッパー
-"------------
-:function! GitFunc()
-    :let lines = [
-        \ "Please select a Function",
-        \ "1 : Gina Diff",
-        \ "2 : Gina!! add -p",
-        \ "3 : GitGutterUndoHunk",
-        \ ]
-    :let choice = inputlist(lines)
-    :if choice == 1
-        :Gina diff
-    :elseif choice == 2
-        :Gina!! add -p
-    :elseif choice == 3
-        :GitGutterUndoHunk
-    :else
-        :echo "exit"
-    :endif
-:endfunction
-
-
-:function! PhactorFunc()
-    " memo 文字列に.があるとエラーになる？
-    :let lines = [
-        \ "Please select a Function",
-        \ "1 : PhpactorTransform",
-        \ "2 : Import all missing classes in the current file",
-        \ "3 : Generate a new class",
-        \ "4 : Move a class",
-        \ ]
-    :let choice = inputlist(lines)
-    :if choice == 1
-        :PhpactorTransform
-    :elseif choice == 2
-        :PhpactorImportMissingClasses
-    :elseif choice == 3
-        :PhpactorClassNew
-    :elseif choice == 4
-        :PhpactorMoveFile
-    :else
-        :echo "exit"
-    :endif
-:endfunction
-
-
-:function! MyPython()
-    :let lines = [
-        \ "Please select a Function",
-        \ "1 : Docstring生成",
-        \ ]
-    :let choice = inputlist(lines)
-    :if choice == 1
-        :Docstring
-    :else
-        :echo "exit"
-    :endif
-:endfunction
-
-
-" memo
-" https://github.com/dyng/ctrlsf.vimつかえばgrepとreplaceできる
 
 imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -770,12 +568,6 @@ augroup EchoFilePath
   autocmd WinEnter * execute "normal! 1\<C-g>"
 augroup END
 
-
-"https://qiita.com/01en/items/7262593be49de784861d
-" note: 先頭は大文字である必要がある
-":command Bs BufstopPreview
-
-
 " https://codehero.jp/vim/9065941/how-can-i-change-vim-status-line-color
 hi StatusLine ctermbg=white ctermfg=black
 
@@ -797,22 +589,6 @@ if has("autocmd")
   autocmd FileType ts        setlocal sw=2 sts=2 ts=2 et
   autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
 endif
-
-
-" vモードの置換連続ペースト用
-" https://qiita.com/hikaruna/items/83c1220eede810bee492?utm_source=pocket_mylist
-function! Put_text_without_override_register()
-  let line_len = strlen(getline('.'))
-  execute "normal! `>"
-  let col_loc = col('.')
-  execute 'normal! gv"_x'
-  if line_len == col_loc
-    execute 'normal! p'
-  else 
-    execute 'normal! P'
-  endif
-endfunction
-xnoremap <silent> p :call Put_text_without_override_register()<CR>
 
 set clipboard=unnamed "ヤンクした時に自動でクリップボードにコピー(autoselectを指定するとvモードの置換連続ペーストができない)
 
@@ -840,3 +616,162 @@ let g:netrw_alto = 1
 let g:netrw_banner=0
 
 "let g:netrw_winsize = 15
+
+let g:findroot_patterns = [
+\  '.git/',
+\  '.svn/',
+\]
+
+
+"---------------------------------------------------------------------------
+" function
+"---------------------------------------------------------------------------
+" https://qiita.com/t_o_d/items/1475671853e984aef777
+" リネーム関数定義
+function! RenameCurrentFile()
+  let old = expand('%')
+  let new = input('新規ファイル名: ', old , 'file')
+  if new != '' && new != old
+    exec ':saveas ' . new
+    exec ':silent !rm ' . old
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameCurrentFile()<cr>
+
+
+" ウィンドウ一時的に最大化 toggle
+" https://qiita.com/grohiro/items/e3dbcc93510bc8c4c812
+let g:toggle_window_size = 0
+function! ToggleWindowSize()
+  if g:toggle_window_size == 1
+    exec "normal \<C-w>="
+    let g:toggle_window_size = 0
+  else
+    :resize
+    :vertical resize
+    let g:toggle_window_size = 1
+  endif
+endfunction
+nnoremap <silent> <Space>w :call ToggleWindowSize()<CR>
+
+
+" https://gist.github.com/pinzolo/8168337
+" 指定のデータをレジスタに登録する
+function! s:Clip(data)
+  let @*=a:data
+  echo "clipped: " . a:data
+endfunction
+
+
+" 現在開いているファイルのパスをレジスタへ
+command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
+" 現在開いているファイルのファイル名をレジスタへ
+command! -nargs=0 ClipFile call s:Clip(expand('%:t'))
+" 現在開いているファイルのディレクトリパスをレジスタへ
+command! -nargs=0 ClipDir  call s:Clip(expand('%:p:h'))
+
+
+function! Nf()
+    "command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
+    let p = expand('%:p:h')
+    execute(':e '. p)
+    "execute(':Vex '. p)
+endfunction
+
+" ,を使うとfが使いづらくなるので別を割り当てる
+nnoremap <leader>my :call MyFunc()<CR>
+nnoremap <leader>g :call GitFunc()<CR>
+nnoremap <leader>pa :call PhactorFunc()<CR>
+
+"------------
+"比較的使うけどキー覚えてないもの
+"------------
+:function! MyFunc()
+    :let lines = [
+        \ "Please select a Function",
+        \ "1 : PHPDoc生成",
+        \ "2 : バッファの差分",
+        \ "3 : バッファ差分解除",
+        \ "4 : json整形",
+        \ "5 : カンマ区切りを改行(カーソルライン対象)",
+        \ "6 : Gina Diff",
+        \ ]
+    :let choice = inputlist(lines)
+    :if choice == 1
+        :call PhpDocSingle()
+    :elseif choice == 2
+        " バッファの差分 https://thinca.hatenablog.com/entry/20130426/1366910837
+        :windo diffthis
+    :elseif choice == 3
+        :diffoff
+    :elseif choice == 4
+        :%!jq '.'
+    :elseif choice == 5
+        :s/,/\r,/g
+    :elseif choice == 6
+        :Gina diff
+    :else
+    :endif
+:endfunction
+
+
+:function! PhactorFunc()
+    " memo 文字列に.があるとエラーになる？
+    :let lines = [
+        \ "Please select a Function",
+        \ "1 : PhpactorTransform",
+        \ "2 : Import all missing classes in the current file",
+        \ "3 : Generate a new class",
+        \ "4 : Move a class",
+        \ ]
+    :let choice = inputlist(lines)
+    :if choice == 1
+        :PhpactorTransform
+    :elseif choice == 2
+        :PhpactorImportMissingClasses
+    :elseif choice == 3
+        :PhpactorClassNew
+    :elseif choice == 4
+        :PhpactorMoveFile
+    :else
+        :echo "exit"
+    :endif
+:endfunction
+
+" vモードの置換連続ペースト用
+" https://qiita.com/hikaruna/items/83c1220eede810bee492?utm_source=pocket_mylist
+function! Put_text_without_override_register()
+  let line_len = strlen(getline('.'))
+  execute "normal! `>"
+  let col_loc = col('.')
+  execute 'normal! gv"_x'
+  if line_len == col_loc
+    execute 'normal! p'
+  else 
+    execute 'normal! P'
+  endif
+endfunction
+xnoremap <silent> p :call Put_text_without_override_register()<CR>
+
+"---------------------------------------------------------------------------
+" note
+"---------------------------------------------------------------------------
+" ;をあてるとfが使いづらくなるので必要なら別を割り当てる
+
+"https://qiita.com/01en/items/7262593be49de784861d
+" note: 先頭は大文字である必要がある
+":command Bs BufstopPreview
+
+" ,を使うとfが使いづらくなるので別を割り当てる
+
+
+" https://github.com/othree/eregex.vim
+" For replacement, use :%S// (uppercase S) to trigger perl style regexp.
+
+" :s/, /\r,/g   行をカンマ区切りで改行する
+
+" :%s/^\%([^,]\+,\)\{2}\zs/挿入したい文字列！！！,/ 
+
+
+" https://github.com/dyng/ctrlsf.vimつかえばgrepとreplaceできる
