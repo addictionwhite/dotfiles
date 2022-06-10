@@ -6,7 +6,10 @@
 "colorscheme sonokai
 "colorscheme darkblue
 
-colorscheme aurora
+"colorscheme aurora
+colorscheme monokai_pro
+"colorscheme hatsunemiku
+"colorscheme monokai-phoenix
 "colorscheme zengarden
 
 "set background=light
@@ -205,7 +208,7 @@ highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
 
 
-" for in container 
+" for in container
 set re=1
 
 set ttyfast
