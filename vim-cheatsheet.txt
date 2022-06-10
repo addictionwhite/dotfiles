@@ -4,3 +4,6 @@ git add -p [file]
 git reset -p [file]
 # Hunkの破棄
 git checkout -p [file]
+
+windo  set scb
+windo  set noscb
