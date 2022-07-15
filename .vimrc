@@ -16,7 +16,7 @@ Plug 'sts10/vim-pink-moon'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'nightsense/snow'
-Plug 'cormacrelf/vim-colors-github'
+" Plug 'cormacrelf/vim-colors-github'
 Plug 'jdkanani/vim-material-theme'
 Plug 'reedes/vim-colors-pencil'
 Plug 'cocopon/iceberg.vim'
@@ -95,8 +95,6 @@ Plug 'kannokanno/previm'
 Plug 'AndrewRadev/switch.vim'
 
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
 
 Plug 'junegunn/vim-easy-align'
 
@@ -129,9 +127,9 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'bling/vim-bufferline'
 "Plug 'itchyny/lightline.vim'
-Plug 'naoty/vim-folcom'
+Plug 'naoty/vim-folcom' " コメントを非表示にする
 
-Plug 'ronakg/quickr-preview.vim'
+"Plug 'ronakg/quickr-preview.vim'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -306,6 +304,8 @@ nnoremap wh <C-w>h
 
 " 新規ファイル
 nnoremap <silent> ,f  :Files<CR> 
+nnoremap <silent> <leader>f  :Files<CR>
+
 nnoremap <silent> ,F  :GFiles?<CR>
 
 " 開いているウィンドウでバッファが開くのが使いやすい
