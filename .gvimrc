@@ -7,10 +7,10 @@
 "colorscheme darkblue
 
 "colorscheme aurora
-colorscheme monokai_pro
+"colorscheme monokai_pro
 "colorscheme hatsunemiku
 "colorscheme monokai-phoenix
-"colorscheme zengarden
+ colorscheme acme 
 
 "set background=light
 
