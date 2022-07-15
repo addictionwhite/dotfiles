@@ -7,3 +7,35 @@ git checkout -p [file]
 
 windo  set scb
 windo  set noscb
+
+#一致した数を調べたい（全体）
+git grep lambda ./ | wc -l
+#一致した数を調べたい（ファイル数）
+git grep -l lambda ./ | wc -l
+
+git grep xxx
+シンプル版
+git grep -i yyy
+大文字小文字を区別しない版
+git grep -E zzz
+正規表現版
+# 参考
+https://dev.classmethod.jp/articles/useful-git-grep-command/
+
+
+# コミットのブランチ名を調べる
+git branch --contains <commit>
+# https://qiita.com/narupo/items/e39e34b164ff592f37ad
+
+
+git log -p -S 'word' ./
+
+# スペース⇒タブ
+:set noexpandtab
+:retab! スペースの数
+# タブ⇒スペース
+:set expandtab
+:retab スペースの数
+
+
+git diff root...feature
