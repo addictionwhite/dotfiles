@@ -40,6 +40,8 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'wellsjo/wellsokai.vim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'tomasr/molokai'
+Plug 'fmoralesc/molokayo'
+
 Plug 'sainnhe/edge'
 Plug 'bluz71/vim-moonfly-colors'
 Plug 'embark-theme/vim', { 'as': 'embark' }
@@ -62,6 +64,7 @@ Plug 'reewr/vim-monokai-phoenix'
 
 Plug 'ronwoch/hotline-vim'
 Plug 'blackbirdtheme/vim'
+Plug 'ErichDonGubler/vim-sublime-monokai'
 
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
@@ -94,8 +97,6 @@ Plug 'kannokanno/previm'
 "Plug 'tyru/open-browser.vim' " 既に定義されているため
 Plug 'AndrewRadev/switch.vim'
 
-
-
 Plug 'junegunn/vim-easy-align'
 
 "VCS 
@@ -127,9 +128,15 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'bling/vim-bufferline'
 "Plug 'itchyny/lightline.vim'
-Plug 'naoty/vim-folcom' " コメントを非表示にする
+"Plug 'naoty/vim-folcom' " コメントを非表示にする
 
 "Plug 'ronakg/quickr-preview.vim'
+
+" 少しスクロールが遅くなるかも
+"Plug 'wellle/context.vim' " インデント内をスクロールする際コンテキストが上に表示される
+
+"Plug 'blueyed/vim-diminactive' " アクティブなウィンドウを見えやすくする
+"Plug 'machakann/vim-highlightedyank'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -159,7 +166,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'kshenoy/vim-signature'
 
-"Plug 't9md/vim-choosewin'
+Plug 't9md/vim-choosewin'
 Plug 'houtsnip/vim-emacscommandline'
 Plug 'vim-scripts/mru.vim'
 " An always-on highlight for a unique character in every word on a line to help you use f, F and family.
@@ -449,6 +456,9 @@ let g:lsp_diagnostics_enabled = 0
 map *  <Plug>(asterisk-z*)
 
 
+" -- choosewin
+nmap - <Plug>(choosewin)
+
 "---------------------------------------------------------------------------
 " その他設定
 "---------------------------------------------------------------------------
@@ -601,21 +611,64 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=un
 :hi Comment ctermfg=Magenta
 
 
-filetype plugin on
-" http://blog.tojiru.net/article/234400966.html
-" netrwは常にtree view
-let g:netrw_liststyle = 3
-" CVSと.で始まるファイルは表示しない
-"let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
-" 'v'でファイルを開くときは右側に開く。(デフォルトが左側なので入れ替え)
-let g:netrw_altv = 1
-" 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
-let g:netrw_alto = 1
-" https://pc.oreda.net/software/filer/netrw#%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E8%A8%AD%E5%AE%9A
-" ヘッダを非表示にする
-let g:netrw_banner=0
+" ------------------------
+"filetype plugin on
+"" http://blog.tojiru.net/article/234400966.html
+"" netrwは常にtree view
+"let g:netrw_liststyle = 3
+"" CVSと.で始まるファイルは表示しない
+""let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
+"" 'v'でファイルを開くときは右側に開く。(デフォルトが左側なので入れ替え)
+"let g:netrw_altv = 1
+"" 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
+"let g:netrw_alto = 1
+"" https://pc.oreda.net/software/filer/netrw#%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E8%A8%AD%E5%AE%9A
+"" ヘッダを非表示にする
+"let g:netrw_banner=0
+"
+""let g:netrw_winsize = 15
 
-"let g:netrw_winsize = 15
+" https://issueoverflow.com/2019/11/22/set-vim-netrw-like-nerdtree/
+filetype plugin on
+"ツリー表示
+"表示を変更したい場合は i で切替可能
+let g:netrw_liststyle=3
+"上部のバナーを非表示
+" I で toggle 可能
+let g:netrw_banner = 0
+"window サイズ
+let g:netrw_winsize = 25
+"Netrw で Enter 押下時の挙動設定
+let g:netrw_browse_split = 4
+let g:netrw_alto = 1
+
+"Netrw を toggle する関数を設定
+"元処理と異なり Vex を呼び出すことで左 window に表示
+let g:NetrwIsOpen=0
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Vex
+    endif
+endfunction
+
+"ショートカットの設定
+"= を 2 回連続押下で toggle
+noremap <silent>== :call ToggleNetrw()<CR>
+
+
+" ---------------------------
+
+
 
 let g:findroot_patterns = [
 \  '.git/',
@@ -775,3 +828,7 @@ xnoremap <silent> p :call Put_text_without_override_register()<CR>
 
 
 " https://github.com/dyng/ctrlsf.vimつかえばgrepとreplaceできる
+
+"Note .gvimrcに配置すると挙動しなかったので.vimrcに配置
+" Show pressed keys in VIM normal mode statusline
+set showcmd
