@@ -8,9 +8,14 @@
 
 "colorscheme aurora
 "colorscheme monokai_pro
+
 "colorscheme hatsunemiku
+"colorscheme molokayo
+colorscheme sublimemonokai
+"colorscheme molokai
+
 "colorscheme monokai-phoenix
- colorscheme acme 
+" colorscheme acme 
 
 "set background=light
 
