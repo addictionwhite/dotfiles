@@ -38,4 +38,10 @@ git log -p -S 'word' ./
 :retab スペースの数
 
 
+
 git diff root...feature
+
+
+# netrw
+ファイル新規作成 %
+https://qiita.com/shoma2da/items/624d46228b0edf30b36e
