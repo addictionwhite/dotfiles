@@ -11,8 +11,15 @@
 
 "colorscheme hatsunemiku
 "colorscheme molokayo
-colorscheme sublimemonokai
+"colorscheme sublimemonokai
 "colorscheme molokai
+"colorscheme yui
+"colorscheme vim-monokai-tasty
+"colorscheme substrata
+
+"let g:monochrome_italic_comments = 1
+"colorscheme monochrome
+colorscheme vim-monokai-tasty
 
 "colorscheme monokai-phoenix
 " colorscheme acme 
