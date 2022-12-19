@@ -66,6 +66,15 @@ Plug 'ronwoch/hotline-vim'
 Plug 'blackbirdtheme/vim'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 
+Plug 'ghifarit53/daycula-vim' , {'branch' : 'main'}
+Plug 'koron/vim-monochromenote'
+Plug 'connorholyday/vim-snazzy'
+Plug 'yuttie/sublimetext-spacegray.vim'
+Plug 'morhetz/gruvbox'
+Plug 'arzg/vim-substrata'
+
+Plug 'fxn/vim-monochrome'
+
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
 Plug 'n1ghtmare/noirblaze-vim'
@@ -74,6 +83,7 @@ Plug 'dterei/VimCobaltColourScheme'
 Plug 'therubymug/vim-pyte'
 Plug 'thenewvu/vim-colors-blueprint'
 Plug 'cideM/yui'
+"Plug 'prurigro/darkcloud-vimconfig'
 
 " preview スクロールしているとたびたびエラーになる?
 Plug 'mnishz/colorscheme-preview.vim'
@@ -121,6 +131,8 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
+
+Plug 'pseewald/vim-anyfold'
 "Plug 'chrisbra/vim-diff-enhanced'
 
 "Plug 'sandeepcr529/Buffet.vim'
@@ -186,6 +198,7 @@ Plug 'mattn/webapi-vim'
 
 Plug 'reireias/vim-cheatsheet'
 Plug 'itchyny/calendar.vim'
+Plug 'vuciv/vim-bujo'
 
 " Debug
 Plug 'sebdah/vim-delve'
@@ -290,7 +303,8 @@ nnoremap <silent> <leader>eg  :<C-u>edit $HOME/.gvimrc<CR>
 nnoremap <silent> <leader>et  :<C-u>edit $HOME/.tigrc<CR>
 
 " 設定再読み込み
-nnoremap <silent> <leader>vi  :source ~/.config/nvim/init.vim<CR>
+"nnoremap <silent> <leader>vi  :source ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <leader>vi  :source ~/.vimrc<CR>
 
 "単語を色マーク
 nmap <leader>h <Plug>(quickhl-manual-this)
@@ -613,57 +627,57 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=un
 
 " ------------------------
 "filetype plugin on
-"" http://blog.tojiru.net/article/234400966.html
-"" netrwは常にtree view
-"let g:netrw_liststyle = 3
-"" CVSと.で始まるファイルは表示しない
-""let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
-"" 'v'でファイルを開くときは右側に開く。(デフォルトが左側なので入れ替え)
-"let g:netrw_altv = 1
-"" 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
-"let g:netrw_alto = 1
-"" https://pc.oreda.net/software/filer/netrw#%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E8%A8%AD%E5%AE%9A
-"" ヘッダを非表示にする
-"let g:netrw_banner=0
-"
-""let g:netrw_winsize = 15
+" http://blog.tojiru.net/article/234400966.html
+" netrwは常にtree view
+let g:netrw_liststyle = 3
+" CVSと.で始まるファイルは表示しない
+"let g:netrw_list_hide = 'CVS,\(^\|\s\s\)\zs\.\S\+'
+" 'v'でファイルを開くときは右側に開く。(デフォルトが左側なので入れ替え)
+let g:netrw_altv = 1
+" 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
+let g:netrw_alto = 1
+" https://pc.oreda.net/software/filer/netrw#%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E8%A8%AD%E5%AE%9A
+" ヘッダを非表示にする
+let g:netrw_banner=0
+
+"let g:netrw_winsize = 15
 
 " https://issueoverflow.com/2019/11/22/set-vim-netrw-like-nerdtree/
 filetype plugin on
-"ツリー表示
-"表示を変更したい場合は i で切替可能
-let g:netrw_liststyle=3
-"上部のバナーを非表示
-" I で toggle 可能
-let g:netrw_banner = 0
-"window サイズ
-let g:netrw_winsize = 25
-"Netrw で Enter 押下時の挙動設定
-let g:netrw_browse_split = 4
-let g:netrw_alto = 1
-
-"Netrw を toggle する関数を設定
-"元処理と異なり Vex を呼び出すことで左 window に表示
-let g:NetrwIsOpen=0
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Vex
-    endif
-endfunction
-
-"ショートカットの設定
-"= を 2 回連続押下で toggle
-noremap <silent>== :call ToggleNetrw()<CR>
+""ツリー表示
+""表示を変更したい場合は i で切替可能
+"let g:netrw_liststyle=3
+""上部のバナーを非表示
+"" I で toggle 可能
+"let g:netrw_banner = 0
+""window サイズ
+"let g:netrw_winsize = 25
+""Netrw で Enter 押下時の挙動設定
+"let g:netrw_browse_split = 4
+"let g:netrw_alto = 1
+"
+""Netrw を toggle する関数を設定
+""元処理と異なり Vex を呼び出すことで左 window に表示
+"let g:NetrwIsOpen=0
+"function! ToggleNetrw()
+"    if g:NetrwIsOpen
+"        let i = bufnr("$")
+"        while (i >= 1)
+"            if (getbufvar(i, "&filetype") == "netrw")
+"                silent exe "bwipeout " . i
+"            endif
+"            let i-=1
+"        endwhile
+"        let g:NetrwIsOpen=0
+"    else
+"        let g:NetrwIsOpen=1
+"        silent Vex
+"    endif
+"endfunction
+"
+""ショートカットの設定
+""= を 2 回連続押下で toggle
+"noremap <silent>== :call ToggleNetrw()<CR>
 
 
 " ---------------------------
@@ -734,7 +748,8 @@ endfunction
 
 " ,を使うとfが使いづらくなるので別を割り当てる
 nnoremap <leader>my :call MyFunc()<CR>
-nnoremap <leader>g :call GitFunc()<CR>
+"nnoremap <leader>g :call GitFunc()<CR>
+nnoremap <leader>t :Todo g<CR>
 nnoremap <leader>pa :call PhactorFunc()<CR>
 
 "------------
@@ -832,3 +847,26 @@ xnoremap <silent> p :call Put_text_without_override_register()<CR>
 "Note .gvimrcに配置すると挙動しなかったので.vimrcに配置
 " Show pressed keys in VIM normal mode statusline
 set showcmd
+
+
+
+" 括弧の反対側のハイライトを調節
+" https://qiita.com/mochizukikotaro/items/7829ab32e0353d49c185
+" ハイライトを消すこと自体は難しそう
+" https://vertys.net/vim-highlight-cancel/
+hi MatchParen ctermbg=1
+
+
+"https://liginc.co.jp/436448
+nnoremap <Leader>m :<C-u>call EditDailyMemo()<CR>
+function! EditDailyMemo()
+    let l:daily_memo_dir = '/tmp'
+    if isdirectory($DAILY_MEMO_DIR)
+        let l:daily_memo_dir = $DAILY_MEMO_DIR
+    endif
+    let l:memo_dir = l:daily_memo_dir.'/'.strftime('%Y/%m')
+    let l:memo_file = l:memo_dir.'/'.strftime('%d').'.txt'
+    call mkdir(l:memo_dir, 'p')
+    execute "tabnew ".l:memo_file
+endfunction
+
