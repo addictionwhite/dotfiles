@@ -19,7 +19,8 @@
 
 "let g:monochrome_italic_comments = 1
 "colorscheme monochrome
-colorscheme vim-monokai-tasty
+"colorscheme vim-monokai-tasty
+colorscheme lunaperche 
 
 "colorscheme monokai-phoenix
 " colorscheme acme 
@@ -99,6 +100,9 @@ set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
 " https://qiita.com/tashua314/items/101f1bec368c75a90251
 " 現在行数/全行数
 set statusline+=[LOW=%l/%L]
+
+" https://blog.ruedap.com/2011/07/12/vim-statusline-git-branch-name
+set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
 
 " 作業時間
 " gtm https://github.com/git-time-metric/gtm/blob/master/README.md
