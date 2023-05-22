@@ -20,10 +20,22 @@
 "let g:monochrome_italic_comments = 1
 "colorscheme monochrome
 "colorscheme vim-monokai-tasty
-colorscheme lunaperche 
+
+"colorscheme sublimemonokai 
+"colorscheme lunaperche 
+"colorscheme redish 
+"colorscheme molokai 
+"colorscheme firewatch
+colorscheme redish
+"colorscheme monochrome 
+"colorscheme sonokai 
 
 "colorscheme monokai-phoenix
 " colorscheme acme 
+
+"set t_Co=256
+"colorscheme Monokai-Refined
+"colorscheme stereokai 
 
 "set background=light
 
@@ -156,7 +168,7 @@ set backspace=indent,eol,start
 
 "hi Visual  ctermbg=236
 "hi Comment ctermfg=white
-
+"hi Comment ctermfg=Yellow
 
 "https://qiita.com/akira-hamada/items/eb46ef02fabfdd418449
 " Vimでキーワードにマッチした数を表示(vim 8.1以降
