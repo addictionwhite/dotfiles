@@ -53,7 +53,7 @@ Plug 'arcticicestudio/nord-vim'
 "Plug 'koron/vim-monochromenote'
 Plug 'crusoexia/vim-dracula'
 Plug 'Rigellute/shades-of-purple.vim'
-Plug 'ray-x/aurora'
+"Plug 'ray-x/aurora'
 "Plug 'cseelus/vim-colors-lucid'
 Plug 'fenetikm/falcon'
 Plug 'yasukotelin/shirotelin'
@@ -74,6 +74,12 @@ Plug 'morhetz/gruvbox'
 Plug 'arzg/vim-substrata'
 
 Plug 'fxn/vim-monochrome'
+Plug 'gummesson/stereokai.vim'
+
+"Plug 'vim-scripts/aiseered.vim' , { 'as': 'zzz' } "動かない
+Plug 'vim-scripts/aiseered.vim'  "動かない
+Plug 'aparaatti/redish.vim' "動かない
+Plug 'erizocosmico/vim-firewatch'
 
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
@@ -81,9 +87,10 @@ Plug 'n1ghtmare/noirblaze-vim'
 Plug 'ingram1107/moneokai'
 Plug 'dterei/VimCobaltColourScheme'
 Plug 'therubymug/vim-pyte'
-Plug 'thenewvu/vim-colors-blueprint'
+"Plug 'thenewvu/vim-colors-blueprint'
 Plug 'cideM/yui'
 "Plug 'prurigro/darkcloud-vimconfig'
+Plug 'jaromero/vim-monokai-refined'
 
 " preview スクロールしているとたびたびエラーになる?
 Plug 'mnishz/colorscheme-preview.vim'
@@ -622,7 +629,10 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=un
 
 " コメントアウトの色変更
 " https://blog.trippyboy.com/2014/centos/vim%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%89%B2%E3%81%8C%E8%A6%8B%E3%81%A5%E3%82%89%E3%81%84%E3%81%AA%E3%82%89%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%97/
-:hi Comment ctermfg=Magenta
+":hi Comment ctermfg=Magenta
+:hi Comment ctermfg=LightYellow
+":hi Comment ctermfg=hala(60,54%,56%)
+
 
 
 " ------------------------
@@ -869,4 +879,12 @@ function! EditDailyMemo()
     call mkdir(l:memo_dir, 'p')
     execute "tabnew ".l:memo_file
 endfunction
+
+
+
+"autocmd Filetype * AnyFoldActivate
+"let g:anyfold_fold_comments=1
+"set foldlevel=1
+"hi Folded term=NONE cterm=NONE
+
 
