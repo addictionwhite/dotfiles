@@ -5,6 +5,7 @@ git reset -p [file]
 # Hunkの破棄
 git checkout -p [file]
 
+# スクロール同期
 windo  set scb
 windo  set noscb
 
@@ -33,6 +34,8 @@ git log -p -S 'word' ./
 # スペース⇒タブ
 :set noexpandtab
 :retab! スペースの数
+:set noexpandtab | retab! 4
+
 # タブ⇒スペース
 :set expandtab
 :retab スペースの数
