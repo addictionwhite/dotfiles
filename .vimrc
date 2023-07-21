@@ -881,10 +881,21 @@ function! EditDailyMemo()
 endfunction
 
 
+"reference: https://qiita.com/kimurap/items/7058c9fe29f51932b196
+"Note: $VIMRUNTIME/syntax/txt.vim
+au BufRead,BufNewFile *.txt set filetype=txt
+au BufRead,BufNewFile *.php set filetype=php
+" wip js
 
-"autocmd Filetype * AnyFoldActivate
-"let g:anyfold_fold_comments=1
-"set foldlevel=1
-"hi Folded term=NONE cterm=NONE
+"reference https://www.xmisao.com/2014/03/19/how-to-define-range-specific-command-in-vim.html
+function! OpengiGithubFileAlias() range
+    echo "firstline: " . a:firstline
+    echo "lastline: " . a:lastline
+    echo a:lastline . "OpenGithubFile"
+    let s:command = a:firstline . ",". a:lastline . "OpenGithubFile"
+    execute s:command
+    ":a:lastline . "OpenGithubFile"
+endfunction
 
-
+" 範囲指定できるコマンドの定義
+command! -range Opg <line1>,<line2>call OpengiGithubFileAlias()
