@@ -41,6 +41,10 @@ Plug 'wellsjo/wellsokai.vim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'tomasr/molokai'
 Plug 'fmoralesc/molokayo'
+Plug 'ntk148v/komau.vim' " Vim-plug
+Plug 'ryanpcmcquen/true-monochrome_vim'
+Plug 'zaki/zazen'
+Plug 'aditya-azad/candle-grey'
 
 Plug 'sainnhe/edge'
 Plug 'bluz71/vim-moonfly-colors'
@@ -221,7 +225,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'Rican7/php-doc-modded'
 
 Plug 'docunext/closetag.vim' " 基本はEmmet。補助的に使用したい
-Plug 'ap/vim-css-color' " TODO:不要そうなら消す
+"Plug 'ap/vim-css-color' " TODO:不要そうなら消す
 
 " js "
 Plug 'jelera/vim-javascript-syntax'
@@ -340,6 +344,7 @@ nnoremap <silent> ,F  :GFiles?<CR>
 nnoremap <silent> <leader>b  :Bufstop<CR>
 nnoremap <silent> <leader>nf :call Nf()<CR>
 
+
 nmap <silent> gr :LspReferences<CR>
 nmap <silent> gd :LspDefinition<CR>
 nmap <silent> gh  :LspHover<CR>
@@ -397,6 +402,7 @@ let g:vim_json_syntax_conceal = 0
 
 " clever-f.vimのmigemo っぽい検索(日本語もfの検索にヒットさせる）https://rhysd.hatenablog.com/entry/2013/09/17/220837
 let g:clever_f_use_migemo=1
+let g:clever_f_mark_char_color="IncSearch"
 
 " ---gitgutter---
 " https://github.com/statico/dotfiles/blob/master/.vim/vimrc
@@ -630,7 +636,7 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=un
 " コメントアウトの色変更
 " https://blog.trippyboy.com/2014/centos/vim%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%89%B2%E3%81%8C%E8%A6%8B%E3%81%A5%E3%82%89%E3%81%84%E3%81%AA%E3%82%89%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%97/
 ":hi Comment ctermfg=Magenta
-:hi Comment ctermfg=LightYellow
+":hi Comment ctermfg=LightYellow
 ":hi Comment ctermfg=hala(60,54%,56%)
 
 
@@ -899,3 +905,24 @@ endfunction
 
 " 範囲指定できるコマンドの定義
 command! -range Opg <line1>,<line2>call OpengiGithubFileAlias()
+
+
+set clipboard=unnamedplus
+
+" クリップボードに相対パスをコピーする関数
+function! CopyRelativePathToClipboard()
+    " 現在のバッファのパスを取得
+    let filepath = expand('%:p')
+
+    " カレントディレクトリからの相対パスを取得
+    let relativepath = fnamemodify(filepath, ":.")
+
+    " 相対パスをクリップボードにコピー
+    let @+ = relativepath
+
+    " メッセージを表示
+    echom "Relative path copied to clipboard: " . relativepath
+endfunction
+
+" キーマッピングを設定（任意のキーに設定してください）
+nnoremap <leader>cp :call CopyRelativePathToClipboard()<CR>
