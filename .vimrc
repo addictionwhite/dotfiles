@@ -1,3 +1,4 @@
+
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd QuickFixCmdPost *ag* cwindow
 
@@ -344,7 +345,6 @@ nnoremap <silent> ,F  :GFiles?<CR>
 nnoremap <silent> <leader>b  :Bufstop<CR>
 nnoremap <silent> <leader>nf :call Nf()<CR>
 
-
 nmap <silent> gr :LspReferences<CR>
 nmap <silent> gd :LspDefinition<CR>
 nmap <silent> gh  :LspHover<CR>
@@ -636,7 +636,7 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=un
 " コメントアウトの色変更
 " https://blog.trippyboy.com/2014/centos/vim%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%89%B2%E3%81%8C%E8%A6%8B%E3%81%A5%E3%82%89%E3%81%84%E3%81%AA%E3%82%89%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%97/
 ":hi Comment ctermfg=Magenta
-":hi Comment ctermfg=LightYellow
+:hi Comment ctermfg=LightYellow
 ":hi Comment ctermfg=hala(60,54%,56%)
 
 
@@ -907,7 +907,8 @@ endfunction
 command! -range Opg <line1>,<line2>call OpengiGithubFileAlias()
 
 
-set clipboard=unnamedplus
+
+"set clipboard=unnamedplus
 
 " クリップボードに相対パスをコピーする関数
 function! CopyRelativePathToClipboard()
