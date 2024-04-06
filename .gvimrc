@@ -21,14 +21,17 @@
 "colorscheme monochrome
 "colorscheme vim-monokai-tasty
 
-"colorscheme sublimemonokai 
-"colorscheme lunaperche 
+colorscheme lunaperche 
+"colorscheme komau 
 "colorscheme redish 
 "colorscheme molokai 
 "colorscheme firewatch
-colorscheme redish
+"colorscheme snazzy
+"colorscheme punk
 "colorscheme monochrome 
 "colorscheme sonokai 
+
+"colorscheme plain 
 
 "colorscheme monokai-phoenix
 " colorscheme acme 
@@ -93,6 +96,7 @@ set hlsearch
 "set nowrapscan 
 
 syntax on
+"syntax off
 "---------------------------------------------------------------------------
 " ステータスラインの表示
 "---------------------------------------------------------------------------
@@ -138,7 +142,7 @@ set guifont=Hack_Nerd_Font:h14 " フォント
 
 
 set list  " 不可視文字を表示する
-" set listchars=tab:≫-,trail:-,extends:≫,precedes:≪,nbsp:%,eol:?
+set listchars=tab:≫-,trail:-,extends:≫,precedes:≪,nbsp:%,eol:?
 
 
 "-------------------------------------------------------------------------------
