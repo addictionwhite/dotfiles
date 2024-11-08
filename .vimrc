@@ -80,11 +80,23 @@ Plug 'arzg/vim-substrata'
 
 Plug 'fxn/vim-monochrome'
 Plug 'gummesson/stereokai.vim'
+Plug 'zekzekus/menguless'
+Plug 'sainttttt/flesh-and-blood'
+Plug 'mrsafalpiya/sp-plain-vim'
+Plug 'rayes0/blossom.vim'
+Plug 'hossein-lap/vim-lupper'
+Plug 'josebalius/vim-light-chromeclipse'
+Plug 'bluz71/vim-nightfly-colors'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'TheNiteCoder/mountaineer.vim'
+Plug 'vim-scripts/win9xblueback.vim'
 
 "Plug 'vim-scripts/aiseered.vim' , { 'as': 'zzz' } "動かない
 Plug 'vim-scripts/aiseered.vim'  "動かない
 Plug 'aparaatti/redish.vim' "動かない
 Plug 'erizocosmico/vim-firewatch'
+Plug 'tomasiser/vim-code-dark'
+Plug 'ErichDonGubler/vim-sublime-monokai'
 
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
@@ -111,6 +123,8 @@ Plug 'w0rp/ale'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'mg979/vim-visual-multi'
 "Plug 'bun913/min-todo.vim'
+Plug 'tpope/vim-abolish'
+Plug 'junegunn/vim-easy-align'
 
 " TODO マークダウン編集不要そうなら消す
 " マークダウンのプレビューに必要
@@ -210,7 +224,7 @@ Plug 'mattn/webapi-vim'
 
 Plug 'reireias/vim-cheatsheet'
 Plug 'itchyny/calendar.vim'
-Plug 'vuciv/vim-bujo'
+Plug 'vuciv/vim-bujo'  "Todoツール
 
 " Debug
 Plug 'sebdah/vim-delve'
@@ -226,7 +240,9 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'Rican7/php-doc-modded'
 
 Plug 'docunext/closetag.vim' " 基本はEmmet。補助的に使用したい
-"Plug 'ap/vim-css-color' " TODO:不要そうなら消す
+Plug 'ap/vim-css-color' " TODO:不要そうなら消す
+Plug 'flyinshadow/php_localvarcheck.vim' "PHP未定義変数・未使用変数を表示
+Plug 'phpstan/vim-phpstan'
 
 " js "
 Plug 'jelera/vim-javascript-syntax'
@@ -247,6 +263,9 @@ Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'beanworks/vim-phpfmt'
 Plug 'tell-k/vim-autopep8'
+
+" #GO
+Plug 'ratmav/vim-task'
 
 " #LSP
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -300,7 +319,7 @@ nnoremap <leader>sf :CtrlSF -ignoredir "*/logs/*"
 " メモプラグイン
 nnoremap <leader>mn :MemoNew<CR>
 nnoremap <leader>ml :MemoList<CR>
-nnoremap <leader>mg :MemoGrep<CR>
+"nnoremap <leader>mg :MemoGrep<CR>
 
 " Cheatsheet
 let g:cheatsheet#cheat_file = '~/dotfiles/vim-cheatsheet.txt'
@@ -313,6 +332,8 @@ nnoremap <silent> <leader>ev  :<C-u>edit $MYVIMRC<CR>
 "nnoremap <silent> <leader>eg  :<C-u>edit $MYGVIMRC<CR>
 nnoremap <silent> <leader>eg  :<C-u>edit $HOME/.gvimrc<CR>
 nnoremap <silent> <leader>et  :<C-u>edit $HOME/.tigrc<CR>
+
+nnoremap <silent> <leader>el  :<C-u>edit $HOME/.vimrc_local<CR>
 
 " 設定再読み込み
 "nnoremap <silent> <leader>vi  :source ~/.config/nvim/init.vim<CR>
@@ -409,6 +430,9 @@ let g:clever_f_mark_char_color="IncSearch"
 let g:gitgutter_sign_added = '.'
 let g:gitgutter_sign_modified = '.'
 let g:gitgutter_sign_removed = '.'
+"let g:gitgutter_sign_added = '|'
+"let g:gitgutter_sign_modified = '|'
+"let g:gitgutter_sign_removed = '|'
 ""let g:gitgutter_sign_modified_removed = '∙'
 
 " https://wonderwall.hatenablog.com/entry/2016/03/26/211710
@@ -630,13 +654,13 @@ endif
 set clipboard=unnamed "ヤンクした時に自動でクリップボードにコピー(autoselectを指定するとvモードの置換連続ペーストができない)
 
 
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=underline
+"highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+"highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=155 cterm=underline
 
 " コメントアウトの色変更
 " https://blog.trippyboy.com/2014/centos/vim%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%89%B2%E3%81%8C%E8%A6%8B%E3%81%A5%E3%82%89%E3%81%84%E3%81%AA%E3%82%89%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%BE%E3%81%97/
 ":hi Comment ctermfg=Magenta
-:hi Comment ctermfg=LightYellow
+":hi Comment ctermfg=LightYellow
 ":hi Comment ctermfg=hala(60,54%,56%)
 
 
@@ -765,7 +789,7 @@ endfunction
 " ,を使うとfが使いづらくなるので別を割り当てる
 nnoremap <leader>my :call MyFunc()<CR>
 "nnoremap <leader>g :call GitFunc()<CR>
-nnoremap <leader>t :Todo g<CR>
+"nnoremap <leader>t :Todo g<CR>
 nnoremap <leader>pa :call PhactorFunc()<CR>
 
 "------------
@@ -780,6 +804,7 @@ nnoremap <leader>pa :call PhactorFunc()<CR>
         \ "4 : json整形",
         \ "5 : カンマ区切りを改行(カーソルライン対象)",
         \ "6 : Gina Diff",
+        \ "7 : Tmp",
         \ ]
     :let choice = inputlist(lines)
     :if choice == 1
@@ -795,6 +820,9 @@ nnoremap <leader>pa :call PhactorFunc()<CR>
         :s/,/\r,/g
     :elseif choice == 6
         :Gina diff
+    :elseif choice == 7
+        " wip
+        :!ls
     :else
     :endif
 :endfunction
@@ -927,3 +955,21 @@ endfunction
 
 " キーマッピングを設定（任意のキーに設定してください）
 nnoremap <leader>cp :call CopyRelativePathToClipboard()<CR>
+
+" https://qiita.com/halt/items/35bf79bc8f959a15c4f3
+" https://hatebu.jp/entry/2017/09/18/223131
+" 未定義変数のチェック
+let g:php_localvarcheck_enable = 1
+let g:php_localvarcheck_global = 0
+
+let g:phpstan_analyse_level = 4
+
+
+" .vimrc_localで定義
+nnoremap <leader>o :call WorkChoice()<CR>
+nnoremap <leader>w :w<CR>
+
+" ステータスラインの背景色を設定
+highlight StatusLine guibg=#ffffff guifg=#000000
+highlight StatusLineNC guibg=#ffffff guifg=#000000
+
