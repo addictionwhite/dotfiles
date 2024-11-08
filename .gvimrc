@@ -1,3 +1,15 @@
+"ターミナルが24ビットカラー（真のカラー）をサポートしているか確認します。
+if has("termguicolors")
+    set termguicolors
+endif
+
+" 環境変数 $TERM の値を取得
+if $TERM =~# 'screen'
+  " tmux内で実行されている場合の設定
+  " tmuxだとこれを指定しないとハイライトのようになってしまう(イタリックがうまく機能していない
+  let g:komau_italic=0
+endif
+
 """""""""""""
 " general
 """""""""""""
@@ -21,11 +33,35 @@
 "colorscheme monochrome
 "colorscheme vim-monokai-tasty
 
-colorscheme lunaperche 
-"colorscheme komau 
+"colorscheme blue 
+"colorscheme lunaperche 
+"colorscheme blossom
+"colorscheme wellsokai
+"colorscheme true-monochrome 
+"colorscheme sonokai 
+"colorscheme xcodehc 
+"colorscheme codedark 
+"colorscheme flesh-and-blood
+"colorscheme komau " tmuxで色が崩れる
+"colorscheme candle-grey-transparent " サジェストがわからなくなる
+
+"colorscheme monochrome 
+
+colorscheme komau  "tmuxの環境だと表示がおかしくなる？
+"colorscheme moonfly
+
+"colorscheme sonokai 
+"colorscheme mountaineer-grey 
+"colorscheme win9xblueback 
+"colorscheme blue 
+"colorscheme lunaperche 
+
 "colorscheme redish 
 "colorscheme molokai 
 "colorscheme firewatch
+"set background=dark
+"set background=light
+
 "colorscheme snazzy
 "colorscheme punk
 "colorscheme monochrome 
@@ -41,6 +77,7 @@ colorscheme lunaperche
 "colorscheme stereokai 
 
 "set background=light
+"set background=dark
 
 "term.appだとvimの色が壊れる
 "set termguicolors
@@ -70,7 +107,7 @@ set nowrap
 set mouse=a
 
 " ブックマークした先にジャンプすると構文シンタックスが消える https://github.com/vim-jp/issues/issues/1076
-set redrawtime=10000
+"set redrawtime=10000
 
 " mark情報は、viminfoを使わないとvimの終了と同時に失われます。
 " https://qiita.com/syui/items/442fd0905a1f2005c10e
@@ -97,32 +134,39 @@ set hlsearch
 
 syntax on
 "syntax off
+
+"syntax match Error /if/
+
 "---------------------------------------------------------------------------
 " ステータスラインの表示
 "---------------------------------------------------------------------------
 " ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
-set laststatus=2
-" パス/ファイル名
-"set statusline=%F
-" ファイル名
-"https://stackoverflow.com/questions/13783839/vim-way-to-only-show-the-current-files-name-in-the-statusline
-"set statusline=%t
-set statusline=%f
-
-
-" https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
-set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
-
-" https://qiita.com/tashua314/items/101f1bec368c75a90251
-" 現在行数/全行数
-set statusline+=[LOW=%l/%L]
-
-" https://blog.ruedap.com/2011/07/12/vim-statusline-git-branch-name
-set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
-
-" 作業時間
-" gtm https://github.com/git-time-metric/gtm/blob/master/README.md
-"set statusline+=%{exists('*GTMStatusline')?'['.GTMStatusline().']':''}
+set laststatus=0
+" start---------- 最近あまり参照しないので、試験的にコメントアウト
+"" ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
+"set laststatus=2
+"" パス/ファイル名
+""set statusline=%F
+"" ファイル名
+""https://stackoverflow.com/questions/13783839/vim-way-to-only-show-the-current-files-name-in-the-statusline
+""set statusline=%t
+"set statusline=%f
+"
+"
+"" https://stackoverflow.com/questions/19614665/how-to-make-vim-indicate-the-file-has-changed-since-last-save
+"set statusline+=\ [%{getbufvar(bufnr('%'),'&mod')?'modified':'saved'}]
+"
+"" https://qiita.com/tashua314/items/101f1bec368c75a90251
+"" 現在行数/全行数
+"set statusline+=[LOW=%l/%L]
+"
+"" https://blog.ruedap.com/2011/07/12/vim-statusline-git-branch-name
+"set statusline+=%{fugitive#statusline()}  " Gitのブランチ名を表示
+"
+"" 作業時間
+"" gtm https://github.com/git-time-metric/gtm/blob/master/README.md
+""set statusline+=%{exists('*GTMStatusline')?'['.GTMStatusline().']':''}
+" end---------- 最近あまり参照しないので、試験的にコメントアウト
 
 "-------------------------------------------------------------------------------
 " エンコーディング設定
@@ -215,7 +259,8 @@ function! MyTabLine()
             let s .= '%#TabLine#'
         endif
         " タブ番号 : [ファイル名] のフォーマットになるように設定
-        let s .= (i + 1) . ':[' . my_tab_label .'] '
+        "let s .= (i + 1) . ':[' . my_tab_label .']|'
+        let s .= (i + 1) . ':' . my_tab_label .'|'
     endfor
 
     " 最後のタブページの後は TabLineFill で埋め、タブページ番号をリセットする
@@ -234,14 +279,21 @@ endfunction
 " https://inari111.hatenablog.com/entry/2014/10/22/222051
 " カレント行ハイライト
 set cursorline
+"set nocursorline
 " アンダーラインを引く(color terminal)
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
-highlight CursorLine gui=underline guifg=NONE guibg=NONE
+"highlight CursorLine gui=underline guifg=NONE guibg=NONE
 
+"colorscheme win9xblueback 
+"highlight CursorLine ctermbg=NONE guibg=NONE
 
 " for in container
 set re=1
 
 set ttyfast
 set lazyredraw
+
+" windowを分割した際の境界線を目立たなくする
+highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
+set fillchars=
