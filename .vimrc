@@ -973,3 +973,55 @@ nnoremap <leader>w :w<CR>
 highlight StatusLine guibg=#ffffff guifg=#000000
 highlight StatusLineNC guibg=#ffffff guifg=#000000
 
+
+
+" テンプレートファイルのパスを設定
+let g:template_file = expand('~/.vim/templates.txt')
+
+" テンプレートを読み込んでリストに変換
+function! LoadTemplates()
+    let l:templates = []
+    let l:headings = []
+    let l:current_template = []
+
+    for l:line in readfile(g:template_file)
+        if l:line == ''
+            " 空行で区切られたテンプレートをリストに追加
+            if !empty(l:current_template)
+                call add(l:templates, join(l:current_template, "\n"))
+                call add(l:headings, l:current_template[0])
+                let l:current_template = []
+            endif
+        else
+            " 現在のテンプレートに行を追加
+            call add(l:current_template, l:line)
+        endif
+    endfor
+
+    " 最後のテンプレートがある場合、それを追加
+    if !empty(l:current_template)
+        call add(l:templates, join(l:current_template, "\n"))
+        call add(l:headings, l:current_template[0])
+    endif
+
+    return [l:headings, l:templates]
+endfunction
+
+" テンプレートを選択して挿入する関数
+function! InsertTemplate()
+    " 見出しとテンプレートのロード
+    let [l:headings, l:templates] = LoadTemplates()
+
+    " 見出しの選択メニューを表示
+    let l:choice = inputlist(['テンプレートを選択してください:'] + l:headings)
+
+    " 有効な選択が行われた場合、そのテンプレートを挿入
+    if l:choice > 0 && l:choice <= len(l:templates)
+        execute 'normal! o' . l:templates[l:choice - 1]
+    else
+        echo "無効な選択です"
+    endif
+endfunction
+
+" キーマッピング (例: <Leader>t でテンプレート選択メニューを呼び出す)
+nnoremap <Leader>t :call InsertTemplate()<CR>

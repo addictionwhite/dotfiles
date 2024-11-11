@@ -56,6 +56,7 @@ colorscheme komau  "tmuxの環境だと表示がおかしくなる？
 "colorscheme blue 
 "colorscheme lunaperche 
 
+colorscheme komau 
 "colorscheme redish 
 "colorscheme molokai 
 "colorscheme firewatch
