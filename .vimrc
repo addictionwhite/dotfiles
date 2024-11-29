@@ -21,11 +21,11 @@ Plug 'nightsense/snow'
 Plug 'jdkanani/vim-material-theme'
 Plug 'reedes/vim-colors-pencil'
 Plug 'cocopon/iceberg.vim'
-Plug 'sickill/vim-monokai', { 'as': 'vim-monokai_sickill' }
+"Plug 'sickill/vim-monokai', { 'as': 'vim-monokai_sickill' }
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'Rigellute/rigel'
 Plug 'hauleth/blame.vim'
-Plug 'crusoexia/vim-monokai'
+"Plug 'crusoexia/vim-monokai'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'w0ng/vim-hybrid'
 Plug 'sainnhe/sonokai'
@@ -96,7 +96,7 @@ Plug 'vim-scripts/aiseered.vim'  "動かない
 Plug 'aparaatti/redish.vim' "動かない
 Plug 'erizocosmico/vim-firewatch'
 Plug 'tomasiser/vim-code-dark'
-Plug 'ErichDonGubler/vim-sublime-monokai'
+"Plug 'ErichDonGubler/vim-sublime-monokai'
 
 "エラーになる？
 "Plug 'rayes0/blossom.vim'
@@ -108,6 +108,9 @@ Plug 'therubymug/vim-pyte'
 Plug 'cideM/yui'
 "Plug 'prurigro/darkcloud-vimconfig'
 Plug 'jaromero/vim-monokai-refined'
+Plug 'while1eq1/vim-monokai-black'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'Badacadabra/vim-archery'
 
 " preview スクロールしているとたびたびエラーになる?
 Plug 'mnishz/colorscheme-preview.vim'
@@ -159,6 +162,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 
 Plug 'pseewald/vim-anyfold'
+
+Plug 'liuchengxu/vim-which-key'
 "Plug 'chrisbra/vim-diff-enhanced'
 
 "Plug 'sandeepcr529/Buffet.vim'
@@ -329,6 +334,7 @@ nnoremap <silent> <leader>pi  :PlugInstall<CR>
 nnoremap <silent> <leader>pu  :PlugUpdate<CR>
 " .設定ファイルを開く
 nnoremap <silent> <leader>ev  :<C-u>edit $MYVIMRC<CR>
+nnoremap <silent> ,ev  :<C-u>edit $MYVIMRC<CR>
 "nnoremap <silent> <leader>eg  :<C-u>edit $MYGVIMRC<CR>
 nnoremap <silent> <leader>eg  :<C-u>edit $HOME/.gvimrc<CR>
 nnoremap <silent> <leader>et  :<C-u>edit $HOME/.tigrc<CR>
@@ -412,6 +418,8 @@ let g:ctrlsf_auto_focus = {
 
 let g:ctrlsf_position = 'right'
 
+let g:ctrlsf_backend ='ack'
+
 
 " --easyMotion--
 " 検索時、大文字小文字を区別しない
@@ -427,9 +435,13 @@ let g:clever_f_mark_char_color="IncSearch"
 
 " ---gitgutter---
 " https://github.com/statico/dotfiles/blob/master/.vim/vimrc
-let g:gitgutter_sign_added = '.'
-let g:gitgutter_sign_modified = '.'
-let g:gitgutter_sign_removed = '.'
+"let g:gitgutter_sign_added = '.'
+"let g:gitgutter_sign_modified = '.'
+"let g:gitgutter_sign_removed = '.'
+highlight GitGutterAdd    guifg=#999999 ctermfg=2
+highlight GitGutterChange guifg=#999999 ctermfg=3
+highlight GitGutterDelete guifg=#999999 ctermfg=1
+
 "let g:gitgutter_sign_added = '|'
 "let g:gitgutter_sign_modified = '|'
 "let g:gitgutter_sign_removed = '|'
@@ -969,9 +981,39 @@ let g:phpstan_analyse_level = 4
 nnoremap <leader>o :call WorkChoice()<CR>
 nnoremap <leader>w :w<CR>
 
-" ステータスラインの背景色を設定
-highlight StatusLine guibg=#ffffff guifg=#000000
-highlight StatusLineNC guibg=#ffffff guifg=#000000
+nnoremap <leader>ol :call WorkChoice()<CR>
+
+" https://zenn.dev/kawarimidoll/articles/0fe2ef584a56b6
+" 最下部のstatuslineを表示しない
+set laststatus=0
+
+" ファイル末尾以降の`~`の表示を削除
+set fillchars+=eob:\\x20
+
+" 縦区切り線をシンプルに
+set fillchars+=vert:│
+" 横区切り線をシンプルに
+set statusline=─
+set fillchars+=stl:─,stlnc:─
+
+" 区切り線のハイライトを抑え気味に
+highlight! link StatusLine Comment
+highlight! link StatusLineNC Comment
+if has('nvim')
+  highlight! link WinSeparator Comment
+else
+  highlight! link VertSplit Comment
+endif
+
+" 非アクティブなウィンドウのカーソルラインを消す
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+
+" 固定のファイルを開くショートカット
+nnoremap <Leader>of :e ~/mycheat.txt<CR>
+" 固定のファイルを閉じるショートカット
+"nnoremap <leader>cf :bd ~/settings.txt<cr>
+
 
 
 
