@@ -48,6 +48,8 @@ endif
 "colorscheme monochrome 
 
 colorscheme komau  "tmuxの環境だと表示がおかしくなる？
+"colorscheme afterglow
+"colorscheme firewatch
 "colorscheme moonfly
 
 "colorscheme sonokai 
@@ -56,12 +58,9 @@ colorscheme komau  "tmuxの環境だと表示がおかしくなる？
 "colorscheme blue 
 "colorscheme lunaperche 
 
-colorscheme komau 
 "colorscheme redish 
 "colorscheme molokai 
 "colorscheme firewatch
-"set background=dark
-"set background=light
 
 "colorscheme snazzy
 "colorscheme punk
@@ -77,7 +76,7 @@ colorscheme komau
 "colorscheme Monokai-Refined
 "colorscheme stereokai 
 
-"set background=light
+set background=light
 "set background=dark
 
 "term.appだとvimの色が壊れる
@@ -123,7 +122,7 @@ set clipboard=unnamed
 " 検索時の大文字小文字無視
 set ignorecase 
 
-set nocursorline
+"set nocursorline
 set nocursorcolumn
 
 set incsearch
@@ -282,12 +281,10 @@ endfunction
 set cursorline
 "set nocursorline
 " アンダーラインを引く(color terminal)
-highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+"highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+highlight CursorLine cterm=underline ctermbg=blue guibg=NONE
 " アンダーラインを引く(gui)
 "highlight CursorLine gui=underline guifg=NONE guibg=NONE
-
-"colorscheme win9xblueback 
-"highlight CursorLine ctermbg=NONE guibg=NONE
 
 " for in container
 set re=1
@@ -296,5 +293,6 @@ set ttyfast
 set lazyredraw
 
 " windowを分割した際の境界線を目立たなくする
-highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
+"highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
+highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 set fillchars=
