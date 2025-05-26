@@ -111,6 +111,9 @@ Plug 'jaromero/vim-monokai-refined'
 Plug 'while1eq1/vim-monokai-black'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'Badacadabra/vim-archery'
+Plug 'karoliskoncevicius/distilled-vim'
+Plug 'alligator/accent.vim'
+Plug 'tssm/fairyfloss.vim'
 
 " preview スクロールしているとたびたびエラーになる?
 Plug 'mnishz/colorscheme-preview.vim'
@@ -164,6 +167,7 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'pseewald/vim-anyfold'
 
 Plug 'liuchengxu/vim-which-key'
+"Plug 'buffer-tree-explorer'
 "Plug 'chrisbra/vim-diff-enhanced'
 
 "Plug 'sandeepcr529/Buffet.vim'
@@ -985,7 +989,9 @@ nnoremap <leader>ol :call WorkChoice()<CR>
 
 " https://zenn.dev/kawarimidoll/articles/0fe2ef584a56b6
 " 最下部のstatuslineを表示しない
-set laststatus=0
+"set laststatus=0
+set laststatus=2 " 常にステータスラインを表示
+set statusline=%f
 
 " ファイル末尾以降の`~`の表示を削除
 set fillchars+=eob:\\x20
@@ -993,7 +999,7 @@ set fillchars+=eob:\\x20
 " 縦区切り線をシンプルに
 set fillchars+=vert:│
 " 横区切り線をシンプルに
-set statusline=─
+"set statusline=─
 set fillchars+=stl:─,stlnc:─
 
 " 区切り線のハイライトを抑え気味に
@@ -1067,3 +1073,42 @@ endfunction
 
 " キーマッピング (例: <Leader>t でテンプレート選択メニューを呼び出す)
 nnoremap <Leader>t :call InsertTemplate()<CR>
+
+
+function! OpenInCursor(...) abort
+  let file = (a:0 == 0 || a:1 == '') ? expand('%:p') : fnamemodify(a:1, ':p')
+  call system('open -a Cursor ' . shellescape(file))
+endfunction
+
+command! -nargs=? CursorOpen call OpenInCursor(<f-args>)
+nnoremap <Leader>cc :CursorOpen<CR>
+nnoremap <Leader>co :CursorOpen<CR>
+
+
+
+function! CopyLineSnippetToClipboard()
+  let l:snippet_file = expand('~/.vim/snippets.txt')
+  if !filereadable(l:snippet_file)
+    echo "Snippet file not found"
+    return
+  endif
+
+  let l:lines = readfile(l:snippet_file)
+
+  call fzf#run(fzf#wrap({
+        \ 'source': l:lines,
+        \ 'sink*': function('s:CopySelectedLineToClipboard'),
+        \ 'options': '--prompt="Snippet> " --reverse',
+        \ }))
+endfunction
+
+function! s:CopySelectedLineToClipboard(lines)
+  if !empty(a:lines)
+    let l:text = join(a:lines, "\n")
+    call setreg('+', l:text)
+    echo "Copied to clipboard: " . l:text
+  endif
+endfunction
+
+nnoremap <leader>cs :call CopyLineSnippetToClipboard()<CR>
+
