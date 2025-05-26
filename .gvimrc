@@ -47,8 +47,42 @@ endif
 
 "colorscheme monochrome 
 
-colorscheme komau  "tmuxの環境だと表示がおかしくなる？
+"colorscheme shirotelin 
+
+"colorscheme komau  "tmuxの環境だと表示がおかしくなる？
+"colorscheme zellner 
+"colorscheme monokai-phoenix 
+"colorscheme plain 
+
+"let g:accent_colour = 'red'
+"colorscheme accent
+"colorscheme yui
+"colorscheme yui_dark
+"let g:yui_comments = 'fade'
+ "colorscheme fairyfloss
+
+"colorscheme quiet
+"colorscheme mountaineer-light
+"colorscheme komau
+"set background=dark
+"set background=light
+
+"set background=light
+"let g:accent_darken = 1
+"let g:accent_auto_cwd_colour = 1
+
+"colorscheme sonokai 
+"set background=dark
+"set background=light
+
+"colorscheme mountaineer-light
+
 "colorscheme afterglow
+"colorscheme afterglow
+
+colorscheme komau
+"colorscheme afterglow
+
 "colorscheme firewatch
 "colorscheme moonfly
 
@@ -76,7 +110,7 @@ colorscheme komau  "tmuxの環境だと表示がおかしくなる？
 "colorscheme Monokai-Refined
 "colorscheme stereokai 
 
-set background=light
+"set background=light
 "set background=dark
 
 "term.appだとvimの色が壊れる
@@ -141,7 +175,8 @@ syntax on
 " ステータスラインの表示
 "---------------------------------------------------------------------------
 " ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
-set laststatus=0
+"set laststatus=0
+"set laststatus=2
 " start---------- 最近あまり参照しないので、試験的にコメントアウト
 "" ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
 "set laststatus=2
@@ -260,7 +295,8 @@ function! MyTabLine()
         endif
         " タブ番号 : [ファイル名] のフォーマットになるように設定
         "let s .= (i + 1) . ':[' . my_tab_label .']|'
-        let s .= (i + 1) . ':' . my_tab_label .'|'
+        "let s .= (i + 1) . ':' . my_tab_label .'|'
+        let s .= (i + 1) .'|'
     endfor
 
     " 最後のタブページの後は TabLineFill で埋め、タブページ番号をリセットする
@@ -282,7 +318,8 @@ set cursorline
 "set nocursorline
 " アンダーラインを引く(color terminal)
 "highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
-highlight CursorLine cterm=underline ctermbg=blue guibg=NONE
+"highlight CursorLine cterm=underline ctermbg=blue guibg=NONE
+highlight CursorLine cterm=underline guibg=NONE
 " アンダーラインを引く(gui)
 "highlight CursorLine gui=underline guifg=NONE guibg=NONE
 
@@ -296,3 +333,6 @@ set lazyredraw
 "highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
 highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 set fillchars=
+
+
+
