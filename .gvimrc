@@ -58,7 +58,9 @@ endif
 "colorscheme accent
 "colorscheme yui
 "colorscheme yui_dark
+"colorscheme yui_dark
 "let g:yui_comments = 'fade'
+"set background=light
  "colorscheme fairyfloss
 
 "colorscheme quiet
@@ -81,6 +83,9 @@ endif
 "colorscheme afterglow
 
 colorscheme komau
+"set background=light
+set background=dark
+
 "colorscheme afterglow
 
 "colorscheme firewatch
@@ -333,6 +338,4 @@ set lazyredraw
 "highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
 highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 set fillchars=
-
-
 
