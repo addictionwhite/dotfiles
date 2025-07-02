@@ -153,7 +153,7 @@ Plug 'lambdalisue/gina.vim'
 
 " 表示
 Plug 'simeji/winresizer' "ウィンドウサイズ変更
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'haya14busa/incsearch.vim' " 検索中の文字列をハイライト
 Plug 'elzr/vim-json' 
 Plug 't9md/vim-quickhl' " 指定の単語をハイライト
@@ -167,6 +167,7 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'pseewald/vim-anyfold'
 
 Plug 'liuchengxu/vim-which-key'
+"Plug 'monaqa/smooth-scroll.vim'
 "Plug 'buffer-tree-explorer'
 "Plug 'chrisbra/vim-diff-enhanced'
 
@@ -184,6 +185,9 @@ Plug 'liuchengxu/vim-which-key'
 
 "Plug 'blueyed/vim-diminactive' " アクティブなウィンドウを見えやすくする
 "Plug 'machakann/vim-highlightedyank'
+
+" スクロールバー
+Plug 'obcat/vnn.vim'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -1112,3 +1116,66 @@ endfunction
 
 nnoremap <leader>cs :call CopyLineSnippetToClipboard()<CR>
 
+
+
+" function! s:SetThemeByFile()
+"   " PHPUnit のテストファイルならライトテーマ
+"   if expand('%:t') =~? '\v(Test|_test)\.php$'
+"     set background=light
+"     colorscheme komau
+"   else
+"     " それ以外はダークテーマ
+"     set background=dark
+"     colorscheme komau
+"   endif
+" endfunction
+" 
+" augroup ThemeSwitcher
+"   autocmd!
+"   autocmd BufEnter * call <SID>SetThemeByFile()
+" augroup END
+
+
+" 1. カスタムハイライトグループを定義
+highlight StatusLineFilename ctermfg=110 guifg=#87afff
+" 2. ステータスラインにそのグループを適用
+set statusline=%#StatusLineFilename#%f%#StatusLine#
+
+
+
+
+let g:sclow_block_buftypes = ['terminal', 'prompt']
+let g:sclow_hide_full_length = 1
+let g:sclow_sbar_text = '┃'
+
+
+
+
+set list
+set listchars=leadmultispace:\ \ \ \│
+highlight SpecialKey ctermfg=white guifg=white
+
+
+
+xnoremap <silent> <leader>c :<C-u>call CopyVisualRangeWithFilename()<CR>
+
+function! CopyVisualRangeWithFilename()
+  " ファイルパス取得（フルパスではなく相対パス）
+  let l:filepath = expand('%:.')
+  " 開始・終了行番号取得（visual modeの範囲）
+  let l:start_line = line("'<")
+  let l:end_line = line("'>")
+  " フォーマット作成
+  let l:link = l:filepath . '#L' . l:start_line . '-L' . l:end_line
+  " クリップボードにコピー
+  call setreg('+', l:link)
+  echo "Copied: " . l:link
+endfunction
+
+
+" Git status から変更ファイル一覧を開くカスタムコマンド
+command! -bang GStatus call fzf#run(fzf#wrap({
+  \ 'source': 'git status --porcelain | cut -c4-',
+  \ 'sink':   'edit',
+  \ 'options': '--prompt "GitStatus> "'
+\ }))
