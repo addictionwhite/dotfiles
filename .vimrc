@@ -114,6 +114,9 @@ Plug 'Badacadabra/vim-archery'
 Plug 'karoliskoncevicius/distilled-vim'
 Plug 'alligator/accent.vim'
 Plug 'tssm/fairyfloss.vim'
+Plug 'romainl/Apprentice'
+"Plug 'sonph/onehalf'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " preview スクロールしているとたびたびエラーになる?
 Plug 'mnishz/colorscheme-preview.vim'
@@ -167,7 +170,6 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'pseewald/vim-anyfold'
 
 Plug 'liuchengxu/vim-which-key'
-"Plug 'monaqa/smooth-scroll.vim'
 "Plug 'buffer-tree-explorer'
 "Plug 'chrisbra/vim-diff-enhanced'
 
@@ -185,9 +187,6 @@ Plug 'liuchengxu/vim-which-key'
 
 "Plug 'blueyed/vim-diminactive' " アクティブなウィンドウを見えやすくする
 "Plug 'machakann/vim-highlightedyank'
-
-" スクロールバー
-Plug 'obcat/vnn.vim'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -1090,6 +1089,18 @@ nnoremap <Leader>co :CursorOpen<CR>
 
 
 
+
+function! OpenInVSCode(...) abort
+  let file = expand('%:p')
+  let line = line('.')
+  call system('code --reuse-window -g ' . shellescape(file . ':' . line))
+endfunction
+
+command! VSCodeOpen call OpenInVSCode()
+nnoremap <Leader>vc :VSCodeOpen<CR>
+
+
+
 function! CopyLineSnippetToClipboard()
   let l:snippet_file = expand('~/.vim/snippets.txt')
   if !filereadable(l:snippet_file)
@@ -1118,64 +1129,91 @@ nnoremap <leader>cs :call CopyLineSnippetToClipboard()<CR>
 
 
 
-" function! s:SetThemeByFile()
-"   " PHPUnit のテストファイルならライトテーマ
-"   if expand('%:t') =~? '\v(Test|_test)\.php$'
-"     set background=light
-"     colorscheme komau
-"   else
-"     " それ以外はダークテーマ
-"     set background=dark
-"     colorscheme komau
-"   endif
-" endfunction
-" 
-" augroup ThemeSwitcher
-"   autocmd!
-"   autocmd BufEnter * call <SID>SetThemeByFile()
-" augroup END
-
-
-" 1. カスタムハイライトグループを定義
-highlight StatusLineFilename ctermfg=110 guifg=#87afff
-" 2. ステータスラインにそのグループを適用
-set statusline=%#StatusLineFilename#%f%#StatusLine#
-
-
-
-
-let g:sclow_block_buftypes = ['terminal', 'prompt']
-let g:sclow_hide_full_length = 1
-let g:sclow_sbar_text = '┃'
-
-
-
+ "exe 'setlocal listchars=tab:\│\ ,multispace:\│' . repeat('\ ', &sw - 1)
 
 set list
 set listchars=leadmultispace:\ \ \ \│
 highlight SpecialKey ctermfg=white guifg=white
 
+ "set list
+ "set listchars=leadmultispace:\ \ \ \→
 
 
-xnoremap <silent> <leader>c :<C-u>call CopyVisualRangeWithFilename()<CR>
+"for i in range(1, 5)
+"  execute 'highlight IndentLevel' . i . ' ctermfg=' . (i + 1)
+"  execute 'call matchadd("IndentLevel' . i . '", "^\\s\\{' . (i * 4) . '\\}")'
+"endfor
 
-function! CopyVisualRangeWithFilename()
-  " ファイルパス取得（フルパスではなく相対パス）
-  let l:filepath = expand('%:.')
-  " 開始・終了行番号取得（visual modeの範囲）
-  let l:start_line = line("'<")
-  let l:end_line = line("'>")
-  " フォーマット作成
-  let l:link = l:filepath . '#L' . l:start_line . '-L' . l:end_line
-  " クリップボードにコピー
-  call setreg('+', l:link)
-  echo "Copied: " . l:link
+
+
+"xnoremap <silent> <leader>c :<C-u>call CopyVisualRangeWithFilename()<CR>
+"
+"function! CopyVisualRangeWithFilename()
+"  " ファイルパス取得（フルパスではなく相対パス）
+"  let l:filepath = expand('%:.')
+"  " 開始・終了行番号取得（visual modeの範囲）
+"  let l:start_line = line("'<")
+"  let l:end_line = line("'>")
+"  " フォーマット作成
+"  let l:link = l:filepath . '#L' . l:start_line . '-L' . l:end_line
+"  " クリップボードにコピー
+"  call setreg('+', l:link)
+"  echo "Copied: " . l:link
+"endfunction
+
+
+"" start----
+
+"" ビジュアルモードで囲った部分の領域を自動でコピーする
+"" 例 src/tests/Feature/GreetingControllerTest.php#L12-L12
+"augroup AutoCopyVisualRange
+"  autocmd!
+"  autocmd ModeChanged [vV\x16]:n call s:AutoCopyVisualRange()
+"augroup END
+"
+"function! s:AutoCopyVisualRange()
+"  " 選択範囲の開始・終了行を取得
+"  let l:start_line = line("'<")
+"  let l:end_line = line("'>")
+"
+"  " 有効な選択かチェック
+"  if l:start_line == 0 || l:end_line == 0
+"    return
+"  endif
+"
+"  " ファイルパス（カレントからの相対パス）
+"  let l:filepath = fnamemodify(expand('%'), ':.')
+"
+"  " Lxx-Lyy の形式に整形
+"  let l:range = printf('%s#L%d-L%d', l:filepath, l:start_line, l:end_line)
+"
+"  " クリップボードにコピー（+ レジスタ）
+"  call setreg('+', l:range)
+"
+"  " 確認メッセージ
+"  echo "📋 Copied to clipboard: " . l:range
+"endfunction
+"
+"" end ---------
+
+" Visualモード中に c を押したら ファイル名#Lxx-Lyy をクリップボードへ
+xnoremap c :<C-u>call CopyLineRange()<CR>
+
+function! CopyLineRange()
+  let start = line("'<")
+  let end = line("'>")
+  if start == 0 || end == 0
+    echo "選択範囲が取得できません"
+    return
+  endif
+
+  let file = fnamemodify(expand('%'), ':.')  " 相対パス。絶対パスにしたい場合は ':p'
+  let result = printf('%s#L%d-L%d', file, start, end)
+
+  call setreg('+', result)
+  echo '📋 Copied: ' . result
 endfunction
 
 
-" Git status から変更ファイル一覧を開くカスタムコマンド
-command! -bang GStatus call fzf#run(fzf#wrap({
-  \ 'source': 'git status --porcelain | cut -c4-',
-  \ 'sink':   'edit',
-  \ 'options': '--prompt "GitStatus> "'
-\ }))
+
+set diffopt=internal,filler,closeoff,algorithm:patience,indent-heuristic
