@@ -58,9 +58,7 @@ endif
 "colorscheme accent
 "colorscheme yui
 "colorscheme yui_dark
-"colorscheme yui_dark
 "let g:yui_comments = 'fade'
-"set background=light
  "colorscheme fairyfloss
 
 "colorscheme quiet
@@ -82,10 +80,10 @@ endif
 "colorscheme afterglow
 "colorscheme afterglow
 
-colorscheme komau
-"set background=light
-set background=dark
+"colorscheme apprentice
+"colorscheme onehalflight
 
+"colorscheme komau
 "colorscheme afterglow
 
 "colorscheme firewatch
@@ -336,6 +334,74 @@ set lazyredraw
 
 " windowを分割した際の境界線を目立たなくする
 "highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
-highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
-set fillchars=
+
+
+hi clear
+if exists("syntax_on")
+  syntax reset
+endif
+
+let g:colors_name = "ciphercrystal"
+
+set background=light
+
+  "  "  " 基本背景と文字
+hi Normal       guifg=#3a3a4f guibg=#fdfaff
+hi CursorLine   guibg=#f2effa
+"hi Visual       guibg=#d6c7f5
+hi Visual       guibg=#bba4e9
+hi LineNr       guifg=#b6aacd guibg=#f4f0fb
+hi Comment      guifg=#a89fb3 gui=italic
+hi Constant     guifg=#b38fb0
+hi String       guifg=#c78ea0
+hi Identifier   guifg=#8877aa
+hi Function     guifg=#7b70aa gui=bold
+hi Statement    guifg=#8564c8 gui=bold
+hi Keyword      guifg=#9e75d6 gui=bold
+hi Type         guifg=#5e4aa5
+hi PreProc      guifg=#aa80c8
+hi Number       guifg=#b479bd
+hi Operator     guifg=#996cb5
+hi Special      guifg=#d09ec7
+hi Todo         guifg=#ffffff guibg=#d080d0 gui=bold
+
+" PHP-specific (if using vim-polyglot or php.vim)
+hi phpVarSelector     guifg=#3a3a4f
+hi phpFunction        guifg=#7b70aa
+hi phpIdentifier      guifg=#8564c8
+hi phpDefine          guifg=#aa80c8
+hi phpRegion          guibg=#f2f0fb
+
+" UI
+hi StatusLine   guifg=#4b3c5c guibg=#e9e4f6 gui=bold
+hi VertSplit    guifg=#cfc3de guibg=#fdfaff
+hi Pmenu        guibg=#ece5f9 guifg=#4b3c5c
+hi PmenuSel     guibg=#c6b1e1 guifg=#ffffff
+hi Search       guibg=#f9cbff guifg=#4b3c5c
+hi IncSearch    guibg=#f3a7ff guifg=#ffffff
+
+" Add----
+" 側面（左端・右端・下部など）を背景色に合わせる
+hi ColorColumn   guibg=#fbf9ff
+hi SignColumn    guibg=#fbf9ff
+hi VertSplit     guibg=#fbf9ff guifg=#d4c6e6
+hi StatusLine    guibg=#fbf9ff guifg=#4b3c5c
+hi MsgArea       guibg=#fbf9ff guifg=#4b3c5c
+hi MsgSeparator  guibg=#fbf9ff guifg=#d4c6e6
+
+" Diagnostic (LSPや構文診断系を使用している場合)
+hi DiagnosticError             guifg=#d03c8d guibg=#fbf9ff
+hi DiagnosticWarn              guifg=#cc9944 guibg=#fbf9ff
+hi DiagnosticInfo              guifg=#7777cc guibg=#fbf9ff
+hi DiagnosticHint              guifg=#9999bb guibg=#fbf9ff
+hi DiagnosticVirtualTextError guifg=#d03c8d guibg=#fbf9ff
+hi DiagnosticVirtualTextWarn  guifg=#cc9944 guibg=#fbf9ff
+hi DiagnosticVirtualTextInfo  guifg=#7777cc guibg=#fbf9ff
+hi DiagnosticVirtualTextHint  guifg=#9999bb guibg=#fbf9ff
+
+hi DiffAdd      guibg=#bfe9f5 guifg=NONE
+hi DiffChange   guibg=#fcf7ce guifg=NONE
+hi DiffDelete   guibg=#f9cbff guifg=NONE
+hi DiffText     guibg=#9999bb guifg=NONE gui=bold
+
 
