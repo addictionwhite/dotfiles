@@ -58,7 +58,9 @@ endif
 "colorscheme accent
 "colorscheme yui
 "colorscheme yui_dark
+"colorscheme yui_dark
 "let g:yui_comments = 'fade'
+"set background=light
  "colorscheme fairyfloss
 
 "colorscheme quiet
@@ -80,10 +82,12 @@ endif
 "colorscheme afterglow
 "colorscheme afterglow
 
-"colorscheme apprentice
-"colorscheme onehalflight
-
 "colorscheme komau
+"set background=light
+"set background=dark
+"colorscheme blossom
+
+
 "colorscheme afterglow
 
 "colorscheme firewatch
@@ -126,9 +130,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 " コーディングの際には不要だがペアプロやエラーの箇所に飛ぶ際にあったほうがよい "
-"set number
+set nu
 " 最近特に行数で指摘受けてないので
-set nonumber 
+"set nonumber 
 " set relativenumber
 set nowrap " 折返し無効
 set showmatch
@@ -317,14 +321,16 @@ endfunction
 
 " https://inari111.hatenablog.com/entry/2014/10/22/222051
 " カレント行ハイライト
-set cursorline
+"set cursorline
 "set nocursorline
 " アンダーラインを引く(color terminal)
 "highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 "highlight CursorLine cterm=underline ctermbg=blue guibg=NONE
-highlight CursorLine cterm=underline guibg=NONE
+"highlight CursorLine cterm=underline guibg=NONE
 " アンダーラインを引く(gui)
 "highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+highlight CursorLine cterm=underline guibg=NONE
 
 " for in container
 set re=1
@@ -334,74 +340,88 @@ set lazyredraw
 
 " windowを分割した際の境界線を目立たなくする
 "highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
+highlight VertSplit cterm=NONE ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+set fillchars=
 
+let &t_SI = "\e[6 q"   " insertモード: Iビーム
+let &t_EI = "\e[2 q"   " ノーマルモード: ブロック
 
-hi clear
-if exists("syntax_on")
-  syntax reset
-endif
-
-let g:colors_name = "ciphercrystal"
 
 set background=light
+  hi clear
+  if exists("syntax_on")
+    syntax reset
+  endif
 
-  "  "  " 基本背景と文字
-hi Normal       guifg=#3a3a4f guibg=#fdfaff
-hi CursorLine   guibg=#f2effa
-"hi Visual       guibg=#d6c7f5
-hi Visual       guibg=#bba4e9
-hi LineNr       guifg=#b6aacd guibg=#f4f0fb
-hi Comment      guifg=#a89fb3 gui=italic
-hi Constant     guifg=#b38fb0
-hi String       guifg=#c78ea0
-hi Identifier   guifg=#8877aa
-hi Function     guifg=#7b70aa gui=bold
-hi Statement    guifg=#8564c8 gui=bold
-hi Keyword      guifg=#9e75d6 gui=bold
-hi Type         guifg=#5e4aa5
-hi PreProc      guifg=#aa80c8
-hi Number       guifg=#b479bd
-hi Operator     guifg=#996cb5
-hi Special      guifg=#d09ec7
-hi Todo         guifg=#ffffff guibg=#d080d0 gui=bold
+  " =========================================================
+  " UI
+  " =========================================================
+  hi Normal       guifg=#2F2F3A guibg=#F7F7FB
+  hi LineNr       guifg=#7A7A96 guibg=#ECECF3
+  hi CursorLineNr guifg=#1F1F28 guibg=#ECECF3 gui=bold  " boldを追加
+  hi CursorLine   guibg=#ECECF3
+  hi VertSplit    guifg=#D8D1F0 guibg=#ECECF3
 
-" PHP-specific (if using vim-polyglot or php.vim)
-hi phpVarSelector     guifg=#3a3a4f
-hi phpFunction        guifg=#7b70aa
-hi phpIdentifier      guifg=#8564c8
-hi phpDefine          guifg=#aa80c8
-hi phpRegion          guibg=#f2f0fb
+  hi StatusLine   guifg=#1F1F28 guibg=#D8D1F0
+  hi StatusLineNC guifg=#7A7A96 guibg=#ECECF3
 
-" UI
-hi StatusLine   guifg=#4b3c5c guibg=#e9e4f6 gui=bold
-hi VertSplit    guifg=#cfc3de guibg=#fdfaff
-hi Pmenu        guibg=#ece5f9 guifg=#4b3c5c
-hi PmenuSel     guibg=#c6b1e1 guifg=#ffffff
-hi Search       guibg=#f9cbff guifg=#4b3c5c
-hi IncSearch    guibg=#f3a7ff guifg=#ffffff
+  hi Visual       guibg=#D8D1F0
+  hi Search       guifg=#1F1F28 guibg=#C4BDD8
 
-" Add----
-" 側面（左端・右端・下部など）を背景色に合わせる
-hi ColorColumn   guibg=#fbf9ff
-hi SignColumn    guibg=#fbf9ff
-hi VertSplit     guibg=#fbf9ff guifg=#d4c6e6
-hi StatusLine    guibg=#fbf9ff guifg=#4b3c5c
-hi MsgArea       guibg=#fbf9ff guifg=#4b3c5c
-hi MsgSeparator  guibg=#fbf9ff guifg=#d4c6e6
+  " =========================================================
+  " Base Syntax (コントラスト強化)
+  " =========================================================
+  hi Comment      guifg=#5A5A72 gui=italic       " 濃くした（元: #6F6F8A）
+  hi Constant     guifg=#8A7FC4                  " 濃くした（元: #9F95D8）
+  hi String       guifg=#9A91CC                  " 濃くした（元: #B1A8E2）
+  hi Number       guifg=#8A7FC4                  " 濃くした（元: #9F95D8）
 
-" Diagnostic (LSPや構文診断系を使用している場合)
-hi DiagnosticError             guifg=#d03c8d guibg=#fbf9ff
-hi DiagnosticWarn              guifg=#cc9944 guibg=#fbf9ff
-hi DiagnosticInfo              guifg=#7777cc guibg=#fbf9ff
-hi DiagnosticHint              guifg=#9999bb guibg=#fbf9ff
-hi DiagnosticVirtualTextError guifg=#d03c8d guibg=#fbf9ff
-hi DiagnosticVirtualTextWarn  guifg=#cc9944 guibg=#fbf9ff
-hi DiagnosticVirtualTextInfo  guifg=#7777cc guibg=#fbf9ff
-hi DiagnosticVirtualTextHint  guifg=#9999bb guibg=#fbf9ff
+  hi Identifier   guifg=#2F2F3A
+  hi Function     guifg=#1F1F28 gui=bold
 
-hi DiffAdd      guibg=#bfe9f5 guifg=NONE
-hi DiffChange   guibg=#fcf7ce guifg=NONE
-hi DiffDelete   guibg=#f9cbff guifg=NONE
-hi DiffText     guibg=#9999bb guifg=NONE gui=bold
+  hi Keyword      guifg=#7A70B4 gui=bold         " 濃くした（元: #8E84C8）
+  hi Statement    guifg=#7A70B4                  " 濃くした（元: #8E84C8）
+  hi Type         guifg=#7A9BC4                  " 濃くした（元: #BFD2EA）
+
+  " =========================================================
+  " Diagnostics / Messages
+  " =========================================================
+  hi Error        guifg=#F7F7FB guibg=#E8B7C5
+  hi WarningMsg   guifg=#D4879C                  " 濃くした（元: #E8B7C5）
+  hi Todo         guifg=#1F1F28 guibg=#E8B7C5 gui=bold
+
+  " =========================================================
+  " PHP specific (IMPORTANT)
+  " =========================================================
+  hi phpStructure   guifg=#7A70B4 gui=bold       " 濃くした（元: #8E84C8）
+  hi phpClass       guifg=#7A70B4                " 濃くした（元: #8E84C8）
+  hi phpType        guifg=#8A7FC4                " 濃くした（元: #9F95D8）
+
+  hi phpIdentifier  guifg=#2F2F3A
+  hi phpVarSelector guifg=#2F2F3A
+  hi phpMethodsVar  guifg=#1F1F28
+
+  " =========================================================
+  " Additional highlights for better visibility
+  " =========================================================
+  hi Special      guifg=#7A70B4
+  hi Delimiter    guifg=#5A5A72
+  hi Operator     guifg=#5A5A72
+  hi PreProc      guifg=#7A70B4
+
+  " Popup menu (autocomplete)
+  hi Pmenu        guifg=#2F2F3A guibg=#ECECF3
+  hi PmenuSel     guifg=#1F1F28 guibg=#D8D1F0 gui=bold
+
+  " =========================================================
+  " End of colorscheme
+  " =========================================================
 
 
+
+" カーソルラインを見やすく
+set cursorline
+hi CursorLine ctermbg=255 guibg=#E8E0F5
+hi CursorLineNr cterm=bold gui=bold
+
+nnoremap <silent> <C-l> :nohlsearch<CR>:set cursorline!<CR>:set cursorline!<CR><C-l>
