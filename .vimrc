@@ -114,9 +114,6 @@ Plug 'Badacadabra/vim-archery'
 Plug 'karoliskoncevicius/distilled-vim'
 Plug 'alligator/accent.vim'
 Plug 'tssm/fairyfloss.vim'
-Plug 'romainl/Apprentice'
-"Plug 'sonph/onehalf'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " preview スクロールしているとたびたびエラーになる?
 Plug 'mnishz/colorscheme-preview.vim'
@@ -170,6 +167,7 @@ Plug 'vimplugin/project.vim' "TODO: 不要そうなら消す
 Plug 'pseewald/vim-anyfold'
 
 Plug 'liuchengxu/vim-which-key'
+"Plug 'monaqa/smooth-scroll.vim'
 "Plug 'buffer-tree-explorer'
 "Plug 'chrisbra/vim-diff-enhanced'
 
@@ -187,6 +185,9 @@ Plug 'liuchengxu/vim-which-key'
 
 "Plug 'blueyed/vim-diminactive' " アクティブなウィンドウを見えやすくする
 "Plug 'machakann/vim-highlightedyank'
+
+" スクロールバー
+Plug 'obcat/vnn.vim'
 
 "検索置換
 Plug 'dyng/ctrlsf.vim' " Grep like sublime text
@@ -1089,18 +1090,6 @@ nnoremap <Leader>co :CursorOpen<CR>
 
 
 
-
-function! OpenInVSCode(...) abort
-  let file = expand('%:p')
-  let line = line('.')
-  call system('code --reuse-window -g ' . shellescape(file . ':' . line))
-endfunction
-
-command! VSCodeOpen call OpenInVSCode()
-nnoremap <Leader>vc :VSCodeOpen<CR>
-
-
-
 function! CopyLineSnippetToClipboard()
   let l:snippet_file = expand('~/.vim/snippets.txt')
   if !filereadable(l:snippet_file)
@@ -1129,20 +1118,44 @@ nnoremap <leader>cs :call CopyLineSnippetToClipboard()<CR>
 
 
 
- "exe 'setlocal listchars=tab:\│\ ,multispace:\│' . repeat('\ ', &sw - 1)
+" function! s:SetThemeByFile()
+"   " PHPUnit のテストファイルならライトテーマ
+"   if expand('%:t') =~? '\v(Test|_test)\.php$'
+"     set background=light
+"     colorscheme komau
+"   else
+"     " それ以外はダークテーマ
+"     set background=dark
+"     colorscheme komau
+"   endif
+" endfunction
+" 
+" augroup ThemeSwitcher
+"   autocmd!
+"   autocmd BufEnter * call <SID>SetThemeByFile()
+" augroup END
+
+
+" 1. カスタムハイライトグループを定義
+highlight StatusLineFilename ctermfg=110 guifg=#87afff
+" 2. ステータスラインにそのグループを適用
+set statusline=%#StatusLineFilename#%f%#StatusLine#
+
+
+
+
+let g:sclow_block_buftypes = ['terminal', 'prompt']
+let g:sclow_hide_full_length = 1
+let g:sclow_sbar_text = '┃'
+
+
+
 
 set list
 set listchars=leadmultispace:\ \ \ \│
-highlight SpecialKey ctermfg=white guifg=white
-
- "set list
- "set listchars=leadmultispace:\ \ \ \→
-
-
-"for i in range(1, 5)
-"  execute 'highlight IndentLevel' . i . ' ctermfg=' . (i + 1)
-"  execute 'call matchadd("IndentLevel' . i . '", "^\\s\\{' . (i * 4) . '\\}")'
-"endfor
+"highlight SpecialKey ctermfg=white guifg=white
+highlight SpecialKey ctermfg=LightBlue guifg=LightBlue
+"highlight SpecialKey ctermfg=Blue guifg=Blue
 
 
 
@@ -1162,40 +1175,7 @@ highlight SpecialKey ctermfg=white guifg=white
 "endfunction
 
 
-"" start----
-
-"" ビジュアルモードで囲った部分の領域を自動でコピーする
-"" 例 src/tests/Feature/GreetingControllerTest.php#L12-L12
-"augroup AutoCopyVisualRange
-"  autocmd!
-"  autocmd ModeChanged [vV\x16]:n call s:AutoCopyVisualRange()
-"augroup END
-"
-"function! s:AutoCopyVisualRange()
-"  " 選択範囲の開始・終了行を取得
-"  let l:start_line = line("'<")
-"  let l:end_line = line("'>")
-"
-"  " 有効な選択かチェック
-"  if l:start_line == 0 || l:end_line == 0
-"    return
-"  endif
-"
-"  " ファイルパス（カレントからの相対パス）
-"  let l:filepath = fnamemodify(expand('%'), ':.')
-"
-"  " Lxx-Lyy の形式に整形
-"  let l:range = printf('%s#L%d-L%d', l:filepath, l:start_line, l:end_line)
-"
-"  " クリップボードにコピー（+ レジスタ）
-"  call setreg('+', l:range)
-"
-"  " 確認メッセージ
-"  echo "📋 Copied to clipboard: " . l:range
-"endfunction
-"
-"" end ---------
-
+"start----
 " Visualモード中に c を押したら ファイル名#Lxx-Lyy をクリップボードへ
 xnoremap c :<C-u>call CopyLineRange()<CR>
 
@@ -1213,7 +1193,20 @@ function! CopyLineRange()
   call setreg('+', result)
   echo '📋 Copied: ' . result
 endfunction
+"end----
 
 
+" Git status から変更ファイル一覧を開くカスタムコマンド
+command! -bang GStatus call fzf#run(fzf#wrap({
+  \ 'source': 'git status --porcelain | cut -c4-',
+  \ 'sink':   'edit',
+  \ 'options': '--prompt "GitStatus> "'
+\ }))
 
-set diffopt=internal,filler,closeoff,algorithm:patience,indent-heuristic
+
+  " これだけ！起動時と終了時のメッセージ                                                                                                                                                 
+  autocmd VimEnter * echo '🎀 今日もがんばろう！'                                                                                                                                        
+  autocmd VimLeave * echo '👋 お疲れさま！'                                                                                                                                              
+                                                                                                                                                                                         
+  " ファイルを開いた時                                                                                                                                                                   
+  autocmd BufRead * echo '📝 ' . expand('%:t') . ' を編集中'   
