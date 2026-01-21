@@ -1204,9 +1204,9 @@ command! -bang GStatus call fzf#run(fzf#wrap({
 \ }))
 
 
-  " これだけ！起動時と終了時のメッセージ                                                                                                                                                 
-  autocmd VimEnter * echo '🎀 今日もがんばろう！'                                                                                                                                        
-  autocmd VimLeave * echo '👋 お疲れさま！'                                                                                                                                              
-                                                                                                                                                                                         
-  " ファイルを開いた時                                                                                                                                                                   
-  autocmd BufRead * echo '📝 ' . expand('%:t') . ' を編集中'   
+ " これだけ！起動時と終了時のメッセージ                                                                                                                                                 
+ autocmd VimEnter * echo '🎀 今日もがんばろう！'                                                                                                                                        
+ autocmd VimLeave * echo '👋 お疲れさま！'                                                                                                                                              
+                                                                                                                                                                                        
+ " ファイルを開いた時                                                                                                                                                                   
+ autocmd BufRead * echo '📝 ' . expand('%:t') . ' を編集中'   
