@@ -336,7 +336,8 @@ highlight CursorLine cterm=underline guibg=NONE
 set re=1
 
 set ttyfast
-set lazyredraw
+" カーソルラインの背景色が消える原因の可能性があるので、いったんコメントアウト
+"set lazyredraw  
 
 " windowを分割した際の境界線を目立たなくする
 "highlight VertSplit cterm=NONE ctermfg=grey ctermbg=NONE guifg=grey guibg=NONE
@@ -425,3 +426,41 @@ hi CursorLine ctermbg=255 guibg=#E8E0F5
 hi CursorLineNr cterm=bold gui=bold
 
 nnoremap <silent> <C-l> :nohlsearch<CR>:set cursorline!<CR>:set cursorline!<CR><C-l>
+
+
+" --- if, else, for, while などの色を強制的に黒の太字にする ---
+hi! Conditional guifg=#1F1F28 ctermfg=black gui=bold cterm=bold
+hi! Repeat      guifg=#1F1F28 ctermfg=black gui=bold cterm=bold
+
+" --- return, break などの色を強制的に黒の太字にする ---
+hi! Statement   guifg=#1F1F28 ctermfg=black gui=bold cterm=bold
+
+" --- phpの制御構文（if, foreachなど）も個別に黒へ ---
+hi! phpConditional guifg=#1F1F28 ctermfg=black gui=bold cterm=bold
+hi! phpRepeat       guifg=#1F1F28 ctermfg=black gui=bold cterm=bold
+hi! phpStatement    guifg=#1F1F28 ctermfg=black gui=bold cterm=bold
+
+
+
+" =========================================================
+" Diff / Fugitive (Light Theme Optimization)
+" =========================================================
+" 追加 (緑系): 背景を薄い緑に、文字は少し濃い緑で読みやすく
+"hi DiffAdd      guifg=#2D5D2D guibg=#E6F5E9 gui=none
+hi DiffAdd   guifg=#24598F guibg=#EAF2FF gui=none
+" 削除 (赤系): 背景を薄いピンクに、文字は少し濃い赤で読みやすく
+hi DiffDelete   guifg=#9C3E3E guibg=#FBE9EB gui=none
+" 変更 (青系): ご要望の「青っぽさ」。GitHub Light風の爽やかな青
+hi DiffChange   guifg=#24598F guibg=#EAF2FF gui=none
+" 変更箇所の強調 (濃い青): 変更された文字そのものを強調
+hi DiffText     guifg=#1F1F28 guibg=#C7DBFF gui=bold
+
+" Fugitiveのインライン差分（> で展開した時）にも適用
+hi link diffAdded   DiffAdd
+hi link diffRemoved DiffDelete
+hi link diffChanged DiffChange
+
+" 削除行の '-' 自体を見やすく
+hi diffFile       guifg=#7A70B4
+hi diffNewFile    guifg=#2D5D2D
+hi diffLine       guifg=#7A7A96
