@@ -1210,3 +1210,24 @@ command! -bang GStatus call fzf#run(fzf#wrap({
                                                                                                                                                                                         
  " ファイルを開いた時                                                                                                                                                                   
  autocmd BufRead * echo '📝 ' . expand('%:t') . ' を編集中'   
+
+
+
+" Fugitiveの画面（filetypeがfugitive）の時だけ有効な設定
+autocmd FileType fugitive call s:setup_fugitive_mappings()
+
+function! s:setup_fugitive_mappings()
+    " ) で 次の + または - の行へジャンプ
+    nnoremap <buffer> ) :silent! /^[+-]/<CR>:nohlsearch<CR>
+    " ( で 前の + または - の行へジャンプ
+    nnoremap <buffer> ( :silent! ?^[+-]?<CR>:nohlsearch<CR>
+endfunction
+
+" Fugitiveのステータス画面が開かれたら、自動的に他のウィンドウを閉じて全画面にする
+autocmd FileType fugitive only
+
+
+
+" Fugitiveのステータス画面でのみ有効
+autocmd FileType fugitive nnoremap <buffer> S s
+autocmd FileType fugitive vnoremap <buffer> S :s<CR>
