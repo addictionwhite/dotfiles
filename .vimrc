@@ -567,7 +567,7 @@ au BufRead,BufNewFile *.yaml set ft=cloudformation.yaml
 
 
 " vimgrepの差分を見やすくする https://qiita.com/takaakikasai/items/3d4f8a4867364a46dfa3
-set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+"set diffopt=internal,filler,algorithm:histogram,indent-heuristic
 
 
 vnoremap z/ <ESC>/\%V
@@ -1154,7 +1154,12 @@ let g:sclow_sbar_text = '┃'
 set list
 set listchars=leadmultispace:\ \ \ \│
 "highlight SpecialKey ctermfg=white guifg=white
-highlight SpecialKey ctermfg=LightBlue guifg=LightBlue
+"highlight SpecialKey ctermfg=LightBlue guifg=LightBlue
+"highlight SpecialKey ctermfg=LightBlue guifg=LightBlue
+
+"highlight SpecialKey ctermfg=white guifg=white
+highlight SpecialKey ctermfg=gray guifg=gray
+"highlight SpecialKey ctermfg=white guifg=black
 "highlight SpecialKey ctermfg=Blue guifg=Blue
 
 
@@ -1231,3 +1236,90 @@ autocmd FileType fugitive only
 " Fugitiveのステータス画面でのみ有効
 autocmd FileType fugitive nnoremap <buffer> S s
 autocmd FileType fugitive vnoremap <buffer> S :s<CR>
+
+
+" :Gwt で worktree を一覧から選んで移動する (fzf.vim が入っている場合)
+function! ChangeWorktree(path)
+    " ディレクトリを変更
+    execute 'cd ' . a:path
+
+    " PR情報を更新
+    call UpdatePR()
+
+    " ステータスラインを強制的に再描画
+    redrawstatus!
+endfunction
+command! Gwt call fzf#run(fzf#wrap({'source': 'git worktree list | cut -d" " -f1', 'sink': function('ChangeWorktree')}))
+
+
+" ===========================================
+" GitHub PR情報表示（最軽量版）
+" ===========================================
+
+" PR情報を保存する変数
+let g:pr_info = ''
+
+" PR情報を手動更新する関数
+function! UpdatePR()
+    " gh pr viewでPR番号とタイトルを取得
+    let output = system('gh pr view --json number,title -q "\"#\\(.number): \\(.title)\"" 2>/dev/null | head -1')
+    let output = substitute(output, '\n', '', 'g')
+
+    if v:shell_error == 0 && output != ''
+        " 40文字に制限
+        if len(output) > 40
+            let output = output[:37] . '...'
+        endif
+        let g:pr_info = ' ' . output . ' '
+        echo 'PR: ' . output
+    else
+        let g:pr_info = ''
+        echo 'No PR found'
+    endif
+endfunction
+
+" コマンド定義（:PR で更新）
+command! PR call UpdatePR()
+
+" 遅延実行で初回PR情報取得（起動時の文字化け回避）
+function! DelayedPRInit()
+    call timer_start(200, {-> UpdatePR()})
+endfunction
+
+" ファイルパスを相対パスで取得する関数
+function! GetRelativePath()
+    " バッファの絶対パスを取得
+    let abspath = expand('%:p')
+    if abspath == ''
+        return '[No Name]'
+    endif
+
+    " 現在のディレクトリを取得
+    let cwd = getcwd()
+
+    " cwdが/で終わっていない場合は追加
+    if cwd !~ '/$'
+        let cwd = cwd . '/'
+    endif
+
+    " 絶対パスがcwdで始まる場合、その部分を削除
+    if stridx(abspath, cwd) == 0
+        return strpart(abspath, strlen(cwd))
+    endif
+
+    " それ以外はファイル名のみ
+    return expand('%:t')
+endfunction
+
+" ステータスラインにPR情報を追加
+set laststatus=2
+" カレントディレクトリからの相対パスを表示
+set statusline=%{GetRelativePath()}%m%{g:pr_info}%=%l:%c\ %P
+
+" Vim起動時に自動でPR情報を取得
+augroup PRAutoLoad
+    autocmd!
+    autocmd VimEnter * call DelayedPRInit()
+    " ディレクトリ変更時も更新
+    autocmd DirChanged * call UpdatePR()
+augroup END
